@@ -629,9 +629,9 @@ of containers that should be running at any given time in the yml file.
 
 <https://docs.docker.com/compose/compose-file/>
 
-`version: \"3.8\"
+`version: \"3.8\"`
 
-services:
+`services:
 
   worker:
 
