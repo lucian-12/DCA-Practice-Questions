@@ -138,3 +138,43 @@ specify a mode, the service defaults to replicated.
 <https://docs.docker.com/engine/swarm/services/#replicated-or-global-services>
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/globalVsreplicated.jpg)
+
+#### **Answer 8: c**
+
+Explanation:
+
+To set the maximum amount of memory the container can use one of the
+following flags
+
+-m or \--memory= or \--memory
+
+Possible values can take a positive integer, followed by a suffix of b,
+k, m, g to indicate bytes, kilobytes, megabytes, or gigabytes.
+
+<https://docs.docker.com/config/containers/resource_constraints/#memory>
+
+#### **Answer 9: a, d**
+
+Explanation:
+
+To scale one or multiple replicated services use:
+
+docker service scale SERVICE=REPLICAS \[SERVICE=REPLICAS\...\]
+
+The following command scales the "web" service to 5 tasks.
+
+docker service scale web=5
+
+Alternatively, you can use:
+
+docker service update \--replicas
+
+For example
+
+docker service update \--replicas=5 web
+
+This example also updates the number of replicas for the service to 5.
+
+<https://docs.docker.com/engine/reference/commandline/service_scale/>
+
+<https://docs.docker.com/engine/reference/commandline/service_update/>
