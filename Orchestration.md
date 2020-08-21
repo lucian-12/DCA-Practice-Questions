@@ -617,3 +617,94 @@ Explanation:
 **Tasks and scheduling**
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
+
+#### Answer 34: b, c
+
+Explanation:
+
+Using either docker-compose.yml or a stack.
+
+If the service is replicated (which is the default), specify the number
+of containers that should be running at any given time in the yml file.
+
+<https://docs.docker.com/compose/compose-file/>
+
+`version: \"3.8\"
+
+services:
+
+  worker:
+
+    image: dockersamples/worker
+
+    deploy:
+
+      mode: replicated
+
+      replicas: 6`
+
+#### Answer 35: c
+
+Explanation:
+
+To set environment variables use -e or --env flags:
+
+For example, this sets an environment variable for all tasks in a
+service:
+
+\$ docker service create \\
+
+  \--name redis_2 \\
+
+  \--replicas 5 \\
+
+  \--env MYVAR=foo \\
+
+  redis:3.0.6
+
+Alternatively, you can use **templates** for some flags of service
+create, using the syntax provided by the Go's text/template package.
+
+The supported flags are the following :
+
+\--hostname
+
+\--mount
+
+\--env
+
+Valid placeholders for the Go template are listed below:
+
+**Placeholder                Description**
+
+.Service.ID                  Service ID
+
+.Service.Name           Service name
+
+.Service.Labels          Service labels
+
+.Node.ID                     Node ID
+
+.Node.Hostname       Node Hostname
+
+.Task.ID                       Task ID
+
+.Task.Name                 Task name
+
+.Task.Slot                    Task slot
+
+For example, we are going to set the template of the created containers
+based on the service's name, the node's ID, and the hostname where it
+sits.
+
+\$ docker service create \\
+
+    \--name hosttempl \\
+
+    \--env="{{.Node.ID}}"\\
+
+    \--hostname=\"{{.Node.Hostname}}-{{.Service.Name}}\"\\
+
+    busybox top
+
+<https://docs.docker.com/engine/reference/commandline/service_create/#create-services-using-templates>
