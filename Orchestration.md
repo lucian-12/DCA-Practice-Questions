@@ -178,3 +178,43 @@ This example also updates the number of replicas for the service to 5.
 <https://docs.docker.com/engine/reference/commandline/service_scale/>
 
 <https://docs.docker.com/engine/reference/commandline/service_update/>
+
+#### **Answer 10: c**
+
+Explanation:
+
+To display detailed information on one or more containers including the
+list of volume use:
+
+docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
+
+<https://docs.docker.com/engine/reference/commandline/container_inspect/>
+
+#### **Answer 11: a**
+
+Explanation:
+
+To update a service use:
+
+docker service update \[OPTIONS\] SERVICE
+
+<https://docs.docker.com/engine/reference/commandline/service_update/>
+
+#### **Answer 12: a**
+
+Explanation:
+
+**Tasks and scheduling**
+
+A **task** is the atomic unit of scheduling within a swarm. When you
+declare a desired service state by creating or updating a service, the
+orchestrator realizes the desired state by scheduling tasks.
+
+For instance, you define a service that instructs the orchestrator to
+keep three instances of an HTTP listener running at all times. The
+orchestrator responds by creating three tasks. Each task is a slot that
+the **scheduler** fills by spawning a container.
+
+<https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/#tasks-and-scheduling>
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
