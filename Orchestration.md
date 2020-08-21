@@ -1712,3 +1712,104 @@ The docker logs command batch-retrieves logs present at the time of
 execution.
 
 <https://docs.docker.com/engine/reference/commandline/logs/>
+
+#### Answer 82: a
+
+Explanation:
+
+Using Secrets as environment variables
+
+To use a secret in an environment variable in a Pod:
+
+· Create a secret or use an existing one. Multiple Pods can reference
+the same secret.
+
+· Modify your Pod definition in each container that you wish to consume
+the value of a secret key to add an environment variable for each secret
+key you wish to consume. The environment variable that consumes the
+secret key should populate the secret\'s name and key in
+env\[\].valueFrom.secretKeyRef.
+
+· Modify your image and/or command line so that the program looks for
+values in the specified environment variables.
+
+This is an example of a Pod that uses secrets from environment
+variables:
+
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: secret-env-pod
+
+spec:
+
+  containers:
+
+  - name: mycontainer
+
+    image: redis
+
+    env:
+
+      - name: SECRET_USERNAME
+
+        valueFrom:
+
+          secretKeyRef:
+
+            name: mysecret
+
+            key: username
+
+<https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables>
+
+#### Answer 83: d
+
+Explanation:
+
+When the Docker Engine runs in swarm mode, manager nodes implement
+the **Raft Consensus Algorithm** to manage the global cluster state.
+
+Raft requires a majority of managers, also called the quorum, to agree
+on proposed updates to the swarm, such as node additions or removals.
+
+<https://docs.docker.com/engine/swarm/admin_guide/#operate-manager-nodes-in-a-swarm>
+
+If the swarm loses the quorum of managers, the swarm cannot perform
+administrative tasks such as scaling or updating services and joining or
+removing nodes from the swarm.
+
+Nevertheless, tasks on existing worker nodes continue to run.
+
+Raft tolerates up to **(N - 1)/2 failures** and requires a majority or
+quorum of** (N/2) + 1** members to agree on values proposed to the
+cluster. This means that in a cluster of 5 Managers running Raft, if 3
+nodes are unavailable, the system cannot process any more requests to
+schedule additional tasks. The existing tasks keep running but the
+scheduler cannot rebalance tasks to cope with failures if the manager
+set is not healthy.
+
+<https://docs.docker.com/engine/swarm/raft/>
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/raft.jpg)
+
+#### Answer 84: b
+
+Explanation:
+
+Docker provides **restart policies** to control whether your containers
+start automatically when they exit, or when Docker restarts. Restart
+policies ensure that linked containers are started in the correct order.
+Docker recommends that you use restart policies, and avoid using process
+managers to start containers.
+
+Restart policies only apply to containers. Restart policies for swarm
+services are configured differently using other flags related
+to **service restart.**
+
+<https://docs.docker.com/config/containers/start-containers-automatically/#restart-policy-details>
+
+<https://docs.docker.com/engine/reference/run/#restart-policies---restart>
