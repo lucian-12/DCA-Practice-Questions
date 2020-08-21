@@ -261,3 +261,111 @@ The number of items in the task history is determined by the
 \--task-history-limit option that was set when initializing the swarm.
 
 <https://docs.docker.com/engine/reference/commandline/service_ps/>
+
+#### **Answer 15: a**
+
+Explanation:
+
+**Tasks and scheduling**
+
+A task is the atomic unit of scheduling within a swarm. When you declare
+a desired service state by creating or updating a service via HTTP API
+endpoints, the **orchestrator** realizes the desired state by scheduling
+tasks.
+
+For instance, you define a service that instructs
+the **orchestrator** to keep three instances of an HTTP listener running
+at all times. The **orchestrator** **responds** by creating three tasks.
+Each task is a slot that the scheduler fills by spawning a container.
+
+<https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/#tasks-and-scheduling>
+
+#### **Answer 16: c, d**
+
+Explanation:
+
+To display detailed information on one or more containers, use:
+
+docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
+
+<https://docs.docker.com/engine/reference/commandline/container_inspect/>
+
+#### **Answer 17: a**
+
+Explanation:
+
+By default, ports are published using **ingress mode**.
+
+This means that the swarm routing mesh makes the service accessible at
+the published port on every node regardless if there is a task for the
+service running on the node.
+
+However, if you set **host mode **explicitly, the port is only bound on
+nodes where the service is running, and a given port on a node can only
+be bound once. You can only set the publication mode using the long
+syntax.
+
+You can publish service ports to make them available externally to the
+swarm using the \--publish flag.
+
+The \--publish flag can take two different styles of arguments.
+
+The short version is positional and allows you to specify the published
+port and target port separated by a colon (:).
+
+\$ docker service create \--name my_web \--replicas 3 \--publish 8080:80
+nginx
+
+Here, the published port is 8080 and the target port is of the container
+is 80.
+
+There is also a long format, which is easier to read and allows you to
+specify more options.
+
+\$ docker service create \--name my_web \--replicas 3 \--publish
+published=8080,target=80 nginx
+
+<https://docs.docker.com/engine/reference/commandline/service_create/#publish-service-ports-externally-to-the-swarm--p---publish>
+
+#### **Answer 18: c**
+
+Explanation:
+
+While **placement constraints** limit the nodes a service can run
+on, **placement preferences** try to place tasks on appropriate nodes in
+an algorithmic way (currently, only spread evenly). For instance, if you
+assign each node a rack label, you can set a placement preference to
+spread the service evenly across nodes with the rack label, by value.
+This way, if you lose a rack, the service is still running on nodes on
+other racks.
+
+Placement preferences are not strictly enforced. If no node has the
+label you specify in your preference, the service is deployed as though
+the preference was not set.
+
+The following example sets a preference to spread the deployment across
+nodes based on the value of the datacenter label. If some nodes have
+datacenter=us-east and others have datacenter=us-west, the service is
+deployed as evenly as possible across the two sets of nodes.
+
+\$ docker service create \\
+
+\--replicas 9 \\
+
+\--name redis_2 \\
+
+\--placement-pref \'spread=node.labels.datacenter\' \\
+
+redis:3.0.6
+
+When updating a service with docker service update,
+\--placement-pref-add appends a new placement preference after all
+existing placement preferences. \--placement-pref-rm removes an existing
+placement preference that matches the argument.
+
+In this diagram the containers are first placed by datacenters and then
+by the rack.
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/placement.png)
+
+<https://docs.docker.com/engine/swarm/services/#control-service-placement>
