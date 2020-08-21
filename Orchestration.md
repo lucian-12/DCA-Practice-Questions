@@ -119,3 +119,22 @@ work called **tasks** to worker **nodes**.
 <https://docs.docker.com/engine/swarm/key-concepts/#nodes>
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
+
+#### **Answer 7: c**
+
+Explanation:
+
+REPLICATED OR GLOBAL SERVICES
+
+Swarm mode has two types of services: replicated and global. For
+replicated services, you specify the number of replica tasks for the
+swarm manager to schedule onto available nodes. For global services, the
+scheduler places one task on each available node that meets the
+service's placement constraints and resource requirements.
+
+You control the type of service using the \--mode flag. If you don't
+specify a mode, the service defaults to replicated.
+
+<https://docs.docker.com/engine/swarm/services/#replicated-or-global-services>
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/globalVsreplicated.jpg)
