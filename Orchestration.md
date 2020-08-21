@@ -146,7 +146,7 @@ Explanation:
 To set the maximum amount of memory the container can use one of the
 following flags
 
-    -m or \--memory= or \--memory
+    -m or --memory= or --memory
 
 Possible values can take a positive integer, followed by a suffix of b,
 k, m, g to indicate bytes, kilobytes, megabytes, or gigabytes.
@@ -167,11 +167,11 @@ The following command scales the "web" service to 5 tasks.
 
 Alternatively, you can use:
 
-    docker service update \--replicas
+    docker service update --replicas
 
 For example
 
-    docker service update \--replicas=5 web
+    docker service update --replicas=5 web
 
 This example also updates the number of replicas for the service to 5.
 
@@ -232,11 +232,11 @@ are **global** **services**.
 The following command tries to scale a global service to 10 tasks and
 returns an error.
 
-    \$ docker service create \--mode global \--name backend backend:latest
+    $ docker service create --mode global --name backend backend:latest
 
     b4g08uwuairexjub6ome6usqh
 
-    \$ docker service scale backend=10
+    $ docker service scale backend=10
 
     backend: scale can only be used with replicated mode
 
@@ -249,7 +249,7 @@ Explanation:
 The following command shows all the tasks that are part of the redis
 service:
 
-    \$ docker service ps redis
+    $ docker service ps redis
 
 In addition to running tasks, the output also shows the task history.
 For example, after updating the service to use the redis:3.0.6 image,
@@ -313,7 +313,7 @@ The \--publish flag can take two different styles of arguments.
 The short version is positional and allows you to specify the published
 port and target port separated by a colon (:).
 
-    \$ docker service create \--name my_web \--replicas 3 \--publish 8080:80
+    $ docker service create --name my_web --replicas 3 --publish 8080:80
     nginx
 
 Here, the published port is 8080 and the target port is of the container
@@ -322,7 +322,7 @@ is 80.
 There is also a long format, which is easier to read and allows you to
 specify more options.
 
-    \$ docker service create \--name my_web \--replicas 3 \--publish
+    $ docker service create --name my_web --replicas 3 --publish
     published=8080,target=80 nginx
 
 <https://docs.docker.com/engine/reference/commandline/service_create/#publish-service-ports-externally-to-the-swarm--p---publish>
@@ -348,13 +348,13 @@ nodes based on the value of the datacenter label. If some nodes have
 datacenter=us-east and others have datacenter=us-west, the service is
 deployed as evenly as possible across the two sets of nodes.
 
-    \$ docker service create \\
+    $ docker service create \
 
-    \--replicas 9 \\
+    --replicas 9 \
 
-    \--name redis_2 \\
+    --name redis_2 \
 
-    \--placement-pref \'spread=node.labels.datacenter\' \\
+    --placement-pref 'spread=node.labels.datacenter' \
 
     redis:3.0.6
 
@@ -392,7 +392,7 @@ replicated service.
 
 The following command creates a redis service with 5 replica tasks:
 
-    \$ docker service create \--name redis \--replicas=5 redis:3.0.6
+    $ docker service create --name redis --replicas=5 redis:3.0.6
 
 <https://docs.docker.com/engine/reference/commandline/service_create/#create-a-service-with-5-replica-tasks---replicas>
 
@@ -540,7 +540,7 @@ The \--publish flag can take two different styles of arguments. The
 short version is positional, and allows you to specify the published
 port and target port separated by a colon (:).
 
-    \$ docker service create \--name my_web \--replicas 3 \--publish 8080:80
+    $ docker service create --name my_web --replicas 3 --publish 8080:80
     nginx
 
 There is also a long format, which is easier to read and allows you to
@@ -550,14 +550,14 @@ the service's mode when using the short format.
 Here is an example of using the long format for the same service as
 above:
 
-    \$ docker service create \--name my_web \--replicas 3 \--publish
+    $ docker service create --name my_web --replicas 3 --publish
     published=8080,target=80 nginx
 
 You can also specify the protocol to use, tcp, udp, or sctp. Defaults to
 tcp. To bind a port for both protocols, specify the -p or \--publish
 flag twice.
 
-    \$ docker service create \--name my_web \--replicas 3 \--publish
+    $ docker service create --name my_web --replicas 3 --publish
     8080:80/udp nginx
 
 <https://docs.docker.com/engine/reference/commandline/service_create/#publish-service-ports-externally-to-the-swarm--p---publish>
@@ -652,13 +652,13 @@ To set environment variables use -e or --env flags:
 For example, this sets an environment variable for all tasks in a
 service:
 
-    \$ docker service create \\
+    \$ docker service create \
 
-      \--name redis_2 \\
+      --name redis_2 \
 
-      \--replicas 5 \\
+      --replicas 5 \
 
-      \--env MYVAR=foo \\
+      --env MYVAR=foo \
 
       redis:3.0.6
 
@@ -697,13 +697,13 @@ For example, we are going to set the template of the created containers
 based on the service's name, the node's ID, and the hostname where it
 sits.
 
-    \$ docker service create \\
+    $ docker service create \
 
-        \--name hosttempl \\
+        --name hosttempl \
 
-        \--env="{{.Node.ID}}"\\
+        --env="{{.Node.ID}}"\
 
-        \--hostname=\"{{.Node.Hostname}}-{{.Service.Name}}\"\\
+        --hostname=\"{{.Node.Hostname}}-{{.Service.Name}}\"\
 
         busybox top
 
@@ -721,11 +721,11 @@ For replicated services, you specify the number of replica tasks you
 want to start using the \--replicas flag. For example, to start a
 replicated nginx service with 3 replica tasks:
 
-    \$ docker service create \\
+    $ docker service create \
 
-    \--name my_web \\
+    --name my_web \
 
-    \--replicas 3 \\
+    --replicas 3 \
 
     nginx
 
@@ -734,11 +734,11 @@ docker service create. Every time a new node becomes available, the
 scheduler places a task for the global service on the new node. For
 example to start a service that runs alpine on every node in the swarm:
 
-    \$ docker service create \\
+    $ docker service create \
 
-    \--name myservice \\
+    --name myservice \
 
-    \--mode global \\
+    --mode global \
 
     alpine top
 
@@ -765,15 +765,15 @@ Explanation:
 
 The following flags are supported by docker service create command:
 
-    \--label , -l
+    --label , -l
 
 Service labels in order to set metadata on a service.
 
-    \--publish , -p
+    --publish , -p
 
 Publish a port as a node port
 
-    \--tty , -t
+    --tty , -t
 
 Allocate a pseudo-TTY
 
@@ -786,13 +786,13 @@ to **volume** if no type is specified.
 
 For example:
 
-    \$ docker service create \\
+    $ docker service create \
 
-    \--name my-service \\
+    --name my-service \
 
-    \--replicas 3 \\
+    --replicas 3 \
 
-    \--mount type=volume,source=my-volume,destination=/path/in/container \\
+    --mount type=volume,source=my-volume,destination=/path/in/container \
 
     nginx:alpine
 
@@ -810,11 +810,11 @@ Explanation:
 To update metadata about a node, such as its availability, labels, or
 roles use:
 
-    docker node update \[OPTIONS\] NODE
+    docker node update [OPTIONS] NODE
 
 To add or update a node label (key=value) use:
 
-    docker node update \--label-add NODE
+    docker node update --label-add NODE
 
 <https://docs.docker.com/engine/reference/commandline/node_update/>
 
@@ -851,11 +851,11 @@ it, ports the service exposed to the outside world, and more).
 
 <https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-swarm>
 
-    \--secret Specify secrets to expose to the service
+    --secret Specify secrets to expose to the service
 
-    \--network Network attachments
+    --network Network attachments
 
-    \--mount Attach a filesystem mount to the service
+    --mount Attach a filesystem mount to the service
 
 DIFFERENCES BETWEEN "\--MOUNT" AND "\--VOLUME"
 
@@ -997,7 +997,7 @@ published.
 Assuming that the my_web service exists, use the following command to
 remove the published port 80.
 
-    \$ docker service update \--publish-rm 80 my_web
+    $ docker service update --publish-rm 80 my_web
 
 <https://docs.docker.com/engine/swarm/services/#update-a-service>
 
@@ -1009,7 +1009,7 @@ You can change node availability.
 
 For example, to change a manager node to Drain availability use:
 
-    \$ docker node update \--availability drain node-1
+    $ docker node update --availability drain node-1
 
 <https://docs.docker.com/engine/swarm/manage-nodes/#change-node-availability>
 
@@ -1050,15 +1050,15 @@ Containers running in a service are called "tasks" or "replicas".
 To scale the number of containers in the service you can use one of the
 following commands.
 
-    \$ docker service scale \<SERVICE-ID\>=\<NUMBER-OF-TASKS\>
+    $ docker service scale <SERVICE-ID>=<NUMBER-OF-TASKS>
 
-    \$ docker service update \--replicas=\<NUMBER-OF-TASKS\> \<SERVICE-ID\>
+    $ docker service update --replicas=<NUMBER-OF-TASKS> <SERVICE-ID>
 
 For example, these commands are equivalent:
 
-    \$ docker service scale web=5
+    $ docker service scale web=5
 
-    \$ docker service update \--replicas=5 web
+    $ docker service update --replicas=5 web
 
 <https://docs.docker.com/engine/swarm/swarm-tutorial/scale-service/>
 
@@ -1084,7 +1084,7 @@ you can execute one of the following commands:
 
     docker service rollback \[OPTIONS\] SERVICE
 
-    docker service update \--rollback SERVICE
+    docker service update --rollback SERVICE
 
 <https://docs.docker.com/engine/reference/commandline/service_rollback/>
 
@@ -1097,7 +1097,7 @@ can set a \--update-delayflag to delay between updates.
 
 For example:
 
-    \$ docker service update \--update-delay 30s redis
+    $ docker service update --update-delay 30s redis
 
 The \--update-delay 30s setting introduces a 30 second delay between
 tasks so that the rolling restart happens gradually.
@@ -1132,7 +1132,7 @@ Explanation:
 
 To remove a node from the swarm use the following on the node itself:
 
-    docker swarm leave \[OPTIONS\]
+    docker swarm leave [OPTIONS]
 
 When you run this command on a worker itself, that worker leaves the
 swarm.
@@ -1170,7 +1170,7 @@ Explanation:
 To list the tasks that are running as part of the specified services
 use:
 
-    docker service ps \[OPTIONS\] SERVICE \[SERVICE\...\]
+    docker service ps [OPTIONS] SERVICE [SERVICE...]
 
 <https://docs.docker.com/engine/reference/commandline/service_ps/>
 
@@ -1204,11 +1204,11 @@ examples.
 To ensure a service runs on worker nodes rather than managers, use
 a **node.role** constraint in the service definition. For example:
 
-    docker service create \\
+    docker service create \
 
-        \--name nginx-workers-only \\
+        --name nginx-workers-only \
 
-        \--constraint node.role==worker \\
+        --constraint node.role==worker \
 
         nginx
 
@@ -1294,13 +1294,13 @@ shared storage.
 The following example starts a nginx service with four replicas, each of
 which uses a local volume called myvol2.
 
-    \$ docker service create -d \\
+    $ docker service create -d \
 
-    \--replicas=4 \\
+    --replicas=4 \
 
-    \--name devtest-service \\
+    --name devtest-service \
 
-    \--mount source=myvol2,target=/app \\
+    --mount source=myvol2,target=/app \
 
     nginx:latest
 
@@ -1308,7 +1308,7 @@ which uses a local volume called myvol2.
 
 To update a service to add or update a mount on a service use:
 
-    \$ docker service update \--mount-add SERVICE
+    $ docker service update --mount-add SERVICE
 
 <https://docs.docker.com/engine/reference/commandline/service_update/>
 
@@ -1330,7 +1330,7 @@ You can change node availability.
 
 For example, to change a manager node to Drain availability use:
 
-    \$ docker node update \--availability drain node-1
+    $ docker node update --availability drain node-1
 
 This is useful when you want to:
 
@@ -1365,7 +1365,7 @@ Explanation:
 
 The command to initialize a swarm is:
 
-    docker swarm init \[OPTIONS\]
+    docker swarm init [OPTIONS]
 
 <https://docs.docker.com/engine/reference/commandline/swarm_init/>
 
@@ -1466,7 +1466,7 @@ spec section.
 
 Explanation:
 
-    docker node inspect self \--pretty
+    docker node inspect self --pretty
 
 You can run docker node inspect \<NODE-ID\> on a manager node to view
 the details for an individual node. The output defaults to JSON format,
@@ -1475,7 +1475,7 @@ human-readable format.
 
 <https://docs.docker.com/engine/swarm/manage-nodes/#inspect-an-individual-node>
 
-    docker node ls \[OPTIONS\]
+    docker node ls [OPTIONS]
 
 Lists all the nodes that the Docker Swarm manager knows about. This is a
 cluster management command and must be executed on a **swarm manager
@@ -1497,7 +1497,7 @@ for a service.
 Assuming that the my_web service from the previous section still exists,
 use the following command to add a network:
 
-    \$ docker service update \--network-add
+    $ docker service update --network-add
 
 <https://docs.docker.com/engine/reference/commandline/service_update/#add-or-remove-network>
 
@@ -1622,7 +1622,7 @@ Explanation:
 You can print the inspect output in a human-readable format instead of
 the default JSON output, by using the \--pretty option:
 
-    docker service inspect \--pretty serviceName
+    docker service inspect --pretty serviceName
 
 <https://docs.docker.com/engine/reference/commandline/service_inspect/#formatting>
 
@@ -1657,13 +1657,13 @@ In the following example, the service only runs on nodes with the label
 region set to east. If no appropriately-labeled nodes are available,
 tasks will wait in Pending until they become available.
 
-    \$ docker service create \\
+    $ docker service create \
 
-    \--name my-nginx \\
+    --name my-nginx \
 
-    \--replicas 5 \\
+    --replicas 5 \
 
-    \--constraint node.labels.region==east \\
+    --constraint node.labels.region==east \
 
     nginx
 
@@ -1702,7 +1702,7 @@ Explanation:
 
 To fetch the logs of a container use:
 
-    docker logs \[OPTIONS\] CONTAINER
+    docker logs [OPTIONS] CONTAINER
 
 The output might look like this:
 
