@@ -280,7 +280,7 @@ Each task is a slot that the scheduler fills by spawning a container.
 
 <https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/#tasks-and-scheduling>
 
-#### **Answer 16: c, d**
+### **Answer 16: c, d**
 
 Explanation:
 
@@ -290,7 +290,7 @@ docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
 
 <https://docs.docker.com/engine/reference/commandline/container_inspect/>
 
-#### **Answer 17: a**
+### **Answer 17: a**
 
 Explanation:
 
@@ -327,7 +327,7 @@ published=8080,target=80 nginx
 
 <https://docs.docker.com/engine/reference/commandline/service_create/#publish-service-ports-externally-to-the-swarm--p---publish>
 
-#### **Answer 18: c**
+### **Answer 18: c**
 
 Explanation:
 
