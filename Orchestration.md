@@ -218,3 +218,46 @@ the **scheduler** fills by spawning a container.
 <https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/#tasks-and-scheduling>
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
+
+#### **Answer 13: a**
+
+Explanation:
+
+The scale command enables you to scale one or more **replicated
+services** either up or down to the desired number of replicas.
+
+This command cannot be applied to services which
+are **global** **services**.
+
+The following command tries to scale a global service to 10 tasks and
+returns an error.
+
+\$ docker service create \--mode global \--name backend backend:latest
+
+b4g08uwuairexjub6ome6usqh
+
+\$ docker service scale backend=10
+
+backend: scale can only be used with replicated mode
+
+<https://docs.docker.com/engine/reference/commandline/service_scale/>
+
+#### **Answer 14: a**
+
+Explanation:
+
+The following command shows all the tasks that are part of the redis
+service:
+
+\$ docker service ps redis
+
+In addition to running tasks, the output also shows the task history.
+For example, after updating the service to use the redis:3.0.6 image,
+the output may look like this:
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageHistory.png)
+
+The number of items in the task history is determined by the
+\--task-history-limit option that was set when initializing the swarm.
+
+<https://docs.docker.com/engine/reference/commandline/service_ps/>
