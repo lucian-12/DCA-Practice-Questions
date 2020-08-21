@@ -887,3 +887,475 @@ with the benefits of Docker Enterprise, like role-based access control
 and Docker Content Trust.
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerEEAPI.jpg)
+
+#### Answer 43: c
+
+Explanation:
+
+There are different kinds of resources for creating Pods:
+
+· Use a Deployment, ReplicaSet or StatefulSet for Pods that are not
+expected to terminate, for example, web servers.
+
+· Use a Job for Pods that are expected to terminate once their work is
+complete; for example, batch computations. Jobs are appropriate only for
+Pods with restartPolicy equal to OnFailure or Never.
+
+· Use a DaemonSet for Pods that need to run one per eligible node.
+
+<https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-lifetime>
+
+#### Answer 44: d
+
+Explanation:
+
+REPLICATED OR GLOBAL SERVICES
+
+Swarm mode has two types of services: replicated and global.
+
+For replicated services, you specify the number of replica tasks for the
+swarm manager to schedule onto available nodes.
+
+For global services, the scheduler places one task on each available
+node that meets the service's placement constraints and resource
+requirements.
+
+<https://docs.docker.com/engine/swarm/services/#replicated-or-global-services>
+
+#### Answer 45: b, c, d
+
+Explanation:
+
+You can define one or multiple topologySpreadConstraint to instruct the
+kube-scheduler on how to place each incoming Pod in relation to the
+existing Pods across your cluster. The fields are:
+
+· **maxSkew** describes the degree to which Pods may be unevenly
+distributed. It\'s the maximum permitted difference between the number
+of matching Pods in any two topology domains of a given topology type.
+It must be greater than zero.
+
+· **topologyKey** is the key of node labels. If two Nodes are labelled
+with this key and have identical values for that label, the scheduler
+treats both Nodes as being in the same topology. The scheduler tries to
+place a balanced number of Pods into each topology domain.
+
+· **whenUnsatisfiable** indicates how to deal with a Pod if it doesn\'t
+satisfy the spread constraint: DoNotSchedule (default) tells the
+scheduler not to schedule it. ScheduleAnyway tells the scheduler to
+still schedule it while prioritizing nodes that minimize the skew.
+
+· **labelSelector** is used to find matching Pods. Pods that match this
+label selector are counted to determine the number of Pods in their
+corresponding topology domain. See Label Selectors for more details.
+
+<https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods>
+
+#### Answer 46: a
+
+Explanation:
+
+Memory reservation is a kind of memory soft limit that allows for
+greater sharing of memory. Under normal circumstances, containers can
+use as much of the memory as needed and are constrained only by the hard
+limits set with the -m/\--memory option.
+
+When memory reservation is set, Docker detects memory contention or low
+memory and forces containers to restrict their consumption to a
+reservation limit.
+
+To set the maximum amount of memory the container can use one of the
+following.
+
+-m or \--memory=
+
+To specify a soft limit which is activated when Docker detects
+contention or low memory on the host machine use the following
+flag:\--memory-reservation
+
+If you use \--memory-reservation, it must be set lower than \--memory
+for it to take precedence. Because it is a soft limit, it does not
+guarantee that the container doesn't exceed the limit.
+
+<https://docs.docker.com/config/containers/resource_constraints/#memory>
+
+<https://docs.docker.com/engine/reference/run/#user-memory-constraints>
+
+#### Answer 47: d
+
+Explanation:
+
+You can change almost everything about an existing service using
+the docker service update command.
+
+When creating a service, use the -p or \--publish flag.
+
+When updating an existing service, use the flag is \--publish-add. There
+is also a \--publish-rm flag to remove a port that was previously
+published.
+
+Assuming that the my_web service exists, use the following command to
+remove the published port 80.
+
+\$ docker service update \--publish-rm 80 my_web
+
+<https://docs.docker.com/engine/swarm/services/#update-a-service>
+
+#### Answer 48: d
+
+Explanation:
+
+You can change node availability.
+
+For example, to change a manager node to Drain availability use:
+
+\$ docker node update \--availability drain node-1
+
+<https://docs.docker.com/engine/swarm/manage-nodes/#change-node-availability>
+
+This is useful when you want to:
+
+· drain a manager node so that only performs swarm management tasks and
+is unavailable for task assignment.
+
+· drain a node so you can take it down for maintenance.
+
+<https://docs.docker.com/engine/swarm/swarm-tutorial/drain-node/>
+
+#### Answer 49: a
+
+Explanation:
+
+Setting a node to DRAIN does not remove standalone containers from that
+node, such as those created with docker run, docker-compose up, or the
+Docker Engine API.
+
+A node's status, including DRAIN, only affects the node's ability to
+schedule swarm service workloads.
+
+<https://docs.docker.com/engine/swarm/swarm-tutorial/drain-node/>
+
+DRAIN availability prevents a node from receiving new tasks from the
+swarm manager. It also means the manager stops tasks running on the node
+and launches replica tasks on a node with ACTIVE availability.
+
+<https://docs.docker.com/engine/swarm/swarm-tutorial/drain-node/>
+
+#### Answer 50: b
+
+Explanation:
+
+Containers running in a service are called "tasks" or "replicas".
+
+To scale the number of containers in the service you can use one of the
+following commands.
+
+\$ docker service scale \<SERVICE-ID\>=\<NUMBER-OF-TASKS\>
+
+\$ docker service update \--replicas=\<NUMBER-OF-TASKS\> \<SERVICE-ID\>
+
+For example, these commands are equivalent:
+
+\$ docker service scale web=5
+
+\$ docker service update \--replicas=5 web
+
+<https://docs.docker.com/engine/swarm/swarm-tutorial/scale-service/>
+
+#### Answer 51: b
+
+Explanation:
+
+A **node** is an instance of the Docker engine participating in the
+swarm. You can also think of this as a Docker node.
+
+You can run one or more nodes on a single physical computer or cloud
+server, but production swarm deployments typically include Docker nodes
+distributed across multiple physical and cloud machines.
+
+<https://docs.docker.com/engine/swarm/key-concepts/#nodes>
+
+#### Answer 52: b
+
+Explanation:
+
+To rollback a specified service to its previous version from the swarm
+you can execute one of the following commands:
+
+docker service rollback \[OPTIONS\] SERVICE
+
+docker service update \--rollback SERVICE
+
+<https://docs.docker.com/engine/reference/commandline/service_rollback/>
+
+#### Answer 53: c
+
+Explanation:
+
+When using \'docker service create\' and \'docker service update\' you
+can set a \--update-delayflag to delay between updates.
+
+For example:
+
+\$ docker service update \--update-delay 30s redis
+
+The \--update-delay 30s setting introduces a 30 second delay between
+tasks so that the rolling restart happens gradually.
+
+You can use the following units ns\|us\|ms\|s\|m\|h.
+
+<https://docs.docker.com/engine/reference/commandline/service_update/#perform-a-rolling-restart-with-no-parameter-changes>
+
+#### Answer 54: a, b, d
+
+Explanation:
+
+A Secret is an object that contains a small amount of sensitive data
+such as a password, a token, or a key. Such information might otherwise
+be put in a Pod specification or in an image. Users can create secrets
+and the system also creates some secrets.
+
+To use a secret, a Pod needs to reference the secret. A secret can be
+used with a Pod in three ways:
+
+· As files in a volume mounted on one or more of its containers.
+
+· As container environment variable.
+
+· By the kubelet when pulling images for the Pod.
+
+<https://kubernetes.io/docs/concepts/configuration/secret/#overview-of-secrets>
+
+#### Answer 55: b
+
+Explanation:
+
+To remove a node from the swarm use the following on the node itself:
+
+docker swarm leave \[OPTIONS\]
+
+When you run this command on a worker itself, that worker leaves the
+swarm.
+
+<https://docs.docker.com/engine/reference/commandline/swarm_leave/>
+
+#### Answer 56: a
+
+Explanation:
+
+To configure the restart policy for a container, use the \--restart flag
+when using the docker run command. The value of the \--restart flag can
+be any of the following:
+
+· **no** - Do not automatically restart the container. (the default)
+
+· **on-failure** - Restart the container if it exits due to an error,
+which manifests as a non-zero exit code.
+
+· **always** - Always restart the container if it stops. If it is
+manually stopped, it is restarted only when Docker daemon restarts or
+the container itself is manually restarted. (See the second bullet
+listed in restart policy details)
+
+· **unless-stopped** - Similar to always, except that when the container
+is stopped (manually or otherwise), it is not restarted even after
+Docker daemon restarts.
+
+<https://docs.docker.com/config/containers/start-containers-automatically/>
+
+#### Answer 57: d
+
+Explanation:
+
+To list the tasks that are running as part of the specified services
+use:
+
+docker service ps \[OPTIONS\] SERVICE \[SERVICE\...\]
+
+<https://docs.docker.com/engine/reference/commandline/service_ps/>
+
+#### Answer 58: b
+
+Explanation:
+
+Containers can join multiple networks that allow you to provide
+fine-grained network policy for connectivity and isolation.
+
+By default, a container will be created with one network attached. If no
+network is specified then this will be the default docker0 network.
+
+After the container has been created more networks can be attached to a
+container using the docker network connect command.
+
+Docker only **allows a single network** to be specified with the docker
+run command. To connect multiple networks docker network connect is used
+to connect additional networks.
+
+https://success.docker.com/article/multiple-docker-networks
+
+#### Answer 59: a
+
+Explanation:
+
+By default, swarm services can run on any node in the cluster. If you
+choose to constrain where services run, please note the following
+examples.
+
+To ensure a service runs on worker nodes rather than managers, use
+a **node.role** constraint in the service definition. For example:
+
+docker service create \\
+
+    \--name nginx-workers-only \\
+
+    \--constraint node.role==worker \\
+
+    nginx
+
+<https://success.docker.com/article/using-contraints-and-labels-to-control-the-placement-of-containers>
+
+Constraint expressions can either use a match (==) or exclude (!=) rule.
+Multiple constraints find nodes that satisfy every expression (AND
+match).
+
+<https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-constraints---constraint>
+
+#### Answer 60: d
+
+Explanation:
+
+Tasks advance through a number of states until they complete or fail.
+
+Tasks are initialized in the NEW state.
+
+The task progresses forward through a number of states, and its state
+doesn't go backward. For example, a task never goes from COMPLETE to
+RUNNING.
+
+<https://docs.docker.com/engine/swarm/how-swarm-mode-works/swarm-task-states/>
+
+#### Answer 61: a, b
+
+Explanation:
+
+**Maintain the quorum of managers**
+
+If the swarm loses the quorum of managers, the swarm **cannot perform
+administrative tasks** such as scaling or updating services and joining
+or removing nodes from the swarm.
+
+Nevertheless, tasks on existing worker nodes continue to run.
+
+Swarm is resilient to failures and the swarm can recover from any number
+of temporary node failures (machine reboots or crash with restart) or
+other transient errors. However, a swarm cannot automatically recover if
+it loses a quorum.
+
+In a swarm of N managers, a quorum (a majority) of manager nodes must
+always be available. For example, in a swarm with five managers, a
+minimum of three must be operational and in communication with each
+other. In other words, the swarm can tolerate up
+to **(N-1)/2** permanent failures beyond which requests involving swarm
+management cannot be processed.
+
+An odd number of managers is recommended because the next even number
+does not make the quorum easier to keep. For instance, whether you have
+3 or 4 managers, you can still only lose 1 manager and maintain the
+quorum. If you have 5 or 6 managers, you can still only lose two.
+
+<https://docs.docker.com/engine/swarm/admin_guide/#maintain-the-quorum-of-managers>
+
+#### Answer 62: a
+
+Explanation:
+
+REPLICATED OR GLOBAL SERVICES
+
+Swarm mode has two types of services: replicated and global.
+
+For replicated services, you specify the number of replica tasks for the
+swarm manager to schedule onto available nodes.
+
+For global services, the scheduler places one task on each available
+node that meets the service's placement constraints and resource
+requirements.
+
+<https://docs.docker.com/engine/swarm/services/#replicated-or-global-services>
+
+#### Answer 63: c
+
+Explanation:
+
+When you start a service and define a volume, each service container
+uses its own local volume. None of the containers can share this data if
+you use the local volume driver, but some volume drivers do support
+shared storage.
+
+The following example starts a nginx service with four replicas, each of
+which uses a local volume called myvol2.
+
+\$ docker service create -d \\
+
+\--replicas=4 \\
+
+\--name devtest-service \\
+
+\--mount source=myvol2,target=/app \\
+
+nginx:latest
+
+<https://docs.docker.com/storage/volumes/#start-a-service-with-volumes>
+
+To update a service to add or update a mount on a service use:
+
+\$ docker service update \--mount-add SERVICE
+
+<https://docs.docker.com/engine/reference/commandline/service_update/>
+
+#### Answer 64: c
+
+Explanation:
+
+To prevent the scheduler from placing tasks on a manager node in a
+multi-node swarm, set the availability for the manager node
+to **Drain**.
+
+The scheduler gracefully stops tasks on nodes in Drain mode and
+schedules the tasks on an Active node. The scheduler does not assign new
+tasks to nodes with Drain **availability**.
+
+<https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/#worker-nodes>
+
+You can change node availability.
+
+For example, to change a manager node to Drain availability use:
+
+\$ docker node update \--availability drain node-1
+
+This is useful when you want to:
+
+· drain a manager node so that only performs swarm management tasks and
+is unavailable for task assignment.
+
+· drain a node so you can take it down for maintenance.
+
+<https://docs.docker.com/engine/swarm/manage-nodes/#change-node-availability>
+
+#### Answer 65: d
+
+Explanation:
+
+Swarm never creates individual containers. Instead, all Swarm workloads
+are scheduled as services, which are scalable groups of containers. Each
+of the services has a certain number of replicas or tasks.
+
+A **stack** is used to describe a collection of swarm services that are
+related, most probably because they are part of the same application.
+
+In that sense, we could also say that a stack describes an application
+that consists of one to many services that we want to run on the swarm.
+
+<https://docs.docker.com/get-started/swarm-deploy/#describe-apps-using-stack-files>
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/stack.jpg)
+
