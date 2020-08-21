@@ -1,9 +1,9 @@
 Answers Orchestration
 =====================
 
-**Answer 1: b**
+#### **Answer 1: b**
 
-#### Explanation
+Explanation
 
 While **placement constraints** limit the nodes a service can run
 on, **placement preferences** try to place tasks on appropriate nodes in
