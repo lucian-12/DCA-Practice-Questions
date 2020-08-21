@@ -89,3 +89,33 @@ containers.
 Use "\\t" for extra space between columns.
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/outputDockerps.png)
+
+#### **Answer 5: b**
+
+Explanation:
+
+In a swarm of N managers, a quorum (a majority) of manager nodes must
+always be available. For example, in a swarm with five managers, a
+minimum of three must be operational and in communication with each
+other. In other words, the swarm can tolerate up
+to **(N-1)/2** permanent failures beyond which requests involving swarm
+management cannot be processed.
+
+An odd number of managers is recommended because the next even number
+does not make the quorum easier to keep. For instance, whether you have
+3 or 4 managers, you can still only lose 1 manager and maintain the
+quorum. If you have 5 or 6 managers, you can still only lose two.
+
+<https://docs.docker.com/engine/swarm/admin_guide/#maintain-the-quorum-of-managers>
+
+#### **Answer 6: c**
+
+Explanation:
+
+To **deploy** your application to a swarm, you **submit a service
+definition** to a manager node. The manager node **dispatches** units of
+work called **tasks** to worker **nodes**.
+
+<https://docs.docker.com/engine/swarm/key-concepts/#nodes>
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
