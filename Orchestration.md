@@ -708,3 +708,182 @@ sits.
     busybox top
 
 <https://docs.docker.com/engine/reference/commandline/service_create/#create-services-using-templates>
+
+#### Answer 36: c
+
+Explanation:
+
+You control the type of service using the \--mode flag.
+
+If you don't specify a mode, the service defaults to replicated.
+
+For replicated services, you specify the number of replica tasks you
+want to start using the \--replicas flag. For example, to start a
+replicated nginx service with 3 replica tasks:
+
+\$ docker service create \\
+
+\--name my_web \\
+
+\--replicas 3 \\
+
+nginx
+
+To start a global service on each available node, pass \--mode global to
+docker service create. Every time a new node becomes available, the
+scheduler places a task for the global service on the new node. For
+example to start a service that runs alpine on every node in the swarm:
+
+\$ docker service create \\
+
+\--name myservice \\
+
+\--mode global \\
+
+alpine top
+
+<https://docs.docker.com/engine/swarm/services/#replicated-or-global-services>
+
+#### Answer 37: d
+
+Explanation:
+
+Sometimes, such as planned maintenance times, you need to set a node to
+DRAIN availability.
+
+DRAIN availability prevents a node from receiving new tasks from the
+swarm manager.
+
+It also means the manager stops tasks running on the node and launches
+replica tasks on a node with ACTIVE availability.
+
+<https://docs.docker.com/engine/swarm/swarm-tutorial/drain-node/>
+
+#### Answer 38: b
+
+Explanation:
+
+The following flags are supported by docker service create command:
+
+\--label , -l
+
+Service labels in order to set metadata on a service.
+
+\--publish , -p
+
+Publish a port as a node port
+
+\--tty , -t
+
+Allocate a pseudo-TTY
+
+**docker service** command does not support -v or --volume flags.
+Instead the \--mount flag is used when creating the service, or
+\--mount-add when updating the service.
+
+The type of mount can be either volume, bind, tmpfs, or npipe. Defaults
+to **volume** if no type is specified.
+
+For example:
+
+\$ docker service create \\
+
+\--name my-service \\
+
+\--replicas 3 \\
+
+\--mount type=volume,source=my-volume,destination=/path/in/container \\
+
+nginx:alpine
+
+Here, for each replica of the service, the engine requests a volume
+named "my-volume" from the default ("local") volume driver where the
+task is deployed. If the volume does not exist, the engine creates a new
+volume.
+
+<https://docs.docker.com/engine/reference/commandline/service_create/#add-bind-mounts-volumes-or-memory-filesystems>
+
+#### Answer 39: d
+
+Explanation:
+
+To update metadata about a node, such as its availability, labels, or
+roles use:
+
+docker node update \[OPTIONS\] NODE
+
+To add or update a node label (key=value) use:
+
+docker node update \--label-add NODE
+
+<https://docs.docker.com/engine/reference/commandline/node_update/>
+
+#### Answer 40: d
+
+Explanation:
+
+Here are a few examples of when a service might remain in state pending.
+
+· If all nodes are paused or drained, and you create a service, it is
+pending until a node becomes available. In reality, the first node to
+become available gets all of the tasks, so this is not a good thing to
+do in a production environment.
+
+· You can reserve a specific amount of memory for a service. If no node
+in the swarm has the required amount of memory, the service remains in a
+pending state until a node is available which can run its tasks. If you
+specify a very large value, such as 500 GB, the task stays pending
+forever, unless you really have a node which can satisfy it.
+
+· You can impose placement constraints on the service, and the
+constraints may not be able to be honored at a given time.
+
+<https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/#pending-services>
+
+#### Answer 41: d
+
+Explanation:
+
+When you create a service, you define its optimal state, that is, a
+number
+of **replicas**, **network** and **storage** **resources** available to
+it, ports the service exposed to the outside world, and more).
+
+<https://docs.docker.com/engine/swarm/key-concepts/#what-is-a-swarm>
+
+\--secret Specify secrets to expose to the service
+
+\--network Network attachments
+
+\--mount Attach a filesystem mount to the service
+
+DIFFERENCES BETWEEN "\--MOUNT" AND "\--VOLUME"
+
+The \--mount flag supports most options that are supported by the -v or
+\--volume flag for docker run, with some important exceptions:
+
+Here all available configuration options when creating a service.
+
+<https://docs.docker.com/engine/reference/commandline/service_create/>
+
+#### Answer 42: c
+
+Explanation:
+
+**Choosing your orchestrator**
+
+Docker Enterprise provides access to the full API sets of three popular
+orchestrators:
+
+· **Kubernetes**: full YAML object support
+
+· **SwarmKit**: Service-centric, Compose file version 3
+
+· "**Classic" Swarm**: Container-centric, Compose file version 2
+
+Docker Enterprise proxies the underlying API of each orchestrator,
+giving you access to all of the capabilities of each orchestrator, along
+with the benefits of Docker Enterprise, like role-based access control
+and Docker Content Trust.
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerEEAPI.jpg)
