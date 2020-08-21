@@ -146,7 +146,7 @@ Explanation:
 To set the maximum amount of memory the container can use one of the
 following flags
 
--m or \--memory= or \--memory
+    -m or \--memory= or \--memory
 
 Possible values can take a positive integer, followed by a suffix of b,
 k, m, g to indicate bytes, kilobytes, megabytes, or gigabytes.
@@ -159,19 +159,19 @@ Explanation:
 
 To scale one or multiple replicated services use:
 
-docker service scale SERVICE=REPLICAS \[SERVICE=REPLICAS\...\]
+    docker service scale SERVICE=REPLICAS \[SERVICE=REPLICAS\...\]
 
 The following command scales the "web" service to 5 tasks.
 
-docker service scale web=5
+    docker service scale web=5
 
 Alternatively, you can use:
 
-docker service update \--replicas
+    docker service update \--replicas
 
 For example
 
-docker service update \--replicas=5 web
+    docker service update \--replicas=5 web
 
 This example also updates the number of replicas for the service to 5.
 
@@ -186,7 +186,7 @@ Explanation:
 To display detailed information on one or more containers including the
 list of volume use:
 
-docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
+    docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
 
 <https://docs.docker.com/engine/reference/commandline/container_inspect/>
 
@@ -196,7 +196,7 @@ Explanation:
 
 To update a service use:
 
-docker service update \[OPTIONS\] SERVICE
+    docker service update \[OPTIONS\] SERVICE
 
 <https://docs.docker.com/engine/reference/commandline/service_update/>
 
