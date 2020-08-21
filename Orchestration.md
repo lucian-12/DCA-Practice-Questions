@@ -369,3 +369,251 @@ by the rack.
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/placement.png)
 
 <https://docs.docker.com/engine/swarm/services/#control-service-placement>
+
+### **Answer 19: d**
+
+Explanation:
+
+You can print the inspect output in a human-readable format instead of
+the default JSON output, by using the \--pretty option.
+
+https://docs.docker.com/engine/reference/commandline/service_inspect/\#formatting
+
+### **Answer 20: a**
+
+Explanation:
+
+Since the service its newly create we use
+
+docker service create \[OPTIONS\] IMAGE \[COMMAND\] \[ARG\...\]
+
+Use the \--replicas flag to set the number of replica tasks for a
+replicated service.
+
+The following command creates a redis service with 5 replica tasks:
+
+\$ docker service create \--name redis \--replicas=5 redis:3.0.6
+
+<https://docs.docker.com/engine/reference/commandline/service_create/#create-a-service-with-5-replica-tasks---replicas>
+
+### **Answer 21: c**
+
+Explanation:
+
+Docker inspect provides detailed information on constructs controlled by
+Docker.
+
+By default, docker inspect will render results in a JSON array.
+
+<https://docs.docker.com/engine/reference/commandline/inspect/>
+
+### **Answer 22: c**
+
+Explanation:
+
+To remove a node from the swarm use the following on the node itself:
+
+docker swarm leave \[OPTIONS\]
+
+When you run this command on a worker, that worker leaves the swarm.
+
+You can use the \--force option on a manager to remove it from the
+swarm. However, this does not reconfigure the swarm to ensure that there
+are enough managers to maintain a quorum in the swarm.
+
+The safe way to remove a manager from a swarm is to demote it to a
+worker and then direct it to leave the quorum without using \--force.
+
+<https://docs.docker.com/engine/reference/commandline/swarm_leave/>
+
+### **Answer 23: a, c, d**
+
+Explanation:
+
+Required Fields
+
+In the .yaml file for the Kubernetes object you want to create, you\'ll
+need to set values for the following fields:
+
+apiVersion - Which version of the Kubernetes API you\'re using to create
+this object
+
+kind - What kind of object you want to create
+
+metadata - Data that helps uniquely identify the object, including a
+name string, UID, and an optional namespace
+
+spec - What state you desire for the object
+
+<https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#required-fields>
+
+### **Answer 24: a, b, c**
+
+Explanation:
+
+If you\'d like to **start sending traffic** to a Pod only when a probe
+succeeds, specify a readiness probe. In this case, the readiness probe
+might be the same as the liveness probe, but the existence of the
+readiness probe in the spec means that the Pod will start without
+receiving any traffic and only start receiving traffic after the probe
+starts succeeding. If your Container needs to work on **loading large
+data, configuration files, or migrations during startup**, specify a
+readiness probe.
+
+If you want your Container to be able to take itself **down for
+maintenance**, you can specify a readiness probe that checks an endpoint
+specific to readiness that is different from the liveness probe.
+
+Note that if you just want to be able to drain requests when the Pod is
+deleted, you do not necessarily need a readiness probe; on deletion, the
+Pod automatically puts itself into an unready state regardless of
+whether the readiness probe exists. The Pod remains in the unready state
+while it waits for the Containers in the Pod to stop.
+
+<https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-readiness-probe>
+
+### **Answer 25: b**
+
+Explanation:
+
+To return low-level information on Docker objects use:
+
+docker inspect \[OPTIONS\] NAME\|ID \[NAME\|ID\...\]
+
+<https://docs.docker.com/engine/reference/commandline/inspect/>
+
+### **Answer 26: b**
+
+Explanation:
+
+To configure the restart policy for a container, use the \--restart flag
+when using the docker run command. The value of the \--restart flag can
+be any of the following:
+
+· **no** - Do not automatically restart the container. (the default)
+
+· **on-failure** - Restart the container if it exits due to an error,
+which manifests as a non-zero exit code.
+
+· **always** - Always restart the container if it stops. If it is
+manually stopped, it is restarted only when Docker daemon restarts or
+the container itself is manually restarted. (See the second bullet
+listed in restart policy details)
+
+· **unless-stopped** - Similar to always, except that when the container
+is stopped (manually or otherwise), it is not restarted even after
+Docker daemon restarts.
+
+<https://docs.docker.com/config/containers/start-containers-automatically/>
+
+### **Answer 27: b**
+
+Explanation:
+
+A task is a one-directional mechanism.
+
+This means that it progresses monotonically through a series of states:
+assigned, prepared, running, etc. If the task fails the orchestrator
+removes the task and its container and then creates a new task to
+replace it according to the desired state specified by the service.
+
+<https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/#tasks-and-scheduling>
+
+### **Answer 28: d**
+
+Explanation:
+
+docker inspect command returns low-level information on Docker objects.
+
+<https://docs.docker.com/engine/reference/commandline/inspect/>
+
+### **Answer 29: b**
+
+Explanation:
+
+**Publish service ports externally to the swarm (-p, \--publish)**
+
+You can publish service ports to make them available externally to the
+swarm using the \--publish flag.
+
+The \--publish flag can take two different styles of arguments. The
+short version is positional, and allows you to specify the published
+port and target port separated by a colon (:).
+
+\$ docker service create \--name my_web \--replicas 3 \--publish 8080:80
+nginx
+
+There is also a long format, which is easier to read and allows you to
+specify more options. The long format is preferred. You cannot specify
+the service's mode when using the short format.
+
+Here is an example of using the long format for the same service as
+above:
+
+\$ docker service create \--name my_web \--replicas 3 \--publish
+published=8080,target=80 nginx
+
+You can also specify the protocol to use, tcp, udp, or sctp. Defaults to
+tcp. To bind a port for both protocols, specify the -p or \--publish
+flag twice.
+
+\$ docker service create \--name my_web \--replicas 3 \--publish
+8080:80/udp nginx
+
+<https://docs.docker.com/engine/reference/commandline/service_create/#publish-service-ports-externally-to-the-swarm--p---publish>
+
+### **Answer 30: d**
+
+Explanation:
+
+You can change almost everything about an existing service using
+the docker service update command.
+
+When creating a service, use the -p or \--publish flag.
+
+When updating an existing service, use the flag is \--publish-add. There
+is also a \--publish-rm flag to remove a port that was previously
+published.
+
+<https://docs.docker.com/engine/reference/commandline/service_update/#add-or-remove-published-service-ports>
+
+### **Answer 31: d**
+
+Explanation:
+
+Docker manager nodes store the swarm state and manager logs in
+the **/var/lib/docker/swarm/** directory.
+
+Usually, on Linux distributions:
+
+\"/**etc**\" is used for configurations (.conf files etc). here you find
+all the configs and settings for your system.
+
+\"/**var**\" is usually used for log files, \'temporary\' files (like
+mail spool, printer spool, etc), databases, and all other data not tied
+to a specific user. Logs are usually in \"/var/log\", databases in
+\"/var/lib\" (mysql - \"/var/lib/mysql\"), etc.
+
+<https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard>
+
+### **Answer 32: d**
+
+Explanation:
+
+To deploy an application image when Docker Engine is in swarm mode, you
+create a service. Frequently a service is the image for a microservice
+within the context of some larger application.
+
+Examples of services might include an HTTP server, a database, or any
+other type of executable program that you wish to run in
+a **distributed** environment.
+
+<https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/>
+
+#### Answer 33: d
+
+Explanation:
+
+**Tasks and scheduling**
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
