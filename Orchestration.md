@@ -1359,3 +1359,356 @@ that consists of one to many services that we want to run on the swarm.
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/stack.jpg)
 
+#### Answer 66: d
+
+Explanation:
+
+The command to initialize a swarm is:
+
+docker swarm init \[OPTIONS\]
+
+<https://docs.docker.com/engine/reference/commandline/swarm_init/>
+
+When you run the docker swarm init command to create a swarm, the Docker
+Engine starts running in swarm mode and it creates a single-node swarm
+on the current node.
+
+The Engine sets up the swarm as follows:
+
+· switches the current node into swarm mode.
+
+· creates a swarm named default.
+
+· designates the current node as a leader manager node for the swarm.
+
+· names the node with the machine hostname.
+
+· configures the manager to listen on an active network interface on
+port 2377.
+
+· sets the current node to Active availability, meaning it can receive
+tasks from the scheduler.
+
+· starts an internal distributed data store for Engines participating in
+the swarm to maintain a consistent view of the swarm and all services
+running on it.
+
+· by default, generates a self-signed root CA for the swarm.
+
+· by default, generates tokens for worker and manager nodes to join the
+swarm.
+
+· creates an overlay network named ingress for publishing service ports
+external to the swarm.
+
+· creates an overlay default IP addresses and subnet mask for your
+networks
+
+The output for docker swarm init provides the connection command to use
+when you join new worker nodes to the swarm
+
+<https://docs.docker.com/engine/swarm/swarm-mode/#create-a-swarm>
+
+#### Answer 67: a
+
+Explanation:
+
+A **ConfigMap** is an API object used to store non-confidential data in
+key-value pairs. Pods can consume ConfigMaps as environment variables,
+command-line arguments, or as configuration files in a volume.
+
+A ConfigMap allows you to decouple environment-specific configuration
+from your container images, so that your applications are easily
+portable.
+
+Use a ConfigMap for setting configuration data separately from the
+application code.
+
+For example, imagine that you are developing an application that you can
+run on your own computer (for development) and in the cloud (to handle
+real traffic). You write the code to look in an environment variable
+named DATABASE_HOST. Locally, you set that variable to localhost. In the
+cloud, you set it to refer to a Kubernetes Service that exposes the
+database component to your cluster.
+
+<https://kubernetes.io/docs/concepts/configuration/configmap/#motivation>
+
+#### Answer 68: c
+
+Explanation:
+
+Don\'t use naked Pods (that is, Pods not bound to a ReplicaSet or
+Deployment) if you can avoid it. Naked Pods will not be rescheduled in
+the event of a node failure.
+
+A **Deployment**, which both creates a **ReplicaSet** to ensure that the
+desired number of Pods is always available and specifies **a strategy to
+replace Pods** (such as RollingUpdate), is almost always preferable to
+creating Pods directly, except for some explicit restartPolicy: Never
+scenarios. A Job may also be appropriate.
+
+<https://kubernetes.io/docs/concepts/configuration/overview/#naked-pods-vs-replicasets-deployments-and-jobs>
+
+A ReplicaSet ensures that a specified number of pod replicas are running
+at any given time. However, a Deployment is a higher-level concept that
+manages ReplicaSets and provides declarative updates to Pods along with
+a lot of other useful features. Therefore, we recommend using
+Deployments instead of directly using ReplicaSets, unless you require
+custom update orchestration or don\'t require updates at all.
+
+This actually means that you may never need to manipulate ReplicaSet
+objects: use a Deployment instead, and define your application in the
+spec section.
+
+<https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/#when-to-use-a-replicaset>
+
+#### Answer 69: c
+
+Explanation:
+
+docker node inspect self \--pretty
+
+You can run docker node inspect \<NODE-ID\> on a manager node to view
+the details for an individual node. The output defaults to JSON format,
+but you can pass the \--pretty flag to print the results in
+human-readable format.
+
+<https://docs.docker.com/engine/swarm/manage-nodes/#inspect-an-individual-node>
+
+docker node ls \[OPTIONS\]
+
+Lists all the nodes that the Docker Swarm manager knows about. This is a
+cluster management command and must be executed on a **swarm manager
+node**. To learn about managers and workers, refer to the Swarm mode
+section in the documentation.
+
+<https://docs.docker.com/engine/reference/commandline/node_ls/>
+
+#### Answer 70: c
+
+Explanation:
+
+You can change almost everything about an existing service using
+the docker service update command.
+
+Use the \--network-add or \--network-rm flags to add or remove a network
+for a service.
+
+Assuming that the my_web service from the previous section still exists,
+use the following command to add a network:
+
+\$ docker service update \--network-add
+
+<https://docs.docker.com/engine/reference/commandline/service_update/#add-or-remove-network>
+
+#### Answer 71: b
+
+Explanation:
+
+When Docker is running in swarm mode, you can still run standalone
+containers on any of the Docker hosts participating in the swarm, as
+well as swarm services.
+
+A key difference between standalone containers and swarm services is
+that only swarm managers can manage a swarm, while standalone containers
+can be started on any daemon. Docker daemons can participate in a swarm
+as managers, workers, or both.
+
+One of the key advantages of swarm services over standalone containers
+is that you can modify a service's configuration, including the networks
+and volumes it is connected to, without the need to manually restart the
+service. Docker will update the configuration, stop the service tasks
+with the out of date configuration, and create new ones matching the
+desired configuration.
+
+<https://docs.docker.com/engine/swarm/key-concepts/>
+
+#### Answer 72: c
+
+Explanation:
+
+To configure the restart policy for a container, use the \--restart flag
+when using the docker run command. The value of the \--restart flag can
+be any of the following:
+
+· **no** - Do not automatically restart the container. (the default)
+
+· **on-failure** - Restart the container if it exits due to an error,
+which manifests as a non-zero exit code.
+
+· **always** - Always restart the container if it stops. If it is
+manually stopped, it is restarted only when Docker daemon restarts or
+the container itself is manually restarted. (See the second bullet
+listed in restart policy details)
+
+· **unless-stopped** - Similar to always, except that when the container
+is stopped (manually or otherwise), it is not restarted even after
+Docker daemon restarts.
+
+<https://docs.docker.com/config/containers/start-containers-automatically/>
+
+#### Answer 73: a, b, d
+
+Explanation:
+
+The following are typical use cases for Deployments:
+
+· Create a Deployment to **rollout a ReplicaSet**. The ReplicaSet
+creates Pods in the background. Check the status of the rollout to see
+if it succeeds or not.
+
+· **Declare the new state of the Pods** by updating the PodTemplateSpec
+of the Deployment. A new ReplicaSet is created and the Deployment
+manages moving the Pods from the old ReplicaSet to the new one at a
+controlled rate. Each new ReplicaSet updates the revision of the
+Deployment.
+
+· Rollback to an earlier Deployment revision if the current state of the
+Deployment is not stable. Each rollback updates the revision of the
+Deployment.
+
+· **Scale up** the Deployment to facilitate more load.
+
+· Pause the Deployment to apply multiple fixes to its PodTemplateSpec
+and then resume it to start a new rollout.
+
+· Use the status of the Deployment as an indicator that a rollout has
+stuck.
+
+· Clean up older ReplicaSets that you don\'t need anymore.
+
+<https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#use-case>
+
+Like a Deployment, a StatefulSet manages Pods that are based on an
+identical container spec. Unlike a Deployment, a StatefulSet maintains a
+sticky identity for each of their Pods. These pods are created from the
+same spec, but are not interchangeable: each has a persistent identifier
+that it maintains across any rescheduling.
+
+<https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>
+
+#### Answer 74: a
+
+Explanation:
+
+**Maintain the quorum of managers**
+
+If the swarm loses the quorum of managers, the swarm cannot perform
+administrative tasks such
+as **scaling** or **updating** **services** and **joining** or **removing** **nodes** from
+the swarm.
+
+Nevertheless, tasks on existing worker nodes continue to run.
+
+<https://docs.docker.com/engine/swarm/admin_guide/#maintain-the-quorum-of-managers>
+
+#### Answer 75: d
+
+Explanation:
+
+To remove one or more services from the swarm use:
+
+docker service rm SERVICE \[SERVICE\...\]
+
+*Note: This is a cluster management command, and must be executed on a
+swarm manager node.*
+
+<https://docs.docker.com/engine/reference/commandline/service_rm/>
+
+#### Answer 76: b
+
+Explanation:
+
+You can print the inspect output in a human-readable format instead of
+the default JSON output, by using the \--pretty option:
+
+docker service inspect \--pretty serviceName
+
+<https://docs.docker.com/engine/reference/commandline/service_inspect/#formatting>
+
+#### Answer 77: a
+
+Explanation:
+
+While **placement constraints** limit the nodes a service can run
+on, **placement preferences** try to place tasks on appropriate nodes in
+an algorithmic way (currently, only spread evenly). For instance, if you
+assign each node a rack label, you can set a placement preference to
+spread the service evenly across nodes with the rack label, by value.
+This way, if you lose a rack, the service is still running on nodes on
+other racks.
+
+Placement preferences are not strictly enforced. If no node has the
+label you specify in your preference, the service is deployed as though
+the preference was not set.
+
+<https://docs.docker.com/engine/swarm/services/#control-service-placement>
+
+#### Answer 78: d
+
+Explanation:
+
+PLACEMENT CONSTRAINTS
+
+Use placement constraints to control the nodes a service can be assigned
+to.
+
+In the following example, the service only runs on nodes with the label
+region set to east. If no appropriately-labeled nodes are available,
+tasks will wait in Pending until they become available.
+
+\$ docker service create \\
+
+\--name my-nginx \\
+
+\--replicas 5 \\
+
+\--constraint node.labels.region==east \\
+
+nginx
+
+<https://docs.docker.com/engine/swarm/services/#control-service-placement>
+
+#### Answer 79: b
+
+Explanation:
+
+There is no limit on the number of manager nodes.
+
+The decision about how many manager nodes to implement is **a
+trade-off** between **performance** and **fault-tolerance**.
+
+Adding manager nodes to a swarm makes the swarm more fault-tolerant.
+However, additional manager nodes reduce write performance because more
+nodes must acknowledge proposals to update the swarm state. This means
+more network round-trip traffic.
+
+<https://docs.docker.com/engine/swarm/admin_guide/#operate-manager-nodes-in-a-swarm>
+
+#### Answer 80: a
+
+Explanation:
+
+By default, a container has no resource constraints and can use as much
+of a given resource as the host's kernel scheduler allows. Docker
+provides ways to control how much memory, or CPU a container can use,
+setting runtime configuration flags of the docker run command.
+
+<https://docs.docker.com/config/containers/resource_constraints/#memory>
+
+#### Answer 81: c
+
+Explanation:
+
+To fetch the logs of a container use:
+
+docker logs \[OPTIONS\] CONTAINER
+
+The output might look like this:
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/containerLogs.png)
+
+The docker logs command batch-retrieves logs present at the time of
+execution.
+
+<https://docs.docker.com/engine/reference/commandline/logs/>
