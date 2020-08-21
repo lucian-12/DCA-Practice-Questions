@@ -66,3 +66,26 @@ physical or virtual machine would mean being executed on the same
 logical host.
 
 <https://kubernetes.io/docs/concepts/workloads/pods/pod/#what-is-a-pod>
+
+#### **Answer 4: b**
+
+Explanation:
+
+**Formatting**
+
+The formatting option \--format pretty-prints container output using a
+Go template.
+
+When using the \--format option, the ps command will either output the
+data exactly as the template declares or, when using the table
+directive, includes column headers as well.
+
+<https://docs.docker.com/engine/reference/commandline/ps/#formatting>
+
+The following example uses a template without headers and outputs the
+ID, name and status entries separated by a colon (:) for all running
+containers.
+
+Use "\\t" for extra space between columns.
+
+![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/outputDockerps.png)
