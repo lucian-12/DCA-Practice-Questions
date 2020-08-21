@@ -1,7 +1,7 @@
 Answers Orchestration
 =====================
 
-#### **Answer 1: b**
+### **Answer 1: b**
 
 Explanation:
 
@@ -21,7 +21,7 @@ not exist.
 
 <https://docs.docker.com/engine/swarm/services/#control-service-placement>
 
-#### **Answer 2: c**
+### **Answer 2: c**
 
 Explanation:
 
@@ -50,7 +50,7 @@ Swarm manager nodes         Repartition (on 3 Availability zones)
 
 <https://docs.docker.com/engine/swarm/admin_guide/#distribute-manager-nodes>
 
-#### **Answer 3: a**
+### **Answer 3: a**
 
 Explanation:
 
@@ -67,7 +67,7 @@ logical host.
 
 <https://kubernetes.io/docs/concepts/workloads/pods/pod/#what-is-a-pod>
 
-#### **Answer 4: b**
+### **Answer 4: b**
 
 Explanation:
 
@@ -90,7 +90,7 @@ Use "\\t" for extra space between columns.
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/outputDockerps.png)
 
-#### **Answer 5: b**
+### **Answer 5: b**
 
 Explanation:
 
@@ -108,7 +108,7 @@ quorum. If you have 5 or 6 managers, you can still only lose two.
 
 <https://docs.docker.com/engine/swarm/admin_guide/#maintain-the-quorum-of-managers>
 
-#### **Answer 6: c**
+### **Answer 6: c**
 
 Explanation:
 
@@ -120,7 +120,7 @@ work called **tasks** to worker **nodes**.
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
 
-#### **Answer 7: c**
+### **Answer 7: c**
 
 Explanation:
 
@@ -139,7 +139,7 @@ specify a mode, the service defaults to replicated.
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/globalVsreplicated.jpg)
 
-#### **Answer 8: c**
+### **Answer 8: c**
 
 Explanation:
 
@@ -153,7 +153,7 @@ k, m, g to indicate bytes, kilobytes, megabytes, or gigabytes.
 
 <https://docs.docker.com/config/containers/resource_constraints/#memory>
 
-#### **Answer 9: a, d**
+### **Answer 9: a, d**
 
 Explanation:
 
@@ -179,7 +179,7 @@ This example also updates the number of replicas for the service to 5.
 
 <https://docs.docker.com/engine/reference/commandline/service_update/>
 
-#### **Answer 10: c**
+### **Answer 10: c**
 
 Explanation:
 
@@ -190,7 +190,7 @@ docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
 
 <https://docs.docker.com/engine/reference/commandline/container_inspect/>
 
-#### **Answer 11: a**
+### **Answer 11: a**
 
 Explanation:
 
@@ -200,7 +200,7 @@ docker service update \[OPTIONS\] SERVICE
 
 <https://docs.docker.com/engine/reference/commandline/service_update/>
 
-#### **Answer 12: a**
+### **Answer 12: a**
 
 Explanation:
 
@@ -219,7 +219,7 @@ the **scheduler** fills by spawning a container.
 
 ![outputDockerps](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/tasks_and_scheduling.jpg)
 
-#### **Answer 13: a**
+### **Answer 13: a**
 
 Explanation:
 
@@ -242,7 +242,7 @@ backend: scale can only be used with replicated mode
 
 <https://docs.docker.com/engine/reference/commandline/service_scale/>
 
-#### **Answer 14: a**
+### **Answer 14: a**
 
 Explanation:
 
@@ -262,7 +262,7 @@ The number of items in the task history is determined by the
 
 <https://docs.docker.com/engine/reference/commandline/service_ps/>
 
-#### **Answer 15: a**
+### **Answer 15: a**
 
 Explanation:
 
