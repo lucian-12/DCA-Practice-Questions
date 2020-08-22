@@ -222,3 +222,48 @@ flag it allows for batch cleanup.
 [[https://docs.docker.com/engine/reference/commandline/images/\#filtering]{.ul}](https://docs.docker.com/engine/reference/commandline/images/#filtering)
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageInspectFilter.png)
+
+### **Answer 13: c**
+
+*Explanation*
+
+To save one or more images to a tar archive (streamed to STDOUT by
+default) use:
+
+docker save \[OPTIONS\] IMAGE \[IMAGE\...\]
+
+The achieve can be distributed through different channels such as:
+central file server, version-control system, sent it to you over email
+or shared it via flash drive.
+
+[[https://docs.docker.com/engine/reference/commandline/save/]{.ul}](https://docs.docker.com/engine/reference/commandline/save/)
+
+Docker provides a command to load images into Docker from a file. With
+this tool, you can load images that you acquired through other channels.
+
+[[https://docs.docker.com/engine/reference/commandline/image_load/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_load/)
+
+### **Answer 14: d**
+
+*Explanation*
+
+To create a tag TARGET_IMAGE that refers to SOURCE_IMAGE use:
+
+docker tag SOURCE_IMAGE\[:TAG\] TARGET_IMAGE\[:TAG\]
+
+[[https://docs.docker.com/engine/reference/commandline/tag/]{.ul}](https://docs.docker.com/engine/reference/commandline/tag/)
+
+### **Answer 15: a**
+
+*Explanation*
+
+The default filename is **Dockerfile** (without an extension), and using
+the default can make various tasks easier while working with containers.
+
+However, you can name it whatever you like.
+
+For example, check the following output:
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerBuildTest.png)
+
+[[https://stackoverflow.com/questions/26077543/how-to-name-dockerfiles]{.ul}](https://stackoverflow.com/questions/26077543/how-to-name-dockerfiles)
