@@ -34,4 +34,4 @@ multiple -t parameters when you run the build command:
 
 https://docs.docker.com/engine/reference/builder/\#run\#usage
 
-![https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageTag2.png](img)
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageTag2.png)
