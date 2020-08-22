@@ -624,3 +624,188 @@ You can check this by running:
 \$ docker network ls
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/networkLS.png)
+
+### **Answer 31: d**
+
+*Explanation*
+
+By using dockerd you can start the Docker daemon manually. On a typical
+installation the Docker daemon is started by a system utility, not
+manually by a user. However, this command can be useful to test things
+out and for troubleshooting problems.
+
+To configure the DNS servers for all Docker containers you have to set
+the configuration at Docker daemon level.
+
+By using dockerd command you can also configure it using flags.
+
+For example, to set the DNS server for all Docker containers, use:
+
+dockerd \--dns IP_ADDRESS
+
+To specify multiple DNS servers, use multiple \--dns flags.
+
+If the container cannot reach any of the IP addresses you specify,
+Google's public DNS server 8.8.8.8 is added, so that your container can
+resolve internet domains.
+
+[[http://dockerlabs.collabnix.com/beginners/components/daemon/]{.ul}](http://dockerlabs.collabnix.com/beginners/components/daemon/)
+
+[[https://docs.docker.com/config/containers/container-networking/]{.ul}](https://docs.docker.com/config/containers/container-networking/)
+
+### **Answer 32: a**
+
+*Explanation*
+
+When you create a swarm service, you can publish that service's ports to
+hosts outside the swarm in two ways:
+
+· You can rely on the **routing mesh**. When you publish a service port,
+the swarm makes the service accessible at the target port on every node,
+regardless of whether there is a task for the service running on that
+node or not. This is less complex and is the right choice for many types
+of services.
+
+· You can publish a service task's port directly on the swarm node where
+that service is running. This feature is available in Docker 1.13 and
+higher. This bypasses the routing mesh and provides the maximum
+flexibility, including the ability for you to develop your own routing
+framework. However, you are responsible for keeping track of where each
+task is running and routing requests to the tasks, and load-balancing
+across the nodes.
+
+By default, services are using the routing mesh which makes the service
+accessible at the published port on every swarm node. When a user or
+process connects to a service, any worker node running a service task
+may respond.
+
+To publish a service's port directly on the node where it is running,
+use the mode=host option to the \--publish flag.
+
+For example:
+
+\$ docker service create \\
+
+  \--mode global \\
+
+  \--publish mode=host,target=80,published=8080 \\
+
+  \--name=nginx \\
+
+  nginx:latest
+
+[[https://docs.docker.com/engine/swarm/services/\#publish-ports]{.ul}](https://docs.docker.com/engine/swarm/services/#publish-ports)
+
+### **Answer 33: a**
+
+*Explanation*
+
+**Bridge networks** apply to containers running on the same Docker
+daemon host.
+
+When you start Docker, a default bridge network (also called bridge) is
+created automatically, and newly-started containers connect to it unless
+otherwise specified.
+
+You can also create user-defined custom bridge networks. User-defined
+bridge networks are superior to the default bridge network for the
+following reasons:
+
+· User-defined bridges provide automatic DNS resolution between
+containers.
+
+· User-defined bridges provide better isolation.
+
+· Containers can be attached and detached from user-defined networks on
+the fly.
+
+· Each user-defined network creates a configurable bridge.
+
+· Linked containers on the default bridge network share environment
+variables.
+
+[[https://docs.docker.com/network/bridge/\#differences-between-user-defined-bridges-and-the-default-bridge]{.ul}](https://docs.docker.com/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge)
+
+### **Answer 34: c**
+
+*Explanation*
+
+IPAM Drivers --- Docker has a native IP Address Management Driver that
+provides default subnets or IP addresses for the networks and endpoints
+if they are not specified. IP addressing can also be manually assigned
+through network, container, and service create commands. Remote IPAM
+drivers also exist and provide integration to existing IPAM tools.
+
+[[https://success.docker.com/article/networking\#networkscope]{.ul}](https://success.docker.com/article/networking#networkscope)
+
+### **Answer 35: d**
+
+*Explanation*
+
+If you use the **host network** mode for a container, that container's
+network stack is not isolated from the Docker host (the container shares
+the host's networking namespace), and the container does not get its own
+IP-address allocated.
+
+https://docs.docker.com/network/host/
+
+Host networks are best when the network stack should not be isolated
+from the Docker host, but you want other aspects of the container to be
+isolated.
+
+https://docs.docker.com/network/\#network-driver-summary
+
+### **Answer 36: c**
+
+*Explanation*
+
+If you use the **host network** mode for a container, that container's
+network stack is not isolated from the Docker host (the container shares
+the host's networking namespace), and the container does not get its own
+IP-address allocated.
+
+For instance, if you run a container which binds to port 80 and you use
+host networking, the container's application is available on port 80 on
+the host's IP address.
+
+The host networking driver only works on Linux hosts, and is not
+supported on Docker Desktop for Mac, Docker Desktop for Windows, or
+Docker EE for Windows Server.
+
+Host mode networking can be useful to optimize performance, and in
+situations where a container needs to handle a large range of ports, as
+it does not require network address translation (NAT), and no
+"userland-proxy" is created for each port.
+
+[[https://docs.docker.com/network/host/]{.ul}](https://docs.docker.com/network/host/)
+
+### **Answer 37: a**
+
+*Explanation*
+
+There are several high-level constructs in the CNM. They are all OS and
+infrastructure agnostic so that applications can have a uniform
+experience no matter the infrastructure stack.
+
+· **Sandbox** --- A Sandbox contains the configuration of a container\'s
+network stack. This includes the management of the container\'s
+interfaces, routing table, and DNS settings. An implementation of a
+Sandbox could be a Windows HNS or Linux Network Namespace, a FreeBSD
+Jail, or other similar concept. A Sandbox may contain many endpoints
+from multiple networks.
+
+· **Endpoint** --- An Endpoint joins a Sandbox to a Network. The
+Endpoint construct exists so the actual connection to the network can be
+abstracted away from the application. This helps maintain portability so
+that a service can use different types of network drivers without being
+concerned with how it\'s connected to that network.
+
+· **Network** --- The CNM does not specify a Network in terms of the OSI
+model. An implementation of a Network could be a Linux bridge, a VLAN,
+etc. A Network is a collection of endpoints that have connectivity
+between them. Endpoints that are not connected to a network do not have
+connectivity on a network.
+
+[[https://success.docker.com/article/networking\#cnmconstructs]{.ul}](https://success.docker.com/article/networking#cnmconstructs)
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerCNM.jpg)
