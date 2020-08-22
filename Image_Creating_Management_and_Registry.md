@@ -546,3 +546,53 @@ straightforward manner using the --format parameter.
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageInspectFormatpng.png)
 
 [[https://docs.docker.com/engine/reference/commandline/inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/inspect/)
+
+### **Answer 32: b**
+
+*Explanation*
+
+The build is run by the Docker daemon, not by the CLI.
+
+The first thing a build process does is send the entire context
+(recursively) to the daemon.
+
+[[https://docs.docker.com/engine/reference/builder/]{.ul}](https://docs.docker.com/engine/reference/builder/)
+
+### **Answer 33: a, b, c**
+
+*Explanation*
+
+By default, when you push an image to DTR, the Docker CLI client doesn't
+sign the image.
+
+You can configure the Docker CLI client to sign the images you push to
+DTR. This allows whoever pulls your image to validate if they are
+getting the image you created, or a forged one.
+
+To sign an image you can run:
+
+export DOCKER_CONTENT_TRUST=1
+
+docker push \<dtr-domain\>/\<repository\>/\<image\>:\<tag\>
+
+This pushes the image to DTR and creates trust metadata. It also creates
+public and private key pairs to sign the trust metadata, and push that
+metadata to the Notary Server internal to DTR.
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageSignedpng.png)
+
+Sign images that UCP can trust
+
+With the command above you can sign your DTR images, but UCP doesn't
+trust them because it can't tie the private key you're using to sign the
+images to your UCP account.
+
+To sign images in a way that UCP trusts them you need to:
+
+· Configure your Notary client
+
+· Initialize trust metadata for the repository
+
+· Delegate signing to the keys in your UCP client bundle
+
+[[https://github.com/docker/docker.github.io]{.ul}](https://github.com/docker/docker.github.io)
