@@ -377,7 +377,7 @@ Explanation:
 You can print the inspect output in a human-readable format instead of
 the default JSON output, by using the \--pretty option.
 
-https://docs.docker.com/engine/reference/commandline/service_inspect/\#formatting
+https://docs.docker.com/engine/reference/commandline/service_inspect/#formatting
 
 ### **Answer 20: a**
 
