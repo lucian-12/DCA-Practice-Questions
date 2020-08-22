@@ -596,3 +596,667 @@ To sign images in a way that UCP trusts them you need to:
 · Delegate signing to the keys in your UCP client bundle
 
 [[https://github.com/docker/docker.github.io]{.ul}](https://github.com/docker/docker.github.io)
+
+### **Answer 34: a**
+
+*Explanation*
+
+**Prune images**
+
+The docker image prune command allows you to clean up unused images. By
+default, docker image prune only cleans up dangling images. A dangling
+image is one that is not tagged and is not referenced by any container.
+To remove dangling images:
+
+\$ docker image prune
+
+To remove all images which are not used by existing containers, use the
+-a flag:
+
+\$ docker image prune -a
+
+[[https://docs.docker.com/config/pruning/\#prune-images]{.ul}](https://docs.docker.com/config/pruning/#prune-images)
+
+### **Answer 35: c**
+
+*Explanation*
+
+EXPOSE \<port\> \[\<port\>/\<protocol\>\...\]
+
+The EXPOSE instruction informs Docker that the container listens on the
+specified network ports at runtime. You can specify whether the port
+listens on TCP or UDP, and the default is TCP if the protocol is not
+specified.
+
+The EXPOSE instruction does not actually publish the port. It functions
+as a type of documentation between the person who builds the image and
+the person who runs the container, about which ports are intended to be
+published. To actually publish the port when running the container, use
+the -p flag on docker run to publish and map one or more ports, or the
+-P flag to publish all exposed ports and map them to high-order ports.
+
+<https://docs.docker.com/engine/reference/builder/#expose>
+
+### **Answer 36: d**
+
+*Explanation*
+
+When an image is updated or rebuilt,
+only **layers** that **change** need to be updated, and unchanged layers
+are cached locally. This is part of why Docker images are so fast and
+lightweight. The sizes of each layer add up to equal the size of the
+final image.
+
+An **image** does not have state and it never changes.
+
+[[https://docs.docker.com/glossary/]{.ul}](https://docs.docker.com/glossary/)
+
+FROM can appear multiple times within a single Dockerfile to create
+multiple images or use one build stage as a dependency for another.
+
+[[https://docs.docker.com/engine/reference/builder/\#from]{.ul}](https://docs.docker.com/engine/reference/builder/#from)
+
+### **Answer 37: a**
+
+*Explanation*
+
+To push an image or a repository to a registry use:
+
+docker image push \[OPTIONS\] NAME\[:TAG\]
+
+[[https://docs.docker.com/engine/reference/commandline/image_push/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_push/)
+
+### **Answer 38: b**
+
+*Explanation*
+
+The FROM instruction initializes a new build stage and sets the Base
+Image for subsequent instructions. As such, a valid Dockerfile must
+start with a FROM instruction.
+
+[[https://docs.docker.com/engine/reference/builder/\#from]{.ul}](https://docs.docker.com/engine/reference/builder/#from)
+
+### **Answer 39: c**
+
+*Explanation*
+
+The WORKDIR instruction can be used multiple times in a Dockerfile.
+
+If a relative path is provided, it will be relative to the path of the
+previous WORKDIR instruction. For example:
+
+WORKDIR /a
+
+WORKDIR b
+
+WORKDIR c
+
+RUN pwd
+
+The output of the final pwd command in this Dockerfile would be /a/b/c.
+
+[[https://docs.docker.com/engine/reference/builder/\#workdir]{.ul}](https://docs.docker.com/engine/reference/builder/#workdir)
+
+### **Answer 40: a**
+
+*Explanation*
+
+**Prune unused Docker objects**
+
+Docker takes a conservative approach to cleaning up unused objects, such
+as images, containers, volumes, and networks: these objects are
+generally not removed unless you explicitly ask Docker to do so.
+
+This can cause Docker to use extra disk space. For each type of object,
+Docker provides a prune command. In addition, you can use docker system
+prune to clean up multiple types of objects at once.
+
+**Prune images**
+
+The docker image prune command allows you to clean up unused images. By
+default, docker image prune only cleans up dangling images. A dangling
+image is one that is not tagged and is not referenced by any container.
+To remove dangling images:
+
+\$ docker image prune
+
+To remove all images which are not used by existing containers, use the
+-a flag:
+
+\$ docker image prune -a
+
+[[https://docs.docker.com/config/pruning/\#prune-images]{.ul}](https://docs.docker.com/config/pruning/#prune-images)
+
+### **Answer 41: b**
+
+*Explanation*
+
+You can examine all the layers in an image by using the docker image
+history command. It will display the following:
+
+· Abbreviated layer ID
+
+· Age of the layer
+
+· Initial command of the creating container
+
+· Total file size of that layer
+
+[[https://docs.docker.com/engine/reference/commandline/history/]{.ul}](https://docs.docker.com/engine/reference/commandline/history/)
+
+### **Answer 42: c**
+
+*Explanation*
+
+The WORKDIR instruction can be used multiple times in a Dockerfile.
+
+If a relative path is provided, it will be relative to the path of the
+previous WORKDIR instruction. For example:
+
+WORKDIR /a
+
+WORKDIR b
+
+WORKDIR c
+
+RUN pwd
+
+The output of the final pwd command in this Dockerfile would be /a/b/c.
+
+[[https://docs.docker.com/engine/reference/builder/\#workdir]{.ul}](https://docs.docker.com/engine/reference/builder/#workdir)
+
+### **Answer 43: b**
+
+*Explanation*
+
+The RUN instruction will execute any commands in a new layer on top of
+the current image and commit the results. The resulting committed image
+will be used for the next step in the Dockerfile.
+
+Layering RUN instructions and generating commits conforms to the core
+concepts of Docker where commits are cheap and containers can be created
+from any point in an image's history, much like source control.
+
+Therefore, it's ok to have more than one RUN instruction.
+
+https://docs.docker.com/engine/reference/builder/\#run
+
+### **Answer 44: a**
+
+*Explanation*
+
+ARG \<name\>\[=\<default value\>\]
+
+The ARG instruction defines a variable that users can pass at build-time
+to the builder with the docker build command using the \--build-arg
+\<varname\>=\<value\> flag.
+
+https://docs.docker.com/engine/reference/builder/\#arg
+
+Unlike an ARG instruction, ENV values are always persisted in the built
+image.
+
+The variable expansion technique in this example allows you to pass
+arguments from the command line and persist them in the final image by
+leveraging the ENV instruction.
+
+https://docs.docker.com/engine/reference/builder/\#run\#using-arg-variables
+
+### **Answer 45: b**
+
+*Explanation*
+
+LABEL
+
+LABEL \<key\>=\<value\> \<key\>=\<value\> \<key\>=\<value\> \...
+
+The LABEL instruction adds metadata to an image. A LABEL is a key-value
+pair.
+
+Example:
+
+LABEL version=\"1.0\"
+
+[[https://docs.docker.com/engine/reference/builder/\#label]{.ul}](https://docs.docker.com/engine/reference/builder/#label)
+
+### **Answer 46: c**
+
+*Explanation*
+
+The RUN instruction will execute any commands in a new layer on top of
+the current image and commit the results. The resulting committed image
+will be used for the next step in the Dockerfile.
+
+ENTRYPOINT instruction allows you to configure a container that will run
+as an executable. It looks similar to CMD, because it also allows you to
+specify a command with parameters. The difference is ENTRYPOINT command
+and parameters are not ignored when Docker container runs with command
+line parameters. (There is a way to ignore ENTTRYPOINT, but it is
+unlikely that you will do it.)
+
+CMD instruction allows you to set a default command, which will be
+executed only when you run container without specifying a command. If
+Docker container runs with a command, the default command will be
+ignored. If Dockerfile has more than one CMD instruction, all but last
+CMD instructions are ignored.
+
+EXEC is not a Dockerfile instruction.
+
+https://docs.docker.com/engine/reference/builder/
+
+### **Answer 47: c**
+
+*Explanation*
+
+To remove one or more images, use the following command:
+
+docker image rm \[OPTIONS\] IMAGE \[IMAGE\...\]
+
+[[https://docs.docker.com/engine/reference/commandline/image_rm/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_rm/)
+
+### **Answer 48: a**
+
+*Explanation*
+
+FROM can appear multiple times within a single Dockerfile to create
+multiple images or use one build stage as a dependency for another.
+
+Each FROM instruction clears any state created by previous instructions.
+
+[[https://docs.docker.com/engine/reference/builder/\#from]{.ul}](https://docs.docker.com/engine/reference/builder/#from)
+
+You use multiple FROM statements in your Dockerfile for multi-stage
+builds. Each FROM instruction can use a different base, and each of them
+begins a new stage of the build. You can selectively copy artifacts from
+one stage to another, leaving behind everything you don't want in the
+final image.
+
+[[https://docs.docker.com/develop/develop-images/multistage-build/\#use-multi-stage-builds]{.ul}](https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds)
+
+### **Answer 49: a**
+
+*Explanation*
+
+To create a tag TARGET_IMAGE that refers to SOURCE_IMAGE use:
+
+docker tag SOURCE_IMAGE\[:TAG\] TARGET_IMAGE\[:TAG\]
+
+Examples:
+
+**Tag an image referenced by ID**
+
+To tag a local image with ID "0e5574283393" into the "fedora" repository
+with "version1.0":
+
+\$ docker tag 0e5574283393 fedora/httpd:version1.0
+
+**Tag an image referenced by Name**
+
+To tag a local image with name "httpd" into the "fedora" repository with
+"version1.0":
+
+\$ docker tag httpd fedora/httpd:version1.0
+
+Note that since the tag name is not specified, the alias is created for
+an existing local version httpd:latest.
+
+**Tag an image referenced by Name and Tag**
+
+To tag a local image with name "httpd" and tag "test" into the "fedora"
+repository with "version1.0.test":
+
+\$ docker tag httpd:test fedora/httpd:version1.0.test
+
+[[https://docs.docker.com/engine/reference/commandline/tag/\#examples]{.ul}](https://docs.docker.com/engine/reference/commandline/tag/#examples)
+
+### **Answer 50: a**
+
+*Explanation*
+
+The RUN instruction will execute any commands in a new layer on top of
+the current image and commit the results. The resulting committed image
+will be used for the next step in the Dockerfile.
+
+CMD instruction allows you to set a default command, which will be
+executed only when you run container without specifying a command. If
+Docker container runs with a command, the default command will be
+ignored. If Dockerfile has more than one CMD instruction, all but last
+CMD instructions are ignored.
+
+https://docs.docker.com/engine/reference/builder/
+
+### **Answer 51: c**
+
+*Explanation*
+
+You can use an ARG or an ENV instruction to specify variables that are
+available to the RUN instruction.
+
+Environment variables defined using the ENV instruction always override
+an ARG instruction of the same name.
+
+https://docs.docker.com/engine/reference/builder/\#run\#using-arg-variables
+
+### **Answer 52: a, b**
+
+*Explanation*
+
+The ADD instruction operates similarly to the COPY instruction with two
+important differences.
+
+The ADD instruction will additionally support:
+
+· Fetch remote source files if a URL is specified
+
+· Auto-extraction of archive files. Extract the files of any source that
+are determined to be of archive file type.
+
+[[https://docs.docker.com/engine/reference/builder/\#add]{.ul}](https://docs.docker.com/engine/reference/builder/#add)
+
+### **Answer 53: c, d**
+
+*Explanation*
+
+The ADD instruction operates similarly to the COPY instruction with two
+important differences.
+
+The ADD instruction will additionally support:
+
+· Fetch remote source files if a URL is specified
+
+· Auto-extraction of archive files. Extract the files of any source that
+are determined to be of archive file type.
+
+[[https://docs.docker.com/engine/reference/builder/\#add]{.ul}](https://docs.docker.com/engine/reference/builder/#add)
+
+### **Answer 54: d**
+
+*Explanation*
+
+Docker Content Trust (DCT) allows you to verify the authenticity,
+integrity, and publication date of Docker images that are made available
+on the Docker Hub Registry.
+
+By default, Content Trust is disabled. To enable Content Trust for
+signing and verifying Docker images that you build, push to, or pull
+from the Docker Hub, set the DOCKER_CONTENT_TRUST environment variable,
+for example:
+
+export DOCKER_CONTENT_TRUST=1
+
+[[https://docs.oracle.com/cd/E37670_01/E75728/html/section-xnz_cxk_ht.html]{.ul}](https://docs.oracle.com/cd/E37670_01/E75728/html/section-xnz_cxk_ht.html)
+
+### **Answer 55: a**
+
+*Explanation*
+
+The FROM instruction initializes a new build stage and sets the Base
+Image for subsequent instructions. As such, a valid Dockerfile must
+start with a FROM instruction.
+
+[[https://docs.docker.com/engine/reference/builder/\#from]{.ul}](https://docs.docker.com/engine/reference/builder/#from)
+
+### **Answer 56: b**
+
+*Explanation*
+
+The FROM instruction initializes a new build stage and sets the Base
+Image for subsequent instructions.
+
+As such, a valid Dockerfile must start with a FROM instruction.
+
+ARG is the only instruction that may precede FROM in the Dockerfile.
+
+For example:
+
+ARG CODE_VERSION=latest
+
+FROM base:\${CODE_VERSION}
+
+[[https://docs.docker.com/engine/reference/builder/\#from]{.ul}](https://docs.docker.com/engine/reference/builder/#from#frm)
+
+### **Answer 57: b**
+
+*Explanation*
+
+ENV
+
+ENV \<key\> \<value\>
+
+ENV \<key\>=\<value\> \...
+
+The ENV instruction sets the environment variable \<key\> to the value
+\<value\>. This value will be in the environment for all subsequent
+instructions in the build stage.
+
+Also, the environment variables set using ENV will persist when a
+container is run from the resulting image. You can view the values using
+docker inspect, and change them using docker run \--env
+\<key\>=\<value\>.
+
+https://docs.docker.com/engine/reference/builder/\#env
+
+### **Answer 58: d**
+
+*Explanation*
+
+To search the Docker Hub for images use:
+
+docker search \[OPTIONS\] TERM
+
+The filtering flag (-f or \--filter) format is a key=value pair. If
+there is more than one filter, then pass multiple flags (e.g. \--filter
+is-automated=true \--filter stars=3)
+
+The currently supported filters are:
+
+stars (int - number of stars the image has)
+
+is-automated (boolean - true or false) - is the image automated or not
+
+is-official (boolean - true or false) - is the image official or not
+
+[[https://docs.docker.com/engine/reference/commandline/search/\#filtering]{.ul}](https://docs.docker.com/engine/reference/commandline/search/#filtering)
+
+### **Answer 59: a**
+
+*Explanation*
+
+By default, users with read and write access to a repository can push
+the same tag multiple times to that repository. For example, when user A
+pushes an image to library/wordpress:latest, there is no preventing user
+B from pushing an image with the same name but a completely different
+functionality. This can make it difficult to trace the image back to the
+build that generated it.
+
+To **prevent tags from being overwritten**, you can configure a
+repository to be immutable in the DTR web UI. Once configured, DTR will
+not allow anyone else to push another image tag with the same name.
+
+[[https://github.com/docker/docker.github.io]{.ul}](https://github.com/docker/docker.github.io)
+
+### **Answer 60: c**
+
+*Explanation*
+
+The main purpose of a CMD is to provide defaults for an executing
+container. These defaults can include an executable, or they can omit
+the executable, in which case you must specify an ENTRYPOINT instruction
+as well.
+
+If CMD is used to provide default arguments for the ENTRYPOINT
+instruction, both the CMD and ENTRYPOINT instructions should be
+specified with the JSON array format.
+
+[[https://docs.docker.com/engine/reference/builder/\#cmd]{.ul}](https://docs.docker.com/engine/reference/builder/#cmd)
+
+### **Answer 61: b**
+
+*Explanation*
+
+The WORKDIR instruction sets the working directory for any RUN, CMD,
+ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile.
+If the WORKDIR doesn't exist, it will be created even if it's not used
+in any subsequent Dockerfile instruction.
+
+[[https://docs.docker.com/engine/reference/builder/\#workdir]{.ul}](https://docs.docker.com/engine/reference/builder/#workdir)
+
+### **Answer 62: a**
+
+*Explanation*
+
+An ENTRYPOINT allows you to configure a container that will run as an
+executable.
+
+You can override the ENTRYPOINT instruction using the docker run
+\--entrypoint flag.
+
+[[https://docs.docker.com/engine/reference/builder/\#entrypoint]{.ul}](https://docs.docker.com/engine/reference/builder/#entrypoint)
+
+The main purpose of a CMD is to provide defaults for an executing
+container. These defaults can include an executable, or they can omit
+the executable, in which case you must specify an ENTRYPOINT instruction
+as well.
+
+If CMD is used to provide default arguments for the ENTRYPOINT
+instruction, both the CMD and ENTRYPOINT instructions should be
+specified with the JSON array format.
+
+The CMD instruction has three forms:
+
+· CMD \[\"executable\",\"param1\",\"param2\"\] (exec form, this is the
+preferred form)
+
+· CMD \[\"param1\",\"param2\"\] (as default parameters to ENTRYPOINT)
+
+· CMD command param1 param2 (shell form)
+
+[[https://docs.docker.com/engine/reference/builder/\#cmd]{.ul}](https://docs.docker.com/engine/reference/builder/#cmd)
+
+### **Answer 63: b**
+
+*Explanation*
+
+**Delete signed images**
+
+DTR only allows deleting images if the image has not been signed. You
+first need to delete all the trust data associated with the image before
+you are able to delete the image.
+
+[[https://github.com/docker/docker.github.io]{.ul}](https://github.com/docker/docker.github.io)
+
+### **Answer 64: b**
+
+*Explanation*
+
+Docker builds images automatically by reading the instructions from a
+Dockerfile text file that contains all commands, in order, needed to
+build a given image.
+
+A Docker image consists of read-only layers each of which represents a
+Dockerfile instruction.
+
+[[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/]{.ul}](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+
+### **Answer 69: d**
+
+*Explanation*
+
+**Best practices for writing Dockerfiles:**
+
+· Create ephemeral containers
+
+· Understand build context
+
+· Pipe Dockerfile through stdin
+
+· Exclude with .dockerignore
+
+· Use multi-stage builds
+
+· Don't install unnecessary packages
+
+· Decouple applications
+
+· Minimize the number of layers
+
+· Sort multi-line arguments
+
+· Leverage build cache
+
+[[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/\#create-ephemeral-containers]{.ul}](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#create-ephemeral-containers)
+
+### **Answer 66: c**
+
+*Explanation*
+
+Multi-stage builds allow you to drastically reduce the size of your
+final image, without struggling to reduce the number of intermediate
+layers and files.
+
+[[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/\#use-multi-stage-builds]{.ul}](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#use-multi-stage-builds)
+
+With multi-stage builds, you use multiple FROM statements in your
+Dockerfile. Each FROM instruction can use a different base, and each of
+them begins a new stage of the build. You can selectively copy artifacts
+from one stage to another, leaving behind everything you don't want in
+the final image.
+
+[[https://docs.docker.com/develop/develop-images/multistage-build/\#use-multi-stage-builds]{.ul}](https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds)
+
+### **Answer 67: a**
+
+*Explanation*
+
+VOLUME \[\"/data\"\]
+
+The VOLUME instruction creates a mount point with the specified name and
+marks it as holding externally mounted volumes from native host or other
+containers. The value can be a JSON array, VOLUME \[\"/var/log/\"\], or
+a plain string with multiple arguments, such as VOLUME /var/log or
+VOLUME /var/log /var/db.
+
+[[https://docs.docker.com/engine/reference/builder/\#volume]{.ul}](https://docs.docker.com/engine/reference/builder/#volume)
+
+### **Answer 68: a**
+
+*Explanation*
+
+In an image, a layer is modification to the image, represented by an
+instruction in the Dockerfile. Layers are applied in sequence to the
+base image to create the final image.
+
+When an image is updated or rebuilt, only layers that change need to be
+updated, and unchanged layers are cached locally. This is part of why
+Docker images are so fast and lightweight. The sizes of each layer add
+up to equal the size of the final image.
+
+[[https://docs.docker.com/glossary/]{.ul}](https://docs.docker.com/glossary/)
+
+### **Answer 69: d**
+
+*Explanation*
+
+Docker Hub is a service provided by Docker for finding and sharing
+container images with your team. It provides the following major
+features:
+
+· Repositories: Push and pull container images.
+
+· Teams & Organizations: Manage access to private repositories of
+container images.
+
+· Official Images: Pull and use high-quality container images provided
+by Docker.
+
+· Publisher Images: Pull and use high-quality container images provided
+by external vendors. Certified images also include support and guarantee
+compatibility with Docker Enterprise.
+
+· Builds: Automatically build container images from GitHub and Bitbucket
+and push them to Docker Hub.
+
+· Webhooks: Trigger actions after a successful push to a repository to
+integrate Docker Hub with other services.
+
+[[https://docs.docker.com/docker-hub/]{.ul}](https://docs.docker.com/docker-hub/)
