@@ -415,3 +415,60 @@ as the visitor counts.
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/volume.png)
 
 [[https://docs.docker.com/storage/tmpfs/]{.ul}](https://docs.docker.com/storage/tmpfs/)
+
+### **Answer 21: c**
+
+*Explanation*
+
+To manage volume, you could use:
+
+docker volume COMMAND COMMAND
+
+You can use subcommands to create, inspect, list, remove, or prune
+volumes.
+
+**Create a volume**
+
+docker volume create
+
+**Display detailed information on one or more volumes**
+
+docker volume inspect
+
+**List volumes**
+
+docker volume ls
+
+**Remove all unused local volumes**
+
+docker volume prune
+
+**Remove one or more volumes**
+
+docker volume rm
+
+[[https://docs.docker.com/engine/reference/commandline/volume/]{.ul}](https://docs.docker.com/engine/reference/commandline/volume/)
+
+### **Answer 22: c**
+
+*Explanation*
+
+To inspect changes to files or directories on a container's filesystem
+use:
+
+docker diff CONTAINER
+
+This lists the changed files and directories in a container᾿s filesystem
+since the container was created.
+
+Three different types of change are tracked with different symbols:
+
+A A file or directory was added
+
+D A file or directory was deleted
+
+C A file or directory was changed
+
+[[https://docs.docker.com/engine/reference/commandline/diff/\#description]{.ul}](https://docs.docker.com/engine/reference/commandline/diff/#description)
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/diff_container.png)
