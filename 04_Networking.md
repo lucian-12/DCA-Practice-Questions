@@ -33,7 +33,7 @@ command starts a container (in detached mode) and the -P flag publishes
 all exposed ports of the container to random ports on the
 host **interfaces**.
 
-\$ docker run -d -P \--name webserver nginx
+    \$ docker run -d -P \--name webserver nginx
 
 [[https://docs.docker.com/config/containers/container-networking/]{.ul}](https://docs.docker.com/config/containers/container-networking/)
 
@@ -221,11 +221,11 @@ routing to expose your services externally.
 
 To create a new network use:
 
-docker network create \[OPTIONS\] NETWORK
+    docker network create \[OPTIONS\] NETWORK
 
 For example:
 
-\$ docker network create -d bridge my-bridge-network
+    \$ docker network create -d bridge my-bridge-network
 
 The DRIVER accepts bridge or overlay which are the built-in network
 drivers. If you have installed a third party or your own custom network
@@ -274,11 +274,11 @@ To set driver specific options use: \--opt , -o
 
 For example:
 
-\$ docker network create -d overlay \\
+    \$ docker network create -d overlay \\
 
-  \--opt encrypted=true \\
+      \--opt encrypted=true \\
 
-  my-network -network
+      my-network -network
 
 [[https://docs.docker.com/engine/reference/commandline/network_create/]{.ul}](https://docs.docker.com/engine/reference/commandline/network_create/)
 
@@ -290,7 +290,7 @@ To create an overlay network which can be used by swarm services or
 standalone containers to communicate with other standalone containers
 running on other Docker daemons, add the \--attachable flag:
 
-\$ docker network create -d overlay \--attachable my-attachable-overlay
+    \$ docker network create -d overlay \--attachable my-attachable-overlay
 
 [[https://docs.docker.com/network/overlay/]{.ul}](https://docs.docker.com/network/overlay/)
 
@@ -310,7 +310,7 @@ the \--publish or -p flag.
 
 Here is anexample:
 
-docker run -p 80:8080 ubuntu bash
+    docker run -p 80:8080 ubuntu bash
 
 This binds port 8080 of the container to TCP port 80 on the host
 machine.
@@ -369,19 +369,19 @@ traffic related to swarm services.
 
 The following run command options work with container networking:
 
-\--publish-all or -P
+    \--publish-all or -P
 
 Publish all exposed ports to the host **interfaces**. Docker binds each
 exposed port to a random port on the host. Use the -p flag to explicitly
 map a single port or range of ports.
 
--p or \--publish
+    -p or \--publish
 
 It makes a port available to services outside of Docker, or to Docker
 containers which are not connected to the container's network.
 
-format: ip:hostPort:containerPort \| ip::containerPort \|
-hostPort:containerPort \| containerPort
+    format: ip:hostPort:containerPort \| ip::containerPort \|
+    hostPort:containerPort \| containerPort
 
 [[https://docs.docker.com/engine/reference/run/\#expose-incoming-ports]{.ul}](https://docs.docker.com/engine/reference/run/#expose-incoming-ports)
 
@@ -512,7 +512,7 @@ docker network COMMAND
 
 To display detailed information on one or more networks you can use:
 
-docker network inspect \[OPTIONS\] NETWORK \[NETWORK\...\]
+    docker network inspect \[OPTIONS\] NETWORK \[NETWORK\...\]
 
 [[https://docs.docker.com/engine/reference/commandline/network_inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/network_inspect/)
 
@@ -522,7 +522,7 @@ docker network inspect \[OPTIONS\] NETWORK \[NETWORK\...\]
 
 The following run command options work with container networking:
 
-\--expose
+    \--expose
 
 Expose a port or a range of ports inside the container. You expose ports
 using the EXPOSE keyword in the Dockerfile or the \--expose flag to
@@ -530,13 +530,13 @@ docker run. Exposing ports is a way of **documenting** which ports are
 used, but **does not actually map or open any ports**. Exposing ports is
 optional.
 
-\--publish-all or -P
+    \--publish-all or -P
 
 Publish all exposed ports to the host **interfaces**. Docker binds each
 exposed port to a random port on the host. Use the -p flag to explicitly
 map a single port or range of ports.
 
--p or \--publish
+    -p or \--publish
 
 It makes a port available to services outside of Docker, or to Docker
 containers which are not connected to the container's network.
@@ -574,7 +574,7 @@ https://docs.docker.com/network/macvlan/\#create-a-macvlan-network
 
 The following run command options work with container networking:
 
-\--expose
+    \--expose
 
 Expose a port or a range of ports inside the container. You expose ports
 using the EXPOSE keyword in the Dockerfile or the \--expose flag to
@@ -582,13 +582,13 @@ docker run. Exposing ports is a way of **documenting** which ports are
 used, but **does not actually map or open any ports**. Exposing ports is
 optional.
 
-\--publish-all or -P
+    \--publish-all or -P
 
 Publish all exposed ports to the host **interfaces**. Docker binds each
 exposed port to a random port on the host. Use the -p flag to explicitly
 map a single port or range of ports.
 
--p or \--publish
+    -p or \--publish
 
 It makes a port available to services outside of Docker, or to Docker
 containers which are not connected to the container's network.
@@ -621,7 +621,7 @@ on each host.
 
 You can check this by running:
 
-\$ docker network ls
+    \$ docker network ls
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/networkLS.png)
 
@@ -641,7 +641,7 @@ By using dockerd command you can also configure it using flags.
 
 For example, to set the DNS server for all Docker containers, use:
 
-dockerd \--dns IP_ADDRESS
+    dockerd \--dns IP_ADDRESS
 
 To specify multiple DNS servers, use multiple \--dns flags.
 
@@ -684,15 +684,15 @@ use the mode=host option to the \--publish flag.
 
 For example:
 
-\$ docker service create \\
+    \$ docker service create \\
 
-  \--mode global \\
+      \--mode global \\
 
-  \--publish mode=host,target=80,published=8080 \\
+      \--publish mode=host,target=80,published=8080 \\
 
-  \--name=nginx \\
+      \--name=nginx \\
 
-  nginx:latest
+      nginx:latest
 
 [[https://docs.docker.com/engine/swarm/services/\#publish-ports]{.ul}](https://docs.docker.com/engine/swarm/services/#publish-ports)
 
@@ -836,7 +836,7 @@ By default, a container inherits the DNS settings of the Docker daemon.
 
 To specify a DNS server for an individual container use:
 
-docker container create \--dns=IP_ADDRESS
+    docker container create \--dns=IP_ADDRESS
 
 To specify multiple DNS servers, use multiple \--dns flags. If the
 container cannot reach any of the IP addresses you specify, Google's
@@ -981,7 +981,7 @@ an already-existing my-net network:
 
 *Explanation*
 
-docker network ls \[OPTIONS\]
+    docker network ls \[OPTIONS\]
 
 Lists all the networks the Engine daemon knows about. This includes the
 networks that span across multiple hosts in a cluster.
