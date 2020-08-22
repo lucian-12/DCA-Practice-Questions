@@ -159,7 +159,7 @@ Explanation:
 
 To scale one or multiple replicated services use:
 
-    docker service scale SERVICE=REPLICAS \[SERVICE=REPLICAS\...\]
+    docker service scale SERVICE=REPLICAS [SERVICE=REPLICAS\...]
 
 The following command scales the "web" service to 5 tasks.
 
@@ -186,7 +186,7 @@ Explanation:
 To display detailed information on one or more containers including the
 list of volume use:
 
-    docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
+    docker container inspect [OPTIONS] CONTAINER [CONTAINER\...]
 
 <https://docs.docker.com/engine/reference/commandline/container_inspect/>
 
@@ -196,7 +196,7 @@ Explanation:
 
 To update a service use:
 
-    docker service update \[OPTIONS\] SERVICE
+    docker service update [OPTIONS] SERVICE
 
 <https://docs.docker.com/engine/reference/commandline/service_update/>
 
@@ -286,7 +286,7 @@ Explanation:
 
 To display detailed information on one or more containers, use:
 
-    docker container inspect \[OPTIONS\] CONTAINER \[CONTAINER\...\]
+    docker container inspect [OPTIONS] CONTAINER [CONTAINER\...]
 
 <https://docs.docker.com/engine/reference/commandline/container_inspect/>
 
@@ -385,7 +385,7 @@ Explanation:
 
 Since the service its newly create we use
 
-    docker service create \[OPTIONS\] IMAGE \[COMMAND\] \[ARG\...\]
+    docker service create [OPTIONS] IMAGE [COMMAND] [ARG\...]
 
 Use the \--replicas flag to set the number of replica tasks for a
 replicated service.
@@ -413,7 +413,7 @@ Explanation:
 
 To remove a node from the swarm use the following on the node itself:
 
-    docker swarm leave \[OPTIONS\]
+    docker swarm leave [OPTIONS]
 
 When you run this command on a worker, that worker leaves the swarm.
 
@@ -478,7 +478,7 @@ Explanation:
 
 To return low-level information on Docker objects use:
 
-    docker inspect \[OPTIONS\] NAME\|ID \[NAME\|ID\...\]
+    docker inspect [OPTIONS] NAME\|ID [NAME\|ID\...]
 
 <https://docs.docker.com/engine/reference/commandline/inspect/>
 
@@ -1082,7 +1082,7 @@ Explanation:
 To rollback a specified service to its previous version from the swarm
 you can execute one of the following commands:
 
-    docker service rollback \[OPTIONS\] SERVICE
+    docker service rollback [OPTIONS] SERVICE
 
     docker service update --rollback SERVICE
 
@@ -1608,7 +1608,7 @@ Explanation:
 
 To remove one or more services from the swarm use:
 
-    docker service rm SERVICE \[SERVICE\...\]
+    docker service rm SERVICE [SERVICE\...]
 
 *Note: This is a cluster management command, and must be executed on a
 swarm manager node.*
