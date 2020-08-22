@@ -169,6 +169,7 @@ Docker port command only shows the port published externally.
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/portsMapped.png)
 
+
 ### **Answer 10: b**
 
 *Explanation*
