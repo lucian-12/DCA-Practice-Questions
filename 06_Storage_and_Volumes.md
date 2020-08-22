@@ -195,3 +195,223 @@ multiple containers sharing the same Ubuntu 18.04 image.
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageLayers.png)
 
 [[https://docs.docker.com/storage/storagedriver/\#container-and-layers]{.ul}](https://docs.docker.com/storage/storagedriver/#container-and-layers)
+
+### **Answer 11: c**
+
+*Explanation*
+
+The major difference between a container and an image is **the top
+writable layer**. All writes to the container that add new or modify
+existing data are stored in this writable layer. When the container is
+deleted, the writable layer is also deleted. The underlying image
+remains unchanged.
+
+Because each container has its own writable container layer, and all
+changes are stored in this container layer, multiple containers can
+share access to the same underlying image and yet have their own data
+state. The diagram below shows multiple containers sharing the same
+Ubuntu 18.04 image.
+
+Docker uses storage drivers to manage the contents of the image layers
+and the writable container layer. Each storage driver handles the
+implementation differently, but all drivers use stackable image layers
+and the **copy-on-write** (CoW) strategy.
+
+[[https://docs.docker.com/storage/storagedriver/\#container-and-layers]{.ul}](https://docs.docker.com/storage/storagedriver/#container-and-layers)
+
+### **Answer 12: b**
+
+*Explanation*
+
+Docker uses **storage drivers** to manage the contents of the image
+layers and the writable container layer. Each storage driver handles the
+implementation differently, but all drivers use stackable image layers
+and the copy-on-write (CoW) strategy.
+
+[[https://docs.docker.com/storage/storagedriver/\#container-and-layers]{.ul}](https://docs.docker.com/storage/storagedriver/#container-and-layers)
+
+### **Answer 13: b**
+
+*Explanation*
+
+A Docker image is built up from **a series of layers**. Each layer
+represents an instruction in the image's Dockerfile.
+
+Each layer except the very last one is read-only.
+
+Each layer is only a **set of differences from the layer before it**.
+
+[[https://docs.docker.com/storage/storagedriver/\#images-and-layers]{.ul}](https://docs.docker.com/storage/storagedriver/#images-and-layers)
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageLayers.png)
+
+### **Answer 14: b**
+
+*Explanation*
+
+When an existing file in a container is modified, the storage driver
+performs a copy-on-write operation. The specifics steps involved depend
+on the specific storage driver. For the aufs, overlay, and overlay2
+drivers, the copy-on-write operation follows this rough sequence:
+
+· Search through the image layers for the file to update. The process
+starts at the newest layer and works down to the base layer one layer at
+a time. When results are found, they are added to a cache to speed
+future operations.
+
+· Perform a copy_up operation on the first copy of the file that is
+found, to copy the file to the container's writable layer.
+
+· Any modifications are made to this copy of the file, and the container
+cannot see the read-only copy of the file that exists in the lower
+layer.
+
+[[https://docs.docker.com/storage/storagedriver/\#copying-makes-containers-efficient]{.ul}](https://docs.docker.com/storage/storagedriver/#copying-makes-containers-efficient)
+
+### **Answer 15: b**
+
+*Explanation*
+
+A user creates, or in the case of dynamic provisioning, has already
+created, a PersistentVolumeClaim with a specific amount of storage
+requested and with certain access modes. A control loop in the master
+watches for new PVCs, finds a matching PV (if possible), and binds them
+together. If a PV was dynamically provisioned for a new PVC, the loop
+will always bind that PV to the PVC. Otherwise, the user will always get
+at least what they asked for, but the volume may be in excess of what
+was requested. Once bound, PersistentVolumeClaim binds are exclusive,
+regardless of how they were bound. A PVC to PV binding is a **one-to-one
+mapping**, using a ClaimRef which is a bi-directional binding between
+the PersistentVolume and the PersistentVolumeClaim.
+
+[[https://kubernetes.io/docs/concepts/storage/persistent-volumes/\#binding]{.ul}](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#binding)
+
+### **Answer 16: d**
+
+*Explanation*
+
+Anonymous volumes can be cleaned up in two ways. First, anonymous
+volumes are automatically deleted when the container they were created
+for are automatically cleaned up. This happens when containers are
+deleted via the docker run \--rm or docker rm -v flags.
+
+Remove one or more containers
+
+docker rm \[OPTIONS\] CONTAINER \[CONTAINER\...\]
+
+Second, they can be manually deleted by issuing a docker volume remove
+command:
+
+docker volume rm \[OPTIONS\] VOLUME \[VOLUME\...\]
+
+[[https://docs.docker.com/engine/reference/commandline/volume_rm/]{.ul}](https://docs.docker.com/engine/reference/commandline/volume_rm/)
+
+### **Answer 17: a**
+
+*Explanation*
+
+The docker run command provides a flag, \--volumes-from, that will copy
+the mount definitions from one or more containers to the new container.
+
+By combining this flag and volumes, you can build shared-state
+relationships in a host-independent way.
+
+[[https://docs.docker.com/engine/reference/commandline/run/\#mount-volumes-from-container\-\--volumes-from]{.ul}](https://docs.docker.com/engine/reference/commandline/run/#mount-volumes-from-container---volumes-from)
+
+### **Answer 18: a**
+
+*Explanation*
+
+-V and \--volumes are incorrect flags.
+
+Output message:
+
+unknown shorthand flag: \'V\' in -V
+
+unknown flag: \--volumes
+
+To mount a volume use -v or \--volume.
+
+These flags consist of three fields, separated by colon characters (:).
+The fields must be in the correct order, and the meaning of each field
+is not immediately obvious.
+
+· In the case of named volumes, the first field is the name of the
+volume, and is unique on a given host machine. For anonymous volumes,
+the first field is omitted.
+
+· The second field is the path where the file or directory are mounted
+in the container.
+
+· The third field is optional, and is a comma-separated list of options,
+such as ro. These options are discussed below.
+
+If you start a container with a volume that does not yet exist, Docker
+creates the volume for you. The following example mounts the volume
+myvol2 into /app/ in the container.
+
+\$ docker run -d \\
+
+  \--name devtest \\
+
+  -v myvol2:/app \\
+
+  nginx:latest
+
+[[https://docs.docker.com/storage/volumes/]{.ul}](https://docs.docker.com/storage/volumes/)
+
+### **Answer 19: d**
+
+*Explanation*
+
+To mount a volume use -v or \--volume.
+
+These flags consist of three fields, separated by colon characters (:).
+The fields must be in the correct order, and the meaning of each field
+is not immediately obvious.
+
+· In the case of named volumes, the first field is the name of the
+volume, and is unique on a given host machine. For anonymous volumes,
+the first field is omitted.
+
+· The second field is the path where the file or directory are mounted
+in the container.
+
+· The third field is optional, and is a comma-separated list of options,
+such as ro. These options are discussed below.
+
+If you start a container with a volume that does not yet exist, Docker
+creates the volume for you. The following example mounts the volume
+myvol2 into /app/ in the container.
+
+\$ docker run -d \\
+
+  \--name devtest \\
+
+  -v myvol2:/app \\
+
+  nginx:latest
+
+[[https://docs.docker.com/storage/volumes/]{.ul}](https://docs.docker.com/storage/volumes/)
+
+### **Answer 20: b**
+
+*Explanation*
+
+Volumes and bind mounts let you share files between the host machine and
+container so that you can persist data even after the container is
+stopped.
+
+However, if you're running Docker on Linux, you have a third
+option: **tmpfs** mounts.
+
+As opposed to volumes and bind mounts, a tmpfs mount is temporary, and
+only persisted in the host memory. When the container stops, the tmpfs
+mount is removed, and files written there won't be persisted.
+
+Therefore, this kind of mount is not recommended for storing state such
+as the visitor counts.
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/volume.png)
+
+[[https://docs.docker.com/storage/tmpfs/]{.ul}](https://docs.docker.com/storage/tmpfs/)
