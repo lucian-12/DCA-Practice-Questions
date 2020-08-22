@@ -129,7 +129,7 @@ Pull an image or a repository from a registry
 
 Or
 
-    docker pull [OPTIONS] NAME[:TAG|\@DIGEST]
+    docker pull [OPTIONS] NAME[:TAG|@DIGEST]
 
 [[https://docs.docker.com/engine/reference/commandline/pull/]{.ul}](https://docs.docker.com/engine/reference/commandline/pull/)
 
@@ -210,7 +210,7 @@ To sign an image you can run:
 
 To show untagged images, or dangling, use:
 
-    docker images \--filter "dangling=true"
+    docker images --filter "dangling=true"
 
 This will display untagged images that are the leaves of the images tree
 (not intermediary layers). These images occur when a new build of an
@@ -534,14 +534,14 @@ To display detailed information on one or more images use:
 
 The options are:
 
-    \--format , -f 
+    --format , -f 
 
 Format the output using the given Go template
 
 For the most part, you can pick out any field from the JSON in a fairly
 straightforward manner using the --format parameter.
 
-    $ docker inspect \--format='{{.LogPath}}' $INSTANCE_ID
+    $ docker inspect --format='{{.LogPath}}' $INSTANCE_ID
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageInspectFormatpng.png)
 
@@ -788,7 +788,7 @@ https://docs.docker.com/engine/reference/builder/#run
     ARG <name>[=<default value>]
 
 The ARG instruction defines a variable that users can pass at build-time
-to the builder with the docker build command using the \--build-arg
+to the builder with the docker build command using the --build-arg
 \<varname\>=\<value\> flag.
 
 https://docs.docker.com/engine/reference/builder/#arg
