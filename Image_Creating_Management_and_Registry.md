@@ -9,7 +9,7 @@ Layering RUN instructions and generating commits conforms to the core
 concepts of Docker where commits are cheap and containers can be created
 from any point in an image's history, much like source control.
 
-https://docs.docker.com/engine/reference/builder/\#run
+https://docs.docker.com/engine/reference/builder/#run
 
 ### **Answer 2: a**
 
@@ -32,7 +32,7 @@ multiple -t parameters when you run the build command:
 
     $ docker build -t myrepo/myapp:1.0.2 -t myrepo/myapp:latest .
 
-https://docs.docker.com/engine/reference/builder/\#run\#usage
+https://docs.docker.com/engine/reference/builder/#run\#usage
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageTag2.png)
 
@@ -68,7 +68,7 @@ Dockerfile commands; see e.g. ENTRYPOINT for details).
 
 To remove one or more images use:
 
-    docker rmi [OPTIONS] IMAGE [IMAGE\...]
+    docker rmi [OPTIONS] IMAGE [IMAGE...]
 
 You cannot remove an image of a running container unless you use
 the --force or -f option.
@@ -103,7 +103,7 @@ context:
 
     Sending build context to Docker daemon  6.51 MB
 
-    \...
+    ...
 
 You use the -f flag with docker build to point to a Dockerfile anywhere
 in your file system.
@@ -129,7 +129,7 @@ Pull an image or a repository from a registry
 
 Or
 
-    docker pull [OPTIONS] NAME[:TAG\|\@DIGEST]
+    docker pull [OPTIONS] NAME[:TAG|\@DIGEST]
 
 [[https://docs.docker.com/engine/reference/commandline/pull/]{.ul}](https://docs.docker.com/engine/reference/commandline/pull/)
 
@@ -153,7 +153,7 @@ required.
 
 *Explanation*
 
-    EXPOSE <port> [<port>/<protocol>\...]
+    EXPOSE <port> [<port>/<protocol>...]
 
 The EXPOSE instruction informs Docker that the container listens on the
 specified network ports at runtime. You can specify whether the port
@@ -187,7 +187,7 @@ multiple -t parameters when you run the build command:
 
     $ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
 
-[https://docs.docker.com/engine/reference/builder/\#run\#usage](https://docs.docker.com/engine/reference/builder/#run)
+[https://docs.docker.com/engine/reference/builder/#run\#usage](https://docs.docker.com/engine/reference/builder/#run)
 
 ### **Answer 11: c**
 
@@ -230,7 +230,7 @@ flag it allows for batch cleanup.
 To save one or more images to a tar archive (streamed to STDOUT by
 default) use:
 
-    docker save [OPTIONS] IMAGE [IMAGE\...]
+    docker save [OPTIONS] IMAGE [IMAGE...]
 
 The achieve can be distributed through different channels such as:
 central file server, version-control system, sent it to you over email
@@ -358,7 +358,7 @@ several command-line instructions in succession.
 
     LABEL
 
-    LABEL <key>=<value> <key>=<value> <key>=<value> \...
+    LABEL <key>=<value> <key>=<value> <key>=<value> ...
 
 The LABEL instruction adds metadata to an image. A LABEL is a key-value
 pair.
@@ -393,7 +393,7 @@ software.
 
 *Explanation*
 
-    EXPOSE <port> [<port>/<protocol>\...]
+    EXPOSE <port> [<port>/<protocol>...]
 
 The EXPOSE instruction informs Docker that the container listens on the
 specified network ports at runtime. You can specify whether the port
@@ -421,7 +421,7 @@ instructions in the build stage.
 
     ENV <key> <value>
 
-    ENV <key>=<value> \...
+    ENV <key>=<value> ...
 
 The ENV instruction sets the environment variable \<key\> to the value
 \<value\>. This value will be in the environment for all subsequent
@@ -515,7 +515,7 @@ from any point in an image's history, much like source control.
 
 To display detailed information on one or more images use:
 
-    docker image inspect [OPTIONS] IMAGE [IMAGE\...]
+    docker image inspect [OPTIONS] IMAGE [IMAGE...]
 
 [[https://docs.docker.com/engine/reference/commandline/image_inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_inspect/)
 
@@ -530,7 +530,7 @@ By default, docker inspect will render results in a JSON array.
 
 To display detailed information on one or more images use:
 
-    docker image inspect [OPTIONS] IMAGE [IMAGE\...]
+    docker image inspect [OPTIONS] IMAGE [IMAGE...]
 
 The options are:
 
@@ -621,7 +621,7 @@ To remove all images which are not used by existing containers, use the
 
 *Explanation*
 
-    EXPOSE <port> [<port>/<protocol>\...]
+    EXPOSE <port> [<port>/<protocol>...]
 
 The EXPOSE instruction informs Docker that the container listens on the
 specified network ports at runtime. You can specify whether the port
@@ -779,7 +779,7 @@ from any point in an image's history, much like source control.
 
 Therefore, it's ok to have more than one RUN instruction.
 
-https://docs.docker.com/engine/reference/builder/\#run
+https://docs.docker.com/engine/reference/builder/#run
 
 ### **Answer 44: a**
 
@@ -800,7 +800,7 @@ The variable expansion technique in this example allows you to pass
 arguments from the command line and persist them in the final image by
 leveraging the ENV instruction.
 
-https://docs.docker.com/engine/reference/builder/\#run\#using-arg-variables
+https://docs.docker.com/engine/reference/builder/#run\#using-arg-variables
 
 ### **Answer 45: b**
 
@@ -808,7 +808,7 @@ https://docs.docker.com/engine/reference/builder/\#run\#using-arg-variables
 
     LABEL
 
-    LABEL <key>=<value> <key>=<value> <key>=<value> \...
+    LABEL <key>=<value> <key>=<value> <key>=<value> ...
 
 The LABEL instruction adds metadata to an image. A LABEL is a key-value
 pair.
@@ -850,7 +850,7 @@ https://docs.docker.com/engine/reference/builder/
 
 To remove one or more images, use the following command:
 
-    docker image rm [OPTIONS] IMAGE [IMAGE\...]
+    docker image rm [OPTIONS] IMAGE [IMAGE...]
 
 [[https://docs.docker.com/engine/reference/commandline/image_rm/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_rm/)
 
@@ -935,7 +935,7 @@ available to the RUN instruction.
 Environment variables defined using the ENV instruction always override
 an ARG instruction of the same name.
 
-https://docs.docker.com/engine/reference/builder/\#run\#using-arg-variables
+https://docs.docker.com/engine/reference/builder/#run\#using-arg-variables
 
 ### **Answer 52: a, b**
 
@@ -1023,7 +1023,7 @@ For example:
 
     ENV <key> <value>
 
-    ENV <key>=<value> \...
+    ENV <key>=<value> ...
 
 The ENV instruction sets the environment variable \<key\> to the value
 \<value\>. This value will be in the environment for all subsequent
