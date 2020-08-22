@@ -501,3 +501,126 @@ forwards it to the local bridge, which in turn forwards it to the target
 container.
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/VXLAN_tunnel.jpg)
+
+### **Answer 26: d**
+
+*Explanation*
+
+To manage networks, you can use:
+
+docker network COMMAND
+
+To display detailed information on one or more networks you can use:
+
+docker network inspect \[OPTIONS\] NETWORK \[NETWORK\...\]
+
+[[https://docs.docker.com/engine/reference/commandline/network_inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/network_inspect/)
+
+### **Answer 27: d**
+
+*Explanation*
+
+The following run command options work with container networking:
+
+\--expose
+
+Expose a port or a range of ports inside the container. You expose ports
+using the EXPOSE keyword in the Dockerfile or the \--expose flag to
+docker run. Exposing ports is a way of **documenting** which ports are
+used, but **does not actually map or open any ports**. Exposing ports is
+optional.
+
+\--publish-all or -P
+
+Publish all exposed ports to the host **interfaces**. Docker binds each
+exposed port to a random port on the host. Use the -p flag to explicitly
+map a single port or range of ports.
+
+-p or \--publish
+
+It makes a port available to services outside of Docker, or to Docker
+containers which are not connected to the container's network.
+
+format: ip:hostPort:containerPort \| ip::containerPort \|
+hostPort:containerPort \| containerPort
+
+[[https://docs.docker.com/engine/reference/run/\#expose-incoming-ports]{.ul}](https://docs.docker.com/engine/reference/run/#expose-incoming-ports)
+
+[[https://docs.docker.com/config/containers/container-networking/]{.ul}](https://docs.docker.com/config/containers/container-networking/)
+
+Example:
+
+docker run -p 127.0.0.1:80:8080 ubuntu bash
+
+### **Answer 28: a, d**
+
+*Explanation*
+
+When you create a **macvlan** **network**, it can either be in bridge
+mode or 802.1q trunk bridge mode.
+
+· In bridge mode, macvlan traffic goes through a physical device on the
+host.
+
+· In 802.1q trunk bridge mode, traffic goes through an 802.1q
+sub-interface which Docker creates on the fly. This allows you to
+control routing and filtering at a more granular level.
+
+https://docs.docker.com/network/macvlan/\#create-a-macvlan-network
+
+### **Answer 29: b**
+
+*Explanation*
+
+The following run command options work with container networking:
+
+\--expose
+
+Expose a port or a range of ports inside the container. You expose ports
+using the EXPOSE keyword in the Dockerfile or the \--expose flag to
+docker run. Exposing ports is a way of **documenting** which ports are
+used, but **does not actually map or open any ports**. Exposing ports is
+optional.
+
+\--publish-all or -P
+
+Publish all exposed ports to the host **interfaces**. Docker binds each
+exposed port to a random port on the host. Use the -p flag to explicitly
+map a single port or range of ports.
+
+-p or \--publish
+
+It makes a port available to services outside of Docker, or to Docker
+containers which are not connected to the container's network.
+
+format: ip:hostPort:containerPort \| ip::containerPort \|
+hostPort:containerPort \| containerPort
+
+[[https://docs.docker.com/engine/reference/run/\#expose-incoming-ports]{.ul}](https://docs.docker.com/engine/reference/run/#expose-incoming-ports)
+
+[[https://docs.docker.com/config/containers/container-networking/]{.ul}](https://docs.docker.com/config/containers/container-networking/)
+
+### **Answer 30: d**
+
+*Explanation*
+
+Network Scope
+
+Docker network drivers have a concept of **scope**. The network scope is
+the domain of the driver which can be the local or swarm scope.
+
+**Local scope** drivers provide connectivity and network services (such
+as DNS or IPAM) within the scope of the host.
+
+**Swarm scope** drivers provide connectivity and network services across
+a swarm cluster. Swarm scope networks have the same network ID across
+the entire cluster while local scope networks have a unique network ID
+on each host.
+
+[[https://success.docker.com/article/networking\#networkscope]{.ul}](https://success.docker.com/article/networking#networkscope)
+
+You can check this by running:
+
+\$ docker network ls
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/networkLS.png)
