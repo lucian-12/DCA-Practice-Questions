@@ -188,3 +188,37 @@ multiple -t parameters when you run the build command:
 \$ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
 
 [https://docs.docker.com/engine/reference/builder/\#run\#usage](https://docs.docker.com/engine/reference/builder/#run)
+
+### **Answer 11: c**
+
+*Explanation*
+
+By default, when you push an image to DTR, the Docker CLI client doesn't
+sign the image.
+
+You can configure the Docker CLI client to sign the images you push to
+DTR. This allows whoever pulls your image to validate if they are
+getting the image you created, or a forged one.
+
+To sign an image you can run:
+
+export DOCKER_CONTENT_TRUST=1
+
+### **Answer 12: a**
+
+*Explanation*
+
+To show untagged images, or dangling, use:
+
+docker images \--filter \"dangling=true\"
+
+This will display untagged images that are the leaves of the images tree
+(not intermediary layers). These images occur when a new build of an
+image takes the repo:tag away from the image ID, leaving it as
+\<none\>:\<none\> or untagged. A warning will be issued if trying to
+remove an image when a container is presently using it. By having this
+flag it allows for batch cleanup.
+
+[[https://docs.docker.com/engine/reference/commandline/images/\#filtering]{.ul}](https://docs.docker.com/engine/reference/commandline/images/#filtering)
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageInspectFilter.png)
