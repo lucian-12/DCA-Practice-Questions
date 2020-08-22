@@ -809,3 +809,217 @@ connectivity on a network.
 [[https://success.docker.com/article/networking\#cnmconstructs]{.ul}](https://success.docker.com/article/networking#cnmconstructs)
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerCNM.jpg)
+
+### **Answer 38: b**
+
+*Explanation*
+
+Docker Engine swarm mode makes it easy to publish ports for services to
+make them available to resources outside the swarm.
+
+All nodes participate in an ingress routing mesh.
+
+The routing mesh **enables each node in the swarm to accept connections
+on published ports** for any service running in the swarm, even if
+there's no task running on the node.
+
+The routing mesh routes all incoming requests to published ports on
+available nodes to an active container.
+
+[[https://docs.docker.com/engine/swarm/ingress/]{.ul}](https://docs.docker.com/engine/swarm/ingress/)
+
+### **Answer 39: c**
+
+*Explanation*
+
+By default, a container inherits the DNS settings of the Docker daemon.
+
+To specify a DNS server for an individual container use:
+
+docker container create \--dns=IP_ADDRESS
+
+To specify multiple DNS servers, use multiple \--dns flags. If the
+container cannot reach any of the IP addresses you specify, Google's
+public DNS server 8.8.8.8 is added, so that your container can resolve
+internet domains.
+
+[[https://docs.docker.com/config/containers/container-networking/\#dns-services]{.ul}](https://docs.docker.com/config/containers/container-networking/#dns-services)
+
+### **Answer 40: d**
+
+*Explanation*
+
+The **sandbox** perfectly isolates a container from the outside world.
+No inbound network connection is allowed into the sandboxed container.
+Yet, it is very unlikely that a container will be of any value in a
+system if absolutely no communication with it is possible. To work
+around this, we have element number two, which is the endpoint.
+
+An endpoint is a **controlled** gateway from the outside world into the
+network\'s sandbox that shields the container. The endpoint connects the
+network sandbox, but not the container, to the third element of the
+model, which is the network. Also, the Endpoint construct exists so
+the **actual** connection to the network can be **abstracted away from
+the application**. This helps **maintain portability** so that a service
+can use different types of network drivers without being concerned with
+how it\'s connected to that network.
+
+[[https://success.docker.com/article/networking\#networkscope]{.ul}](https://success.docker.com/article/networking#networkscope)
+
+### **Answer 41: d**
+
+*Explanation*
+
+NodePort service type is well suited for application services that
+require direct TCP/UDP access, like RabbitMQ for example.
+
+If your service can be accessed using HTTP/HTTPs then Ingress is
+recommended.
+
+Ingress is a Kubernetes API object that manages external access to the
+services in a cluster, typically HTTP/HTTPS.
+
+[[https://success.docker.com/article/ucp-service-discovery-k8s]{.ul}](https://success.docker.com/article/ucp-service-discovery-k8s)
+
+[[https://www.docker.com/blog/designing-your-first-application-kubernetes-communication-services-part3/]{.ul}](https://www.docker.com/blog/designing-your-first-application-kubernetes-communication-services-part3/)
+
+### **Answer 42: a**
+
+*Explanation*
+
+The **overlay network driver** creates a distributed network among
+multiple Docker daemon hosts. This network sits on top of (overlays) the
+host-specific networks, allowing containers connected to it (including
+swarm service containers) to communicate securely when encryption is
+enabled. Docker transparently handles routing of each packet to and from
+the correct Docker daemon host and the correct destination container.
+
+[[https://docs.docker.com/network/overlay/]{.ul}](https://docs.docker.com/network/overlay/)
+
+### **Answer 43: d**
+
+*Explanation*
+
+With the network set to host a container will share the host's network
+stack and all interfaces from the host will be available to the
+container.
+
+The container's hostname will match the hostname on the host system.
+
+Even in host network mode a container has its own UTS namespace by
+default.
+
+As such \--hostname and \--domainname are allowed in host network mode
+and will only change the hostname and domain name inside the container.
+
+[[https://docs.docker.com/engine/reference/run/\#network-settings]{.ul}](https://docs.docker.com/engine/reference/run/#network-settings)
+
+### **Answer 44: b**
+
+*Explanation*
+
+When you create a swarm service and do not connect it to a user-defined
+overlay network, it connects to the **ingress network** by default.
+
+[[https://docs.docker.com/network/overlay/]{.ul}](https://docs.docker.com/network/overlay/)
+
+### **Answer 45: b**
+
+*Explanation*
+
+Different types and use cases for the built-in network drivers:
+
+· **User-defined bridge networks** are best when you need multiple
+containers to communicate on the same Docker host.
+
+· **Host networks** are best when the network stack should not be
+isolated from the Docker host, but you want other aspects of the
+container to be isolated.
+
+· **Overlay networks** are best when you need containers running on
+different Docker hosts to communicate, or when multiple applications
+work together using swarm services.
+
+· **Macvlan networks** are best when you are migrating from a VM setup
+or need your containers to look like physical hosts on your network,
+each with a unique MAC address.
+
+· **Third-party network** plugins allow you to integrate Docker with
+specialized network stacks.
+
+https://docs.docker.com/network/\#network-driver-summary\#network-driver-summary
+
+### **Answer 46: a**
+
+*Explanation*
+
+**macvlan**: Macvlan networks allow you to assign a MAC address to a
+container, making it appear as a physical device on your network. The
+Docker daemon routes traffic to containers by their MAC addresses. Using
+the macvlan driver is sometimes the best choice when dealing with legacy
+applications that expect to be directly connected to the physical
+network, rather than routed through the Docker host's network stack. See
+Macvlan networks.
+
+https://docs.docker.com/network/\#network-drivers
+
+### **Answer 47: c**
+
+*Explanation*
+
+To connect a running container to an existing user-defined bridge, use
+the docker network connect command.
+
+The following command connects an already-running my-nginx container to
+an already-existing my-net network:
+
+\$ docker network connect my-net my-nginx
+
+[[https://docs.docker.com/network/bridge/\#connect-a-container-to-a-user-defined-bridge]{.ul}](https://docs.docker.com/network/bridge/#connect-a-container-to-a-user-defined-bridge)
+
+### **Answer 48: c**
+
+*Explanation*
+
+docker network ls \[OPTIONS\]
+
+Lists all the networks the Engine daemon knows about. This includes the
+networks that span across multiple hosts in a cluster.
+
+Example:
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/networkLS.png)
+
+[[https://docs.docker.com/engine/reference/commandline/network_ls/]{.ul}](https://docs.docker.com/engine/reference/commandline/network_ls/)
+
+### **Answer 49: b**
+
+*Explanation*
+
+Services using the routing mesh are running in virtual IP (VIP) mode.
+Even a service running on each node (by means of the \--mode global
+flag) uses the routing mesh. When using the routing mesh, there is no
+guarantee about which Docker node services client requests.
+
+To bypass the routing mesh, you can start a service using DNS Round
+Robin (DNSRR) mode, by setting the \--endpoint-mode flag to dnsrr.
+
+[[https://docs.docker.com/network/overlay/\#bypass-the-routing-mesh-for-a-swarm-service]{.ul}](https://docs.docker.com/network/overlay/#bypass-the-routing-mesh-for-a-swarm-service)
+
+### **Answer 50: b**
+
+*Explanation*
+
+By default, Docker Swarm uses a default address pool 10.0.0.0/8 for
+global scope (overlay) networks.
+
+Every network that does not have a subnet specified will have a subnet
+sequentially allocated from this pool. In some circumstances it may be
+desirable to use a different default IP address pool for networks.
+
+For example, if the default 10.0.0.0/8 range conflicts with already
+allocated address space in your network, then it is desirable to ensure
+that networks use a different range without requiring Swarm users to
+specify each subnet with the \--subnet command.
+
+[[https://docs.docker.com/engine/swarm/swarm-mode/\#configuring-default-address-pools]{.ul}](https://docs.docker.com/engine/swarm/swarm-mode/#configuring-default-address-pools)
