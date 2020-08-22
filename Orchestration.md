@@ -652,7 +652,7 @@ To set environment variables use -e or --env flags:
 For example, this sets an environment variable for all tasks in a
 service:
 
-    \$ docker service create \
+    $ docker service create \
 
       --name redis_2 \
 
