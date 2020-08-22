@@ -18,7 +18,7 @@ install extra packages, such as linux-image-extra.
 
 To display system-wide information use:
 
-    docker info \[OPTIONS\]
+    docker info [OPTIONS]
 
 This command displays system wide information regarding the Docker
 installation. Information displayed includes the kernel version, number
@@ -107,7 +107,7 @@ By default this directory is:
 
     · /var/lib/docker on Linux.
 
-    · C:\\ProgramData\\docker on Windows.
+    · C:\ProgramData\docker on Windows.
 
 [[https://docs.docker.com/config/daemon/\#docker-daemon-directory]{.ul}](https://docs.docker.com/config/daemon/#docker-daemon-directory)
 
@@ -297,12 +297,12 @@ deleted via the docker run \--rm or docker rm -v flags.
 
 Remove one or more containers
 
-    docker rm \[OPTIONS\] CONTAINER \[CONTAINER\...\]
+    docker rm [OPTIONS] CONTAINER [CONTAINER...]
 
 Second, they can be manually deleted by issuing a docker volume remove
 command:
 
-    docker volume rm \[OPTIONS\] VOLUME \[VOLUME\...\]
+    docker volume rm [OPTIONS] VOLUME [VOLUME...]
 
 [[https://docs.docker.com/engine/reference/commandline/volume_rm/]{.ul}](https://docs.docker.com/engine/reference/commandline/volume_rm/)
 
@@ -326,9 +326,9 @@ relationships in a host-independent way.
 
 Output message:
 
-    unknown shorthand flag: \'V\' in -V
+    unknown shorthand flag: 'V' in -V
 
-    unknown flag: \--volumes
+    unknown flag: --volumes
 
 To mount a volume use -v or \--volume.
 
@@ -350,11 +350,11 @@ If you start a container with a volume that does not yet exist, Docker
 creates the volume for you. The following example mounts the volume
 myvol2 into /app/ in the container.
 
-    \$ docker run -d \\
+    $ docker run -d \
 
-      \--name devtest \\
+      --name devtest \
 
-      -v myvol2:/app \\
+      -v myvol2:/app \
 
       nginx:latest
 
@@ -384,11 +384,11 @@ If you start a container with a volume that does not yet exist, Docker
 creates the volume for you. The following example mounts the volume
 myvol2 into /app/ in the container.
 
-    \$ docker run -d \\
+    $ docker run -d \
 
-      \--name devtest \\
+      --name devtest \
 
-      -v myvol2:/app \\
+      -v myvol2:/app \
 
       nginx:latest
 
@@ -510,11 +510,11 @@ HTML content.
 
 The \--mount and -v examples have the same end result.
 
-    \$ docker run -d \\
+    $ docker run -d \
 
-      \--name=nginxtest \\
+      --name=nginxtest \
 
-      -v nginx-vol:/usr/share/nginx/html \\
+      -v nginx-vol:/usr/share/nginx/html \
 
       nginx:latest
 
@@ -543,25 +543,25 @@ The \--mount and -v examples below produce the same result. You can't
 run them both unless you remove the devtest container after running the
 first one.
 
-    \$ docker run -d \\
+    $ docker run -d \
 
-      -it \\
+      -it \
 
-      \--name devtest \\
+      --name devtest \
 
-      \--mount type=bind,source=\"\$(pwd)\"/target,target=/app \\
+      --mount type=bind,source="$(pwd)"/target,target=/app \
 
       nginx:latest
 
  
 
-    \$ docker run -d \\
+    $ docker run -d \
 
-      -it \\
+      -it \
 
-      \--name devtest \\
+      --name devtest \
 
-      -v \"\$(pwd)\"/target:/app \\
+      -v "$(pwd)"/target:/app \
 
       nginx:latest
 
@@ -573,7 +573,7 @@ first one.
 
 Remove one or more images
 
-    docker image rm \[OPTIONS\] IMAGE \[IMAGE\...\]
+    docker image rm [OPTIONS] IMAGE [IMAGE...]
 
 [[https://docs.docker.com/engine/reference/commandline/image_rm/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_rm/)
 
@@ -602,7 +602,7 @@ of disk space used by the docker daemon.
 By default the command will just show a summary of the data used
 including images, containers and local volumes:
 
-    \$ docker system df
+    $ docker system df
 
 [[https://docs.docker.com/engine/reference/commandline/system_df/\#examples]{.ul}](https://docs.docker.com/engine/reference/commandline/system_df/#examples)
 
@@ -614,7 +614,7 @@ including images, containers and local volumes:
 
 To remove all unused local volumes use:
 
-    docker volume prune \[OPTIONS\]
+    docker volume prune [OPTIONS]
 
 Unused local volumes are those which are not referenced by any
 containers
@@ -647,7 +647,7 @@ automatically provisions storage when it is requested by users.
 
 To display detailed information on one or more images use:
 
-    docker image inspect \[OPTIONS\] IMAGE \[IMAGE\...\]
+    docker image inspect [OPTIONS] IMAGE [IMAGE...]
 
 [[https://docs.docker.com/engine/reference/commandline/image_inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_inspect/)
 
