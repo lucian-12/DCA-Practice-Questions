@@ -32,7 +32,7 @@ multiple -t parameters when you run the build command:
 
     $ docker build -t myrepo/myapp:1.0.2 -t myrepo/myapp:latest .
 
-https://docs.docker.com/engine/reference/builder/#run\#usage
+https://docs.docker.com/engine/reference/builder/#run#usage
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageTag2.png)
 
@@ -187,7 +187,7 @@ multiple -t parameters when you run the build command:
 
     $ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
 
-[https://docs.docker.com/engine/reference/builder/#run\#usage](https://docs.docker.com/engine/reference/builder/#run)
+[https://docs.docker.com/engine/reference/builder/#run#usage](https://docs.docker.com/engine/reference/builder/#run)
 
 ### **Answer 11: c**
 
@@ -407,7 +407,7 @@ published. To actually publish the port when running the container, use
 the -p flag on docker run to publish and map one or more ports, or the
 -P flag to publish all exposed ports and map them to high-order ports.
 
-https://docs.docker.com/engine/reference/builder/\#expose
+https://docs.docker.com/engine/reference/builder/#expose
 
 The ENV instruction sets the environment variable \<key\> to the value
 \<value\>. This value will be in the environment for all subsequent
@@ -432,7 +432,7 @@ container is run from the resulting image. You can view the values using
 docker inspect, and change them using docker run \--env
 \<key\>=\<value\>.
 
-https://docs.docker.com/engine/reference/builder/\#env
+https://docs.docker.com/engine/reference/builder/#env
 
 ### **Answer 25: d**
 
@@ -791,7 +791,7 @@ The ARG instruction defines a variable that users can pass at build-time
 to the builder with the docker build command using the \--build-arg
 \<varname\>=\<value\> flag.
 
-https://docs.docker.com/engine/reference/builder/\#arg
+https://docs.docker.com/engine/reference/builder/#arg
 
 Unlike an ARG instruction, ENV values are always persisted in the built
 image.
@@ -800,7 +800,7 @@ The variable expansion technique in this example allows you to pass
 arguments from the command line and persist them in the final image by
 leveraging the ENV instruction.
 
-https://docs.docker.com/engine/reference/builder/#run\#using-arg-variables
+https://docs.docker.com/engine/reference/builder/#run#using-arg-variables
 
 ### **Answer 45: b**
 
@@ -935,7 +935,7 @@ available to the RUN instruction.
 Environment variables defined using the ENV instruction always override
 an ARG instruction of the same name.
 
-https://docs.docker.com/engine/reference/builder/#run\#using-arg-variables
+https://docs.docker.com/engine/reference/builder/#run#using-arg-variables
 
 ### **Answer 52: a, b**
 
@@ -1034,7 +1034,7 @@ container is run from the resulting image. You can view the values using
 docker inspect, and change them using docker run \--env
 \<key\>=\<value\>.
 
-https://docs.docker.com/engine/reference/builder/\#env
+https://docs.docker.com/engine/reference/builder/#env
 
 ### **Answer 58: d**
 
