@@ -159,7 +159,7 @@ Explanation:
 
 To scale one or multiple replicated services use:
 
-    docker service scale SERVICE=REPLICAS [SERVICE=REPLICAS\...]
+    docker service scale SERVICE=REPLICAS [SERVICE=REPLICAS...]
 
 The following command scales the "web" service to 5 tasks.
 
@@ -186,7 +186,7 @@ Explanation:
 To display detailed information on one or more containers including the
 list of volume use:
 
-    docker container inspect [OPTIONS] CONTAINER [CONTAINER\...]
+    docker container inspect [OPTIONS] CONTAINER [CONTAINER...]
 
 <https://docs.docker.com/engine/reference/commandline/container_inspect/>
 
@@ -286,7 +286,7 @@ Explanation:
 
 To display detailed information on one or more containers, use:
 
-    docker container inspect [OPTIONS] CONTAINER [CONTAINER\...]
+    docker container inspect [OPTIONS] CONTAINER [CONTAINER...]
 
 <https://docs.docker.com/engine/reference/commandline/container_inspect/>
 
@@ -385,7 +385,7 @@ Explanation:
 
 Since the service its newly create we use
 
-    docker service create [OPTIONS] IMAGE [COMMAND] [ARG\...]
+    docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 Use the \--replicas flag to set the number of replica tasks for a
 replicated service.
@@ -478,7 +478,7 @@ Explanation:
 
 To return low-level information on Docker objects use:
 
-    docker inspect [OPTIONS] NAME\|ID [NAME\|ID\...]
+    docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 
 <https://docs.docker.com/engine/reference/commandline/inspect/>
 
@@ -1608,7 +1608,7 @@ Explanation:
 
 To remove one or more services from the swarm use:
 
-    docker service rm SERVICE [SERVICE\...]
+    docker service rm SERVICE [SERVICE...]
 
 *Note: This is a cluster management command, and must be executed on a
 swarm manager node.*
