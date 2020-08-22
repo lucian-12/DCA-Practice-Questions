@@ -264,6 +264,6 @@ However, you can name it whatever you like.
 
 For example, check the following output:
 
-![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerBuildTest.png)
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerfileName.png)
 
 [[https://stackoverflow.com/questions/26077543/how-to-name-dockerfiles]{.ul}](https://stackoverflow.com/questions/26077543/how-to-name-dockerfiles)
