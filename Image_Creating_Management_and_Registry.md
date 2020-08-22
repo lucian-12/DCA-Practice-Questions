@@ -30,7 +30,7 @@ container.
 To tag the image into multiple repositories after the build, add
 multiple -t parameters when you run the build command:
 
-    \$ docker build -t myrepo/myapp:1.0.2 -t myrepo/myapp:latest .
+    $ docker build -t myrepo/myapp:1.0.2 -t myrepo/myapp:latest .
 
 https://docs.docker.com/engine/reference/builder/\#run\#usage
 
@@ -68,7 +68,7 @@ Dockerfile commands; see e.g. ENTRYPOINT for details).
 
 To remove one or more images use:
 
-    docker rmi \[OPTIONS\] IMAGE \[IMAGE\...\]
+    docker rmi [OPTIONS] IMAGE [IMAGE\...]
 
 You cannot remove an image of a running container unless you use
 the --force or -f option.
@@ -99,7 +99,7 @@ subdirectories and the URL includes the repository and its submodules.
 This example shows a build command that uses the current directory as
 context:
 
-    \$ docker build .
+    $ docker build .
 
     Sending build context to Docker daemon  6.51 MB
 
@@ -108,7 +108,7 @@ context:
 You use the -f flag with docker build to point to a Dockerfile anywhere
 in your file system.
 
-    \$ docker build -f /path/to/a/Dockerfile .
+    $ docker build -f /path/to/a/Dockerfile .
 
 The build is run by the Docker daemon. The first thing a build process
 does is send the entire context (recursively) to the daemon.
@@ -129,7 +129,7 @@ Pull an image or a repository from a registry
 
 Or
 
-    docker pull \[OPTIONS\] NAME\[:TAG\|\@DIGEST\]
+    docker pull [OPTIONS] NAME[:TAG\|\@DIGEST]
 
 [[https://docs.docker.com/engine/reference/commandline/pull/]{.ul}](https://docs.docker.com/engine/reference/commandline/pull/)
 
@@ -153,7 +153,7 @@ required.
 
 *Explanation*
 
-    EXPOSE \<port\> \[\<port\>/\<protocol\>\...\]
+    EXPOSE <port> [<port>/<protocol>\...]
 
 The EXPOSE instruction informs Docker that the container listens on the
 specified network ports at runtime. You can specify whether the port
@@ -176,7 +176,7 @@ the -p flag on docker run to publish and map one or more ports, or the
 You can specify a repository and tag at which to save the new image if
 the build succeeds:
 
-    \$ docker build -t myrepo/myapp .
+    $ docker build -t myrepo/myapp .
 
 The output could look like the following:
 
@@ -185,7 +185,7 @@ The output could look like the following:
 To tag the image into multiple repositories after the build, add
 multiple -t parameters when you run the build command:
 
-    \$ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
+    $ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
 
 [https://docs.docker.com/engine/reference/builder/\#run\#usage](https://docs.docker.com/engine/reference/builder/#run)
 
@@ -210,7 +210,7 @@ To sign an image you can run:
 
 To show untagged images, or dangling, use:
 
-    docker images \--filter \"dangling=true\"
+    docker images \--filter "dangling=true"
 
 This will display untagged images that are the leaves of the images tree
 (not intermediary layers). These images occur when a new build of an
@@ -230,7 +230,7 @@ flag it allows for batch cleanup.
 To save one or more images to a tar archive (streamed to STDOUT by
 default) use:
 
-    docker save \[OPTIONS\] IMAGE \[IMAGE\...\]
+    docker save [OPTIONS] IMAGE [IMAGE\...]
 
 The achieve can be distributed through different channels such as:
 central file server, version-control system, sent it to you over email
@@ -249,7 +249,7 @@ this tool, you can load images that you acquired through other channels.
 
 To create a tag TARGET_IMAGE that refers to SOURCE_IMAGE use:
 
-    docker tag SOURCE_IMAGE\[:TAG\] TARGET_IMAGE\[:TAG\]
+    docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
 [[https://docs.docker.com/engine/reference/commandline/tag/]{.ul}](https://docs.docker.com/engine/reference/commandline/tag/)
 
@@ -286,7 +286,7 @@ Dockerfile. For example:
 
     ENV DIRPATH /path
 
-    WORKDIR \$DIRPATH/\$DIRNAME
+    WORKDIR $DIRPATH/$DIRNAME
 
     RUN pwd
 
@@ -321,7 +321,7 @@ connections, even though the server process is still running.
 
 To create a new image from a container's changes use:
 
-    docker commit \[OPTIONS\] CONTAINER \[REPOSITORY\[:TAG\]\]
+    docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
 
 It can be useful to commit a container's file changes or settings into a
 new image.
@@ -358,14 +358,14 @@ several command-line instructions in succession.
 
     LABEL
 
-    LABEL \<key\>=\<value\> \<key\>=\<value\> \<key\>=\<value\> \...
+    LABEL <key>=<value> <key>=<value> <key>=<value> \...
 
 The LABEL instruction adds metadata to an image. A LABEL is a key-value
 pair.
 
 Example:
 
-    LABEL version=\"1.0\"
+    LABEL version="1.0"
 
 [[https://docs.docker.com/engine/reference/builder/\#label]{.ul}](https://docs.docker.com/engine/reference/builder/#label)
 
@@ -393,7 +393,7 @@ software.
 
 *Explanation*
 
-    EXPOSE \<port\> \[\<port\>/\<protocol\>\...\]
+    EXPOSE <port> [<port>/<protocol>\...]
 
 The EXPOSE instruction informs Docker that the container listens on the
 specified network ports at runtime. You can specify whether the port
@@ -419,9 +419,9 @@ instructions in the build stage.
 
     ENV
 
-    ENV \<key\> \<value\>
+    ENV <key> <value>
 
-    ENV \<key\>=\<value\> \...
+    ENV <key>=<value> \...
 
 The ENV instruction sets the environment variable \<key\> to the value
 \<value\>. This value will be in the environment for all subsequent
@@ -471,7 +471,7 @@ specifies the intended command for the image.
 
 To create a tag TARGET_IMAGE that refers to SOURCE_IMAGE use:
 
-    docker tag SOURCE_IMAGE\[:TAG\] TARGET_IMAGE\[:TAG\]
+    docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
 Example:
 
@@ -486,7 +486,7 @@ repository with "version1.0":
 
 *Explanation*
 
-    docker images \[OPTIONS\] \[REPOSITORY\[:TAG\]\]
+    docker images [OPTIONS] [REPOSITORY[:TAG]]
 
 The default docker images will show all top-level images, their
 repository and tags, and their size.
@@ -515,7 +515,7 @@ from any point in an image's history, much like source control.
 
 To display detailed information on one or more images use:
 
-    docker image inspect \[OPTIONS\] IMAGE \[IMAGE\...\]
+    docker image inspect [OPTIONS] IMAGE [IMAGE\...]
 
 [[https://docs.docker.com/engine/reference/commandline/image_inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_inspect/)
 
@@ -530,7 +530,7 @@ By default, docker inspect will render results in a JSON array.
 
 To display detailed information on one or more images use:
 
-    docker image inspect \[OPTIONS\] IMAGE \[IMAGE\...\]
+    docker image inspect [OPTIONS] IMAGE [IMAGE\...]
 
 The options are:
 
@@ -541,7 +541,7 @@ Format the output using the given Go template
 For the most part, you can pick out any field from the JSON in a fairly
 straightforward manner using the --format parameter.
 
-    \$ docker inspect \--format=\'{{.LogPath}}\' \$INSTANCE_ID
+    $ docker inspect \--format='{{.LogPath}}' $INSTANCE_ID
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageInspectFormatpng.png)
 
@@ -573,7 +573,7 @@ To sign an image you can run:
 
     export DOCKER_CONTENT_TRUST=1
 
-    docker push \<dtr-domain\>/\<repository\>/\<image\>:\<tag\>
+    docker push <dtr-domain>/<repository>/<image>:<tag>
 
 This pushes the image to DTR and creates trust metadata. It also creates
 public and private key pairs to sign the trust metadata, and push that
@@ -608,12 +608,12 @@ default, docker image prune only cleans up dangling images. A dangling
 image is one that is not tagged and is not referenced by any container.
 To remove dangling images:
 
-    \$ docker image prune
+    $ docker image prune
 
 To remove all images which are not used by existing containers, use the
 -a flag:
 
-    \$ docker image prune -a
+    $ docker image prune -a
 
 [[https://docs.docker.com/config/pruning/\#prune-images]{.ul}](https://docs.docker.com/config/pruning/#prune-images)
 
@@ -621,7 +621,7 @@ To remove all images which are not used by existing containers, use the
 
 *Explanation*
 
-    EXPOSE \<port\> \[\<port\>/\<protocol\>\...\]
+    EXPOSE <port> [<port>/<protocol>\...]
 
 The EXPOSE instruction informs Docker that the container listens on the
 specified network ports at runtime. You can specify whether the port
@@ -662,7 +662,7 @@ multiple images or use one build stage as a dependency for another.
 
 To push an image or a repository to a registry use:
 
-    docker image push \[OPTIONS\] NAME\[:TAG\]
+    docker image push [OPTIONS] NAME[:TAG]
 
 [[https://docs.docker.com/engine/reference/commandline/image_push/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_push/)
 
@@ -718,12 +718,12 @@ default, docker image prune only cleans up dangling images. A dangling
 image is one that is not tagged and is not referenced by any container.
 To remove dangling images:
 
-    \$ docker image prune
+    $ docker image prune
 
 To remove all images which are not used by existing containers, use the
 -a flag:
 
-    \$ docker image prune -a
+    $ docker image prune -a
 
 [[https://docs.docker.com/config/pruning/\#prune-images]{.ul}](https://docs.docker.com/config/pruning/#prune-images)
 
@@ -785,7 +785,7 @@ https://docs.docker.com/engine/reference/builder/\#run
 
 *Explanation*
 
-    ARG \<name\>\[=\<default value\>\]
+    ARG <name>[=<default value>]
 
 The ARG instruction defines a variable that users can pass at build-time
 to the builder with the docker build command using the \--build-arg
@@ -808,14 +808,14 @@ https://docs.docker.com/engine/reference/builder/\#run\#using-arg-variables
 
     LABEL
 
-    LABEL \<key\>=\<value\> \<key\>=\<value\> \<key\>=\<value\> \...
+    LABEL <key>=<value> <key>=<value> <key>=<value> \...
 
 The LABEL instruction adds metadata to an image. A LABEL is a key-value
 pair.
 
 Example:
 
-    LABEL version=\"1.0\"
+    LABEL version="1.0"
 
 [[https://docs.docker.com/engine/reference/builder/\#label]{.ul}](https://docs.docker.com/engine/reference/builder/#label)
 
@@ -850,7 +850,7 @@ https://docs.docker.com/engine/reference/builder/
 
 To remove one or more images, use the following command:
 
-    docker image rm \[OPTIONS\] IMAGE \[IMAGE\...\]
+    docker image rm [OPTIONS] IMAGE [IMAGE\...]
 
 [[https://docs.docker.com/engine/reference/commandline/image_rm/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_rm/)
 
@@ -879,7 +879,7 @@ final image.
 
 To create a tag TARGET_IMAGE that refers to SOURCE_IMAGE use:
 
-    docker tag SOURCE_IMAGE\[:TAG\] TARGET_IMAGE\[:TAG\]
+    docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
 Examples:
 
@@ -888,14 +888,14 @@ Examples:
 To tag a local image with ID "0e5574283393" into the "fedora" repository
 with "version1.0":
 
-    \$ docker tag 0e5574283393 fedora/httpd:version1.0
+    $ docker tag 0e5574283393 fedora/httpd:version1.0
 
 **Tag an image referenced by Name**
 
 To tag a local image with name "httpd" into the "fedora" repository with
 "version1.0":
 
-    \$ docker tag httpd fedora/httpd:version1.0
+    $ docker tag httpd fedora/httpd:version1.0
 
 Note that since the tag name is not specified, the alias is created for
 an existing local version httpd:latest.
@@ -905,7 +905,7 @@ an existing local version httpd:latest.
 To tag a local image with name "httpd" and tag "test" into the "fedora"
 repository with "version1.0.test":
 
-    \$ docker tag httpd:test fedora/httpd:version1.0.test
+    $ docker tag httpd:test fedora/httpd:version1.0.test
 
 [[https://docs.docker.com/engine/reference/commandline/tag/\#examples]{.ul}](https://docs.docker.com/engine/reference/commandline/tag/#examples)
 
@@ -1011,7 +1011,7 @@ For example:
 
     ARG CODE_VERSION=latest
 
-    FROM base:\${CODE_VERSION}
+    FROM base:${CODE_VERSION}
 
 [[https://docs.docker.com/engine/reference/builder/\#from]{.ul}](https://docs.docker.com/engine/reference/builder/#from#frm)
 
@@ -1021,9 +1021,9 @@ For example:
 
     ENV
 
-    ENV \<key\> \<value\>
+    ENV <key> <value>
 
-    ENV \<key\>=\<value\> \...
+    ENV <key>=<value> \...
 
 The ENV instruction sets the environment variable \<key\> to the value
 \<value\>. This value will be in the environment for all subsequent
@@ -1042,7 +1042,7 @@ https://docs.docker.com/engine/reference/builder/\#env
 
 To search the Docker Hub for images use:
 
-    docker search \[OPTIONS\] TERM
+    docker search [OPTIONS] TERM
 
 The filtering flag (-f or \--filter) format is a key=value pair. If
 there is more than one filter, then pass multiple flags (e.g. \--filter
@@ -1208,7 +1208,7 @@ the final image.
 
 *Explanation*
 
-    VOLUME \[\"/data\"\]
+    VOLUME ["/data"]
 
 The VOLUME instruction creates a mount point with the specified name and
 marks it as holding externally mounted volumes from native host or other
