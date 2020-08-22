@@ -136,17 +136,17 @@ empowering developers without having to grant them SSH access.
 To enable centralized logging, modify /etc/docker/daemon.json and add
 the following:
 
-{
+    {
 
-  \"log-level\": \"syslog\",
+      \"log-level\": \"syslog\",
 
-  \"log-opts\": {syslog-address=tcp://192.x.x.x}
+      \"log-opts\": {syslog-address=tcp://192.x.x.x}
 
-}
+    }
 
 Then restart the daemon:
 
-sudo systemctl restart docker
+    sudo systemctl restart docker
 
 [[https://success.docker.com/article/security-best-practices]{.ul}](https://success.docker.com/article/security-best-practices)
 
@@ -194,7 +194,7 @@ rotate this key encryption key at any time.
 
 To enable autolock on an existing swarm, set the autolock flag to true.
 
-docker swarm update \--autolock=true
+    docker swarm update \--autolock=true
 
 [[https://docs.docker.com/engine/swarm/swarm_manager_locking/\#enable-or-disable-autolock-on-an-existing-swarm]{.ul}](https://docs.docker.com/engine/swarm/swarm_manager_locking/#enable-or-disable-autolock-on-an-existing-swarm)
 
@@ -244,7 +244,7 @@ in a Dockerfile or in your application's source code.
 The command to create a secret from a file or standard input (STDIN) as
 content is:
 
-docker secret create \[OPTIONS\] SECRET \[file\|-\]
+    docker secret create \[OPTIONS\] SECRET \[file\|-\]
 
 Since this is a cluster management command, it must be executed on
 a **swarm manager node**.
@@ -322,11 +322,11 @@ rotate this key encryption key at any time.
 When you initialize a new swarm, you can use the \--autolock flag to
 enable autolocking of swarm manager nodes when Docker restarts.
 
-docker swarm init \--autolock
+    docker swarm init \--autolock
 
 To enable autolock on an existing swarm, set the autolock flag to true.
 
-docker swarm update \--autolock=true
+    docker swarm update \--autolock=true
 
 [[https://docs.docker.com/engine/swarm/swarm_manager_locking/]{.ul}](https://docs.docker.com/engine/swarm/swarm_manager_locking/)
 
@@ -404,27 +404,27 @@ secrets.
 
 For example:
 
-docker service update \\
+    docker service update \\
 
-     \--secret-rm mysql_password \\
+         \--secret-rm mysql_password \\
 
-     \--secret-add
-source=mysql_password_v2,target=wp_db_password,mode=0400 \\
+         \--secret-add
+    source=mysql_password_v2,target=wp_db_password,mode=0400 \\
 
-     wordpress  
+         wordpress  
 
 This triggers a rolling restart of the WordPress service and the new
 secret is used.
 
 The following example adds a secret named ssh-2 and removes ssh-1:
 
-\$ docker service update \\
+    \$ docker service update \\
 
-    \--secret-add source=ssh-2,target=ssh-2 \\
+        \--secret-add source=ssh-2,target=ssh-2 \\
 
-    \--secret-rm ssh-1 \\
+        \--secret-rm ssh-1 \\
 
-    Myservice
+        Myservice
 
 [[https://docs.docker.com/engine/reference/commandline/service_update/\#add-or-remove-secrets]{.ul}](https://docs.docker.com/engine/reference/commandline/service_update/#add-or-remove-secrets)
 
@@ -685,7 +685,7 @@ If you want to limit access to a specific device or devices you can use
 the \--device flag. It allows you to specify one or more devices that
 will be accessible within the container.
 
-\$ docker run \--device=/dev/snd:/dev/snd \...
+    \$ docker run \--device=/dev/snd:/dev/snd \...
 
 Following the least privileged principle, you should use \--device
 instead of \--priviledged.
@@ -803,7 +803,7 @@ rotate this key encryption key at any time.
 
 To enable autolock on an existing swarm, set the autolock flag to true.
 
-docker swarm update \--autolock=true
+    docker swarm update \--autolock=true
 
 [[https://docs.docker.com/engine/swarm/swarm_manager_locking/\#enable-or-disable-autolock-on-an-existing-swarm]{.ul}](https://docs.docker.com/engine/swarm/swarm_manager_locking/#enable-or-disable-autolock-on-an-existing-swarm)
 
@@ -838,11 +838,11 @@ registry.
 1\. Edit the daemon.json file, whose default location is
 /etc/docker/daemon.json. Add the following content.
 
-{
+    {
 
-  \"insecure-registries\": \[\"myregistrydomain.com:5000\"\]
+      \"insecure-registries\": \[\"myregistrydomain.com:5000\"\]
 
-}
+    }
 
 2\. Restart Docker for the changes to take effect.
 
