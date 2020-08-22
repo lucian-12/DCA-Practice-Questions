@@ -166,7 +166,7 @@ To find the current default logging driver for the Docker daemon,
 run docker info and search for Logging Driver. You can use the following
 command on Linux, macOS, or PowerShell on Windows:
 
-    \$ docker info \--format \'{{.LoggingDriver}}\'
+    $ docker info --format '{{.LoggingDriver}}'
 
 [[https://docs.docker.com/config/containers/logging/configure/\#configure-the-default-logging-driver]{.ul}](https://docs.docker.com/config/containers/logging/configure/#configure-the-default-logging-driver)
 
@@ -222,11 +222,11 @@ reconfiguring your DTR.
 
 To do so, run the following:
 
-    docker run \--rm -it \\
+    docker run --rm -it \
 
-    docker/dtr:2.7.6 reconfigure \\
+    docker/dtr:2.7.6 reconfigure \
 
-    \--dtr-external-url dtr.example.com \\
+    --dtr-external-url dtr.example.com \
 
     ...
 
@@ -316,7 +316,7 @@ automated convenience scripts to install Docker.
 
 To join a node to a swarm use the following command:
 
-    docker swarm join \[OPTIONS\] HOST:PORT
+    docker swarm join [OPTIONS] HOST:PORT
 
 <https://docs.docker.com/engine/reference/commandline/swarm_join/>
 
@@ -346,11 +346,11 @@ Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and
 higher) use **systemd** to manage which services start when the system
 boots. Ubuntu 14.10 and below use upstart.
 
-    \$ sudo systemctl enable docker
+    $ sudo systemctl enable docker
 
 To disable this behavior, use disable instead.
 
-    \$ sudo systemctl disable docker
+    $ sudo systemctl disable docker
 
 [[https://docs.docker.com/engine/install/linux-postinstall/\#configure-docker-to-start-on-boot]{.ul}](https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot)
 
@@ -390,7 +390,7 @@ production).
 
 *Explanation*
 
-    \--cpus=\<value\>
+    --cpus=<value>
 
 Specify how much of the available CPU resources a container can use. For
 instance, if the host machine has two CPUs and you set \--cpus=\"1.5\",
@@ -398,7 +398,7 @@ the container is guaranteed at most one and a half of the CPUs. This is
 the equivalent of setting \--cpu-period=\"100000\" and
 \--cpu-quota=\"150000\". Available in Docker 1.13 and higher.
 
-    -m or \--memory=
+    -m or --memory=
 
 The maximum amount of memory the container can use. If you set this
 option, the minimum allowed value is 4m (4 megabyte).
@@ -457,7 +457,7 @@ plugins, volumes and daemons.
 
 *Explanation*
 
-    \--force-new-cluster
+    --force-new-cluster
 
 This flag forces an existing node that was part of a quorum that was
 lost to restart as a single node Manager without losing its data.
@@ -479,8 +479,8 @@ Docker fails to start with an error such as:
     the following directives are specified both as a flag and in the
     configuration
 
-    file: hosts: (from flag: \[unix:///var/run/docker.sock\], from file:
-    \[tcp://127.0.0.1:2376\])
+    file: hosts: (from flag: [unix:///var/run/docker.sock], from file:
+    [tcp://127.0.0.1:2376])
 
 If you see an error similar to this one and you are starting the daemon
 manually with flags, you may need to adjust your flags or the
@@ -528,7 +528,7 @@ configuration
 
 To display system-wide information use:
 
-    docker info \[OPTIONS\]
+    docker info [OPTIONS]
 
 This command displays system-wide information regarding the Docker
 installation. Information displayed includes the kernel version, number
@@ -567,25 +567,25 @@ replicas.
 
 To create a UCP backup you should run the following command:
 
-    \$ docker container run \\
+    $ docker container run \
 
-    \--rm \\
+    --rm \
 
-    \--log-driver none \\
+    --log-driver none \
 
-    \--name ucp \\
+    --name ucp \
 
-    \--volume /var/run/docker.sock:/var/run/docker.sock \\
+    --volume /var/run/docker.sock:/var/run/docker.sock \
 
-    \--volume /tmp:/backup \\
+    --volume /tmp:/backup \
 
-    docker/ucp:3.2.6 backup \\
+    docker/ucp:3.2.6 backup \
 
-    \--file mybackup.tar \\
+    --file mybackup.tar \
 
-    \--passphrase \"secret12chars\" \\
+    --passphrase "secret12chars" \
 
-    \--include-logs=false
+    --include-logs=false
 
 Here, the "docker/ucp" represents a docker image, "backup" is the
 command to execute.
@@ -704,16 +704,16 @@ provide to the docker swarm join command.
 To retrieve the join command including the join token for worker nodes,
 run the following command on a **manager node**:
 
-    \$ docker swarm join-token worker
+    $ docker swarm join-token worker
 
 To add a worker to this swarm, run the following command with the output
 from the previous command:
 
-        docker swarm join \\
+        docker swarm join \
 
-        \--token
+        --token
     SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c
-    \\
+    \
 
         192.168.99.100:2377
 
@@ -763,7 +763,7 @@ correct SAN values
 
 If you want to use the self-signed certificate that UCP has out of the
 box, you can set up the SANs when you install UCP with
-the \--san argument. You can also add them after installation.
+the .-san argument. You can also add them after installation.
 
 [[https://github.com/docker/docker.github.io]{.ul}](https://github.com/docker/docker.github.io)
 
@@ -779,7 +779,7 @@ To find the current logging driver for a running container, run the
 docker inspect command, substituting the container name or ID for
 \<CONTAINER\>:
 
-    \$ docker inspect \<CONTAINER\>
+    $ docker inspect <CONTAINER>
 
 [[https://docs.docker.com]{.ul}](https://docs.docker.com/config/containers/logging/configure/)/config/containers/logging/configure/
 
@@ -803,8 +803,8 @@ per-container ring buffer for consumption by driver
 
 To make the modifications and send the HUP signal in one-line use:
 
-echo \'{\"debug\": true}\' \> **/etc/docker**/daemon.json ; sudo kill
--HUP
+    echo '{"debug": true}' > **/etc/docker**/daemon.json ; sudo kill
+    -HUP
 
 [[https://docs.docker.com/config/daemon/\#enable-debugging]{.ul}](https://docs.docker.com/config/daemon/#enable-debugging)
 
@@ -834,7 +834,7 @@ Several runtime flags allow you to configure the amount of access to CPU
 resources your container has. When you use these settings, Docker
 modifies the settings for the container's cgroup on the host machine.
 
-    \--cpuset-cpus
+    --cpuset-cpus
 
 Limit the specific CPUs or cores a container can use. A comma-separated
 list or hyphen-separated range of CPUs a container can use, if you have
@@ -848,11 +848,11 @@ We can set cpus in which to allow execution for containers.
 
 Examples:
 
-    \$ docker run -it \--cpuset-cpus=\"1,3\" ubuntu:14.04 /bin/bash
+    $ docker run -it --cpuset-cpus="1,3" ubuntu:14.04 /bin/bash
 
 This means processes in container can be executed on cpu 1 and cpu 3.
 
-    \$ docker run -it \--cpuset-cpus=\"0-2\" ubuntu:14.04 /bin/bash
+    $ docker run -it --cpuset-cpus="0-2" ubuntu:14.04 /bin/bash
 
 This means processes in container can be executed on cpu 0, cpu 1 and
 cpu 2.
@@ -867,11 +867,11 @@ Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and
 higher) use **systemd** to manage which services start when the system
 boots. Ubuntu 14.10 and below use upstart.
 
-    \$ sudo systemctl enable docker
+    $ sudo systemctl enable docker
 
 To disable this behavior, use disable instead.
 
-    \$ sudo systemctl disable docker
+    $ sudo systemctl disable docker
 
 [[https://docs.docker.com/engine/install/linux-postinstall/\#configure-docker-to-start-on-boot]{.ul}](https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot)
 
@@ -905,25 +905,25 @@ The following example shows how to create a UCP backup on a manager
 node, encrypt it by using a passphrase, decrypt it, verify its contents,
 and store it locally on the node at /tmp/mybackup.tar:
 
-    \$ docker container run \\
+    $ docker container run \
 
-    \--rm \\
+    --rm \
 
-    \--log-driver none \\
+    --log-driver none \
 
-    \--name ucp \\
+    --name ucp \
 
-    \--volume /var/run/docker.sock:/var/run/docker.sock \\
+    --volume /var/run/docker.sock:/var/run/docker.sock \
 
-    \--volume /tmp:/backup \\
+    --volume /tmp:/backup \
 
-    docker/ucp:3.2.6 backup \\
+    docker/ucp:3.2.6 backup \
 
-    \--file mybackup.tar \\
+    --file mybackup.tar \
 
-    \--passphrase \"secret12chars\" \\
+    --passphrase "secret12chars" \
 
-    \--include-logs=false
+    --include-logs=false
 
 Here, the "docker/ucp" represents a docker image, "backup" is the
 command to execute.
@@ -945,7 +945,7 @@ If the file is empty, add the following:
 
     {
 
-      \"debug\": true
+      "debug": true
 
     }
 
@@ -953,7 +953,7 @@ After the daemon.json file is modified, you should send a HUP signal to
 the daemon to cause it to reload its configuration. On Linux hosts, use
 the following command.
 
-sudo kill -SIGHUP \$(pidof dockerd)
+    sudo kill -SIGHUP $(pidof dockerd)
 
 Instead of following this procedure, you can also stop the Docker daemon
 and restart it manually with the debug flag -D. However, this may result
@@ -977,13 +977,13 @@ system configuration.
 When you start Docker this way, it runs in the foreground and sends its
 logs directly to your terminal.
 
-    \$ dockerd
+    $ dockerd
 
-    INFO\[0000\] +job init_networkdriver()
+    INFO[0000] +job init_networkdriver()
 
-    INFO\[0000\] +job serveapi(unix:///var/run/docker.sock)
+    INFO[0000] +job serveapi(unix:///var/run/docker.sock)
 
-    INFO\[0000\] Listening for HTTP on unix (/var/run/docker.sock)
+    INFO[0000] Listening for HTTP on unix (/var/run/docker.sock)
 
 To stop Docker when you have started it manually, issue a Ctrl+C in your
 terminal.
