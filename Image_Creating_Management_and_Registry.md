@@ -454,3 +454,95 @@ unlikely that you will do it.)
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerBuildTest.png)
 
 https://docs.docker.com/engine/reference/builder
+
+### **Answer 26: b**
+
+*Explanation*
+
+Note: Don't confuse RUN with CMD. RUN actually runs a command and
+commits the result; CMD does not execute anything at build time, but
+specifies the intended command for the image.
+
+[[https://docs.docker.com/engine/reference/builder/\#cmd]{.ul}](https://docs.docker.com/engine/reference/builder/#cmd)
+
+### **Answer 27: c**
+
+*Explanation*
+
+To create a tag TARGET_IMAGE that refers to SOURCE_IMAGE use:
+
+docker tag SOURCE_IMAGE\[:TAG\] TARGET_IMAGE\[:TAG\]
+
+Example:
+
+To tag a local image with name "myimage" into the "myrepositroy"
+repository with "version1.0":
+
+docker tag myimage myrepositroy/myimage:version1.0
+
+[[https://docs.docker.com/engine/reference/commandline/tag/]{.ul}](https://docs.docker.com/engine/reference/commandline/tag/)
+
+### **Answer 28: d**
+
+*Explanation*
+
+docker images \[OPTIONS\] \[REPOSITORY\[:TAG\]\]
+
+The default docker images will show all top-level images, their
+repository and tags, and their size.
+
+You can use \--all, -a to show all images (default hides intermediate
+images)
+
+[[https://docs.docker.com/engine/reference/commandline/images/]{.ul}](https://docs.docker.com/engine/reference/commandline/images/)
+
+### **Answer 29: a**
+
+*Explanation*
+
+In the Dockerfile context, The RUN instruction will execute any commands
+in a new layer on top of the current image and commit the results.
+
+Layering RUN instructions and generating commits conforms to the core
+concepts of Docker where commits are cheap and containers can be created
+from any point in an image's history, much like source control.
+
+<https://docs.docker.com/engine/reference/builder/#run>
+
+### **Answer 30: c**
+
+*Explanation*
+
+To display detailed information on one or more images use:
+
+docker image inspect \[OPTIONS\] IMAGE \[IMAGE\...\]
+
+[[https://docs.docker.com/engine/reference/commandline/image_inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/image_inspect/)
+
+### **Answer 31: d**
+
+*Explanation*
+
+Docker inspect provides detailed information on constructs controlled by
+Docker.
+
+By default, docker inspect will render results in a JSON array.
+
+To display detailed information on one or more images use:
+
+docker image inspect \[OPTIONS\] IMAGE \[IMAGE\...\]
+
+The options are:
+
+\--format , -f 
+
+Format the output using the given Go template
+
+For the most part, you can pick out any field from the JSON in a fairly
+straightforward manner using the --format parameter.
+
+\$ docker inspect \--format=\'{{.LogPath}}\' \$INSTANCE_ID
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/imageInspectFormatpng.png)
+
+[[https://docs.docker.com/engine/reference/commandline/inspect/]{.ul}](https://docs.docker.com/engine/reference/commandline/inspect/)
