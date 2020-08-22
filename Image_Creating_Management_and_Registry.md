@@ -267,3 +267,190 @@ For example, check the following output:
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerfileName.png)
 
 [[https://stackoverflow.com/questions/26077543/how-to-name-dockerfiles]{.ul}](https://stackoverflow.com/questions/26077543/how-to-name-dockerfiles)
+
+### **Answer 16: b**
+
+*Explanation*
+
+The WORKDIR instruction can be used multiple times in a Dockerfile.
+
+· If a relative path is provided, it will be relative to the path of the
+previous WORKDIR instruction.
+
+· If the WORKDIR doesn't exist, it will be created even if it's not used
+in any subsequent Dockerfile instruction.
+
+The WORKDIR instruction can resolve environment variables previously set
+using ENV. You can only use environment variables explicitly set in the
+Dockerfile. For example:
+
+ENV DIRPATH /path
+
+WORKDIR \$DIRPATH/\$DIRNAME
+
+RUN pwd
+
+[[https://docs.docker.com/engine/reference/builder/\#workdir]{.ul}](https://docs.docker.com/engine/reference/builder/#workdir)
+
+### **Answer 17: b**
+
+*Explanation*
+
+**Warning**
+
+When building an image, do not use your root directory, /, as the PATH
+as it causes the build to transfer the entire contents of your hard
+drive to the Docker daemon.
+
+[[https://docs.docker.com/engine/reference/builder/]{.ul}](https://docs.docker.com/engine/reference/builder/)
+
+### **Answer 18: b**
+
+*Explanation*
+
+The HEALTHCHECK instruction tells Docker how to test a container to
+check that it is still working. This can detect cases such as a web
+server that is stuck in an infinite loop and unable to handle new
+connections, even though the server process is still running.
+
+[[https://docs.docker.com/engine/reference/builder/\#healthcheck]{.ul}](https://docs.docker.com/engine/reference/builder/#healthcheck)
+
+### **Answer 19: a**
+
+*Explanation*
+
+To create a new image from a container's changes use:
+
+docker commit \[OPTIONS\] CONTAINER \[REPOSITORY\[:TAG\]\]
+
+It can be useful to commit a container's file changes or settings into a
+new image.
+
+This allows you to export a working dataset to another server.
+
+Still, it is better to use Dockerfiles to manage your images in a
+documented and maintainable way. The Version Control can be used mainly
+for text-based files such as Dockerfiles, docker-compose.yml, and
+configuration files. Small binaries can also be kept in the same version
+control. Examples of version control are git, svn, Team Foundation
+Server, Azure DevOps, and Clear Case.
+
+[[https://success.docker.com/article/dev-pipeline]{.ul}](https://success.docker.com/article/dev-pipeline)
+
+### **Answer 20: c**
+
+*Explanation*
+
+Docker can build images automatically by reading the instructions from a
+Dockerfile.
+
+A Dockerfile is a text document that contains all the commands a user
+could call on the command line to assemble an image.
+
+Using docker build users can create an automated build that executes
+several command-line instructions in succession.
+
+[[https://docs.docker.com/engine/reference/builder/]{.ul}](https://docs.docker.com/engine/reference/builder/)
+
+### **Answer 21: d**
+
+*Explanation*
+
+LABEL
+
+LABEL \<key\>=\<value\> \<key\>=\<value\> \<key\>=\<value\> \...
+
+The LABEL instruction adds metadata to an image. A LABEL is a key-value
+pair.
+
+Example:
+
+LABEL version=\"1.0\"
+
+[[https://docs.docker.com/engine/reference/builder/\#label]{.ul}](https://docs.docker.com/engine/reference/builder/#label)
+
+### **Answer 22: a**
+
+*Explanation*
+
+A **container** is a runtime instance of a docker image.
+
+A Docker container consists of
+
+· A Docker image
+
+· An execution environment
+
+· A standard set of instructions
+
+The concept is borrowed from Shipping Containers, which define a
+standard to ship goods globally. Docker defines a standard to ship
+software.
+
+[[https://docs.docker.com/glossary/]{.ul}](https://docs.docker.com/glossary/)
+
+### **Answer 23: a**
+
+*Explanation*
+
+EXPOSE \<port\> \[\<port\>/\<protocol\>\...\]
+
+The EXPOSE instruction informs Docker that the container listens on the
+specified network ports at runtime. You can specify whether the port
+listens on TCP or UDP, and the default is TCP if the protocol is not
+specified.
+
+The EXPOSE instruction does not actually publish the port. It functions
+as a type of documentation between the person who builds the image and
+the person who runs the container, about which ports are intended to be
+published. To actually publish the port when running the container, use
+the -p flag on docker run to publish and map one or more ports, or the
+-P flag to publish all exposed ports and map them to high-order ports.
+
+https://docs.docker.com/engine/reference/builder/\#expose
+
+The ENV instruction sets the environment variable \<key\> to the value
+\<value\>. This value will be in the environment for all subsequent
+instructions in the build stage.
+
+### **Answer 24: b**
+
+*Explanation*
+
+ENV
+
+ENV \<key\> \<value\>
+
+ENV \<key\>=\<value\> \...
+
+The ENV instruction sets the environment variable \<key\> to the value
+\<value\>. This value will be in the environment for all subsequent
+instructions in the build stage.
+
+Also, the environment variables set using ENV will persist when a
+container is run from the resulting image. You can view the values using
+docker inspect, and change them using docker run \--env
+\<key\>=\<value\>.
+
+https://docs.docker.com/engine/reference/builder/\#env
+
+### **Answer 25: d**
+
+*Explanation*
+
+CMD instruction allows you to set a default command, which will be
+executed only when you run container without specifying a command. If
+Docker container runs with a command, the default command will be
+ignored. If Dockerfile has more than one CMD instruction, all but last
+CMD instructions are ignored.
+
+ENTRYPOINT instruction allows you to configure a container that will run
+as an executable. It looks similar to CMD, because it also allows you to
+specify a command with parameters. The difference is ENTRYPOINT command
+and parameters are not ignored when Docker container runs with command
+line parameters. (There is a way to ignore ENTTRYPOINT, but it is
+unlikely that you will do it.)
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/dockerBuildTest.png)
+
+https://docs.docker.com/engine/reference/builder
