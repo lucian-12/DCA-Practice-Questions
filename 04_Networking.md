@@ -168,3 +168,336 @@ Docker port command only shows the port published externally.
 [[https://docs.docker.com/engine/reference/commandline/port/]{.ul}](https://docs.docker.com/engine/reference/commandline/port/)
 
 ![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/portsMapped.png)
+
+### **Answer 10: b**
+
+*Explanation*
+
+**Using a user-defined network** provides a scoped network in which only
+containers attached to that network are able to communicate.
+
+Furthermore, on user-defined networks, containers can not only
+communicate by IP address, but can also resolve a container name to an
+IP address. This capability is called automatic service discovery.
+
+[[https://docs.docker.com/network/network-tutorial-standalone/\#use-user-defined-bridge-networks]{.ul}](https://docs.docker.com/network/network-tutorial-standalone/#use-user-defined-bridge-networks)
+
+However, containers connected to the **default bridge network** can
+communicate, but only by IP address, unless they are linked using the
+legacy \--link flag.
+
+Obs. If you do not specify a network using the \--network flag, and you
+do specify a network driver, your container is connected to the default
+bridge network by default.
+
+[[https://docs.docker.com/network/bridge/\#connect-a-container-to-the-default-bridge-network]{.ul}](https://docs.docker.com/network/bridge/#connect-a-container-to-the-default-bridge-network)
+
+### **Answer 11: c**
+
+*Explanation*
+
+Services will receive a cluster-scoped Virtual IP address also known as
+ClusterIP.
+
+**ClusterIP** is the default method of exposing the service internally.
+Once the service is created and a VIP is associated with it, every
+kube-proxy running on every cluster node will program an iptables rule
+so that all traffic destined to that VIP will be redirected to one of
+the Service's backend pods instead.
+
+If the service needs to be accessed from outside the cluster, then there
+are a couple of available options to doing so. Mainly NodePort and
+LoadBalancer.
+
+Ingress is another method that you can use. Ingress is technically not a
+Type of a service, but it\'s another method for using Layer 7 based
+routing to expose your services externally.
+
+[[https://success.docker.com/article/ucp-service-discovery-k8s]{.ul}](https://success.docker.com/article/ucp-service-discovery-k8s)
+
+### **Answer 12: c**
+
+*Explanation*
+
+To create a new network use:
+
+docker network create \[OPTIONS\] NETWORK
+
+For example:
+
+\$ docker network create -d bridge my-bridge-network
+
+The DRIVER accepts bridge or overlay which are the built-in network
+drivers. If you have installed a third party or your own custom network
+driver you can specify that DRIVER here also. If you don't specify
+the \--driver option, the command automatically creates a bridge network
+for you.
+
+[[https://docs.docker.com/engine/reference/commandline/network_create/]{.ul}](https://docs.docker.com/engine/reference/commandline/network_create/)
+
+### **Answer 13: a**
+
+*Explanation*
+
+Docker Engine swarm mode makes it easy to publish ports for services to
+make them available to resources outside the swarm.
+
+All nodes participate in an ingress routing mesh.
+
+The routing mesh **enables each node in the swarm to accept connections
+on published ports** for any service running in the swarm, even if
+there's no task running on the node.
+
+The routing mesh routes all incoming requests to published ports on
+available nodes to an active container.
+
+[[https://docs.docker.com/engine/swarm/ingress/]{.ul}](https://docs.docker.com/engine/swarm/ingress/)
+
+### **Answer 14: b**
+
+*Explanation*
+
+**Encrypt traffic on an overlay network**
+
+All swarm service management traffic is encrypted by default, using the
+AES algorithm in GCM mode. Manager nodes in the swarm rotate the key
+used to encrypt gossip data every 12 hours.
+
+To encrypt application data as well, add \--opt encrypted when creating
+the overlay network. This enables IPSEC encryption at the level of the
+vxlan. This encryption imposes a non-negligible performance penalty, so
+you should test this option before using it in production.
+
+[[https://docs.docker.com/network/overlay/]{.ul}](https://docs.docker.com/network/overlay/)
+
+To set driver specific options use: \--opt , -o
+
+For example:
+
+\$ docker network create -d overlay \\
+
+  \--opt encrypted=true \\
+
+  my-network -network
+
+[[https://docs.docker.com/engine/reference/commandline/network_create/]{.ul}](https://docs.docker.com/engine/reference/commandline/network_create/)
+
+### **Answer 15: b**
+
+*Explanation*
+
+To create an overlay network which can be used by swarm services or
+standalone containers to communicate with other standalone containers
+running on other Docker daemons, add the \--attachable flag:
+
+\$ docker network create -d overlay \--attachable my-attachable-overlay
+
+[[https://docs.docker.com/network/overlay/]{.ul}](https://docs.docker.com/network/overlay/)
+
+### **Answer 16: d**
+
+*Explanation*
+
+To start a container in detached mode, you use -d=true or
+just -d option. By design, containers started in detached mode exit when
+the root process used to run the container exits.
+
+[[https://docs.docker.com/engine/reference/run/\#detached\--d]{.ul}](https://docs.docker.com/engine/reference/run/#detached--d)
+
+To make a port available to services outside of Docker, or to Docker
+containers which are not connected to the container's network, use
+the \--publish or -p flag.
+
+Here is anexample:
+
+docker run -p 80:8080 ubuntu bash
+
+This binds port 8080 of the container to TCP port 80 on the host
+machine.
+
+[[https://docs.docker.com/engine/reference/commandline/run/\#publish-or-expose-port\--p\-\--expose]{.ul}](https://docs.docker.com/engine/reference/commandline/run/#publish-or-expose-port--p---expose)
+
+[[https://docs.docker.com/config/containers/container-networking/\#published-ports]{.ul}](https://docs.docker.com/config/containers/container-networking/#published-ports)
+
+### **Answer 17: d**
+
+*Explanation*
+
+If you do not specify a network using the \--network flag, and you do
+specify a network driver, your container is connected to the default
+bridge network by default.
+
+[[https://docs.docker.com/network/bridge/\#use-the-default-bridge-network]{.ul}](https://docs.docker.com/network/bridge/#use-the-default-bridge-network)
+
+### **Answer 18: d**
+
+*Explanation*
+
+The ingress network is created without the \--attachable flag, which
+means that only swarm services can use it, and not standalone
+containers.
+
+You can connect standalone containers to user-defined overlay networks
+which are created with the \--attachable flag.
+
+[[https://docs.docker.com/network/overlay/\#attach-a-standalone-container-to-an-overlay-network]{.ul}](https://docs.docker.com/network/overlay/#attach-a-standalone-container-to-an-overlay-network)
+
+The routing mesh allows all the swarm nodes to accept connections on the
+services published ports. When any swarm node receives traffic destined
+to the published TCP/UDP port of a running service, it forwards the
+traffic to the service\'s VIP using a pre-defined overlay network
+called **ingress**. The ingress network behaves similarly to other
+overlay networks, but its sole purpose is to transport mesh routing
+traffic from external clients to cluster services. It uses the same
+VIP-based internal load balancing as described in the previous section.
+
+[[https://success.docker.com/article/ucp-service-discovery-swarm\#interlockproxyusageexamples]{.ul}](https://success.docker.com/article/ucp-service-discovery-swarm#interlockproxyusageexamples)
+
+### **Answer 19: c**
+
+*Explanation*
+
+Ingress is one of the types of **overlay networks**, which sits on top
+of (overlays) the host-specific networks and handles control and data
+traffic related to swarm services.
+
+[[https://docs.docker.com/network/overlay/\#customize-the-default-ingress-network]{.ul}](https://docs.docker.com/network/overlay/#customize-the-default-ingress-network)
+
+### **Answer 20: b**
+
+*Explanation*
+
+The following run command options work with container networking:
+
+\--publish-all or -P
+
+Publish all exposed ports to the host **interfaces**. Docker binds each
+exposed port to a random port on the host. Use the -p flag to explicitly
+map a single port or range of ports.
+
+-p or \--publish
+
+It makes a port available to services outside of Docker, or to Docker
+containers which are not connected to the container's network.
+
+format: ip:hostPort:containerPort \| ip::containerPort \|
+hostPort:containerPort \| containerPort
+
+[[https://docs.docker.com/engine/reference/run/\#expose-incoming-ports]{.ul}](https://docs.docker.com/engine/reference/run/#expose-incoming-ports)
+
+[[https://docs.docker.com/config/containers/container-networking/]{.ul}](https://docs.docker.com/config/containers/container-networking/)
+
+### **Answer 21: d**
+
+*Explanation*
+
+Docker Universal Control Plane (UCP) uses Calico as the default
+Kubernetes networking solution. Calico is configured to create a Border
+Gateway Protocol (BGP) mesh between all nodes in the cluster.
+
+[[https://github.com/docker/docker.github.io]{.ul}](https://github.com/docker/docker.github.io)
+
+### **Answer 22: c, e**
+
+*Explanation*
+
+Docker uses embedded DNS to provide **service discovery** for containers
+running on a single Docker engine and tasks running in a Docker swarm.
+
+The Docker engine checks if the DNS query belongs to a container or
+service on each network that the requesting container belongs to. If it
+does, then the Docker engine looks up the IP address that matches the
+name of a container, task, or service in a key-value store and returns
+that IP or service **Virtual IP** (VIP) back to the requester. Here, all
+nodes participate in a network called routing mesh.
+
+[[https://success.docker.com/article/ucp-service-discovery-swarm]{.ul}](https://success.docker.com/article/ucp-service-discovery-swarm)
+
+**DNS round robin** (DNS RR) load balancing is another load balancing
+option for services (configured with \--endpoint-mode dnsrr). In DNS RR
+mode a VIP is not created for each service. The Docker DNS server
+resolves a service name to individual container IPs in round robin
+fashion.
+
+[[https://success.docker.com/article/networking]{.ul}](https://success.docker.com/article/networking)
+
+To use an external load balancer without the routing mesh, set
+\--endpoint-mode to dnsrr instead of the default value of vip.
+
+In this case, there is not a single virtual IP. Instead, Docker sets up
+DNS entries for the service such that a DNS query for the service name
+returns a list of IP addresses, and the client connects directly to one
+of these. You are responsible for providing the list of IP addresses and
+ports to your load balancer. See Configure service discovery.
+
+[[https://docs.docker.com/engine/swarm/ingress/\#without-the-routing-mesh]{.ul}](https://docs.docker.com/engine/swarm/ingress/#without-the-routing-mesh)
+
+### **Answer 23: c**
+
+*Explanation*
+
+When you initialize a swarm or join a Docker host to an existing swarm,
+two new networks are created on that Docker host:
+
+· an overlay network called **ingress**, which handles control and data
+traffic related to swarm services. When you create a swarm service and
+do not connect it to a user-defined overlay network, it connects to the
+ingress network by default.
+
+· a bridge network called **docker_gwbridge**, which connects the
+individual Docker daemon to the other daemons participating in the
+swarm.
+
+[[https://docs.docker.com/network/overlay/]{.ul}](https://docs.docker.com/network/overlay/)
+
+### **Answer 24: b**
+
+*Explanation*
+
+When creating overlay networks, the are some prerequisites:
+
+· Setup the firewall rules
+
+You need the following ports open to traffic to and from each Docker
+host participating on an overlay network:
+
+TCP port 2377 for cluster management communications
+
+TCP and UDP port 7946 for communication among nodes
+
+UDP port 4789 for overlay network traffic
+
+· Before you can create an overlay network, you need to either
+initialize your Docker daemon as a swarm manager using docker swarm init
+or join it to an existing swarm using docker swarm join. Either of these
+creates the default ingress overlay network which is used by swarm
+services by default. You need to do this even if you never plan to use
+swarm services. Afterward, you can create additional user-defined
+overlay networks.
+
+[[https://docs.docker.com/network/overlay/\#operations-for-all-overlay-networks]{.ul}](https://docs.docker.com/network/overlay/#operations-for-all-overlay-networks)
+
+### **Answer 25: b**
+
+*Explanation*
+
+**Linux bridges** only operate locally and cannot span across nodes.
+
+So, for multi-host networking we need another mechanism.
+Linux **VXLAN** comes to the rescue.
+
+When a container sends a data packet, the bridge realizes that the
+target of the packet is not on this host.
+
+Now, each node participating in an overlay network gets a so-called
+VXLAN Tunnel Endpoint (VTEP) object, which intercepts the packet (the
+packet at that moment is an OSI layer 2 data packet), wraps it with a
+header containing the target IP address of the host that runs the target
+container (this makes it now an OSI layer 3 data packet), and sends it
+over the VXLAN tunnel.
+
+The VTEP on the other side of the tunnel unpacks the data packet and
+forwards it to the local bridge, which in turn forwards it to the target
+container.
+
+![img](https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/VXLAN_tunnel.jpg)
