@@ -22,7 +22,7 @@ each with a unique MAC address.
 · **Third-party network** plugins allow you to integrate Docker with
 specialized network stacks.
 
-https://docs.docker.com/network/\#network-driver-summary\#network-driver-summary
+https://docs.docker.com/network/#network-driver-summary\#network-driver-summary
 
 ### **Answer 2: b**
 
@@ -157,7 +157,7 @@ Host networks are best when the network stack should not be isolated
 from the Docker host, but you want other aspects of the container to be
 isolated.
 
-https://docs.docker.com/network/\#network-driver-summary
+https://docs.docker.com/network/#network-driver-summary
 
 ### **Answer 9: a, c, d**
 
@@ -567,7 +567,7 @@ host.
 sub-interface which Docker creates on the fly. This allows you to
 control routing and filtering at a more granular level.
 
-https://docs.docker.com/network/macvlan/\#create-a-macvlan-network
+https://docs.docker.com/network/macvlan/#create-a-macvlan-network
 
 ### **Answer 29: b**
 
@@ -754,7 +754,7 @@ Host networks are best when the network stack should not be isolated
 from the Docker host, but you want other aspects of the container to be
 isolated.
 
-https://docs.docker.com/network/\#network-driver-summary
+https://docs.docker.com/network/#network-driver-summary
 
 ### **Answer 36: c**
 
@@ -913,7 +913,7 @@ default.
 As such \--hostname and \--domainname are allowed in host network mode
 and will only change the hostname and domain name inside the container.
 
-[[https://docs.docker.com/engine/reference/run/\#network-settings]{.ul}](https://docs.docker.com/engine/reference/run/#network-settings)
+[[https://docs.docker.com/engine/reference/run/#network-settings]{.ul}](https://docs.docker.com/engine/reference/run/#network-settings)
 
 ### **Answer 44: b**
 
@@ -948,7 +948,7 @@ each with a unique MAC address.
 · **Third-party network** plugins allow you to integrate Docker with
 specialized network stacks.
 
-https://docs.docker.com/network/\#network-driver-summary\#network-driver-summary
+https://docs.docker.com/network/#network-driver-summary\#network-driver-summary
 
 ### **Answer 46: a**
 
@@ -962,7 +962,7 @@ applications that expect to be directly connected to the physical
 network, rather than routed through the Docker host's network stack. See
 Macvlan networks.
 
-https://docs.docker.com/network/\#network-drivers
+https://docs.docker.com/network/#network-drivers
 
 ### **Answer 47: c**
 
