@@ -1158,7 +1158,7 @@ Dockerfile instruction.
 
 [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/]{.ul}](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
-### **Answer 69: d**
+### **Answer 65: d**
 
 *Explanation*
 
