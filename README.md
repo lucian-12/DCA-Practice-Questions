@@ -34,6 +34,5 @@ August 2020 Update Our practice tests contain the new Kubernetes topics such as 
 * Security - 48 questions
 * Storage and Volumes - 33 questions
 
-<a href="url"><img src="https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/book_cover7.jpg" align="left" height="289" width="200" ></a>
+<a href="https://www.amazon.com/dp/B08GCVGMN4"><img src="https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/book_cover7.jpg" align="left" height="433" width="300" ></a>
 
-https://www.amazon.com/dp/B08GCVGMN4
