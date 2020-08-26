@@ -5,9 +5,12 @@ This Docker Certified Associate (DCA) Practice Exam book is your one-stop self-a
 
 August 2020 Update Our practice tests contain the new Kubernetes topics such as Kubernetes pods and deployments, configMaps and secrets, ClusterIP and NodePort services, etc.
 
+
 ✔ Each question has detailed explanations at the end of each set that will help you gain a deep understanding of the Docker container technologies.
 
 ✔ The explanation provides an overview of the topic, reference links to Docker official docs, and a rationale on why the option is correct or incorrect.
+
+<a href="https://www.amazon.com/dp/B08GCVGMN4"><img src="https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/book_cover7.jpg" align="center" height="433" width="300" ></a>
 
 ### For who?
 * Aiming to take the Docker Certified Associate (DCA) Certification
@@ -34,5 +37,4 @@ August 2020 Update Our practice tests contain the new Kubernetes topics such as 
 * Security - 48 questions
 * Storage and Volumes - 33 questions
 
-<a href="https://www.amazon.com/dp/B08GCVGMN4"><img src="https://github.com/lucian-12/DCA-Practice-Questions/blob/master/img/book_cover7.jpg" align="left" height="433" width="300" ></a>
 
